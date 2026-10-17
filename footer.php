@@ -15,7 +15,7 @@ $fb    = mural17_opt( 'mural17_facebook' );
 <footer class="rodape">
 	<div class="wrap rodape__grade">
 		<div class="rodape__marca">
-			<a class="marca__nome marca__nome--claro" href="<?php echo esc_url( home_url( '/' ) ); ?>">Mural<span>17</span></a>
+			<a class="marca__logo marca__logo--rodape" href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo esc_url( MURAL17_URI . '/assets/marca/mural17-logo-negativo.svg' ); ?>" width="361" height="118" alt="Mural 17"></a>
 			<p><?php echo esc_html( mural17_opt( 'mural17_slogan' ) ); ?>: notícias, anúncios, eventos e empregos de Neves Paulista, Mirassol, Jaci e Rio Preto.</p>
 			<div class="rodape__redes">
 				<?php if ( $ig ) : ?>

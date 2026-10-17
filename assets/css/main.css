@@ -14,7 +14,7 @@
 	--m17-blue: #1F4E79;
 	--m17-blue-soft: #E8EEF5;
 	--m17-orange: #C2410C;
-	--m17-wa: #128C4A;
+	--m17-wa: #0F7A40;
 	--m17-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 	--m17-sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
 	--m17-radius: 6px;
@@ -104,6 +104,9 @@ input:focus-visible { outline: 3px solid var(--m17-accent); outline-offset: 2px;
 .menu-abrir { display: none; }
 
 .marca { display: flex; flex-direction: column; gap: 4px; }
+.marca__logo { display: inline-flex; }
+.marca__logo img { height: 60px; width: auto; }
+.marca__logo--rodape img { height: 40px; }
 .marca__nome {
 	font-family: var(--m17-serif); font-weight: 800; font-size: 44px; line-height: 1;
 	letter-spacing: -0.02em; color: var(--m17-ink);
@@ -432,6 +435,7 @@ input:focus-visible { outline: 3px solid var(--m17-accent); outline-offset: 2px;
 	.menu-abrir { display: inline-flex; }
 	.marca { align-items: center; text-align: center; flex: 1; }
 	.marca__nome { font-size: 30px; }
+	.marca__logo img { height: 40px; }
 	.marca__slogan { display: none; }
 	.cabecalho__acoes { display: none; }
 

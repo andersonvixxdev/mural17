@@ -39,7 +39,7 @@ Em **Aparência › Personalizar › Mural 17**:
 | E-mail, Instagram, Facebook | Rodapé |
 | Faixa "Última hora" | Liga ou desliga a faixa com as notícias das últimas 48 h |
 
-Para o logo em imagem, use **Personalizar › Identidade do site**. Sem logo, o tema mostra "Mural**17**" em texto.
+Sem logo escolhido em **Personalizar › Identidade do site**, o tema usa o logo da marca (`assets/marca/`) no cabeçalho e no rodapé, e o favicon da marca. Cores, versões do logo e regras de uso estão em [`assets/marca/README.md`](assets/marca/README.md).
 
 **Menus** (Aparência › Menus): o tema tem três posições, *Menu principal*, *Barra do topo* e *Rodapé*. Se o menu principal ficar vazio, o tema monta um automático com as cidades, Polícia, Trânsito, Empregos, Classificados e Agenda.
 

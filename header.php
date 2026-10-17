@@ -44,7 +44,7 @@
 			<?php if ( has_custom_logo() ) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
-				<a class="marca__nome" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">Mural<span>17</span></a>
+				<a class="marca__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><img src="<?php echo esc_url( MURAL17_URI . '/assets/marca/mural17-logo.svg' ); ?>" width="361" height="118" alt="Mural 17"></a>
 			<?php endif; ?>
 			<?php if ( mural17_opt( 'mural17_slogan' ) ) : ?>
 				<p class="marca__slogan"><?php echo esc_html( mural17_opt( 'mural17_slogan' ) ); ?></p>

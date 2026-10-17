@@ -122,6 +122,21 @@ function mural17_resource_hints( $urls, $relation_type ) {
 add_filter( 'wp_resource_hints', 'mural17_resource_hints', 10, 2 );
 
 /**
+ * Favicon da marca enquanto não houver "Ícone do site" no Personalizar.
+ */
+function mural17_favicon() {
+	if ( has_site_icon() ) {
+		return;
+	}
+	$base = MURAL17_URI . '/assets/marca/';
+	echo '<link rel="icon" href="' . esc_url( $base . 'mural17-favicon.svg' ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="icon" href="' . esc_url( $base . 'mural17-icone-512.png' ) . '" sizes="512x512">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( $base . 'mural17-icone-180.png' ) . '">' . "\n";
+	echo '<meta name="theme-color" content="#15171A">' . "\n";
+}
+add_action( 'wp_head', 'mural17_favicon' );
+
+/**
  * Resumo curto nas listagens.
  *
  * @return int

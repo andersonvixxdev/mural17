@@ -132,7 +132,7 @@ function mural17_favicon() {
 	echo '<link rel="icon" href="' . esc_url( $base . 'mural17-favicon.svg' ) . '" type="image/svg+xml">' . "\n";
 	echo '<link rel="icon" href="' . esc_url( $base . 'mural17-icone-512.png' ) . '" sizes="512x512">' . "\n";
 	echo '<link rel="apple-touch-icon" href="' . esc_url( $base . 'mural17-icone-180.png' ) . '">' . "\n";
-	echo '<meta name="theme-color" content="#15171A">' . "\n";
+	echo '<meta name="theme-color" content="#0E1014">' . "\n";
 }
 add_action( 'wp_head', 'mural17_favicon' );
 

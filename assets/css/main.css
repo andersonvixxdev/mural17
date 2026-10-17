@@ -3,8 +3,8 @@
    ========================================================================== */
 
 :root {
-	--m17-accent: #B3261E;
-	--m17-ink: #15171A;
+	--m17-accent: #E5232D;
+	--m17-ink: #0E1014;
 	--m17-ink-2: #3A4048;
 	--m17-muted: #5B626B;
 	--m17-line: #DDE1E5;
@@ -105,8 +105,8 @@ input:focus-visible { outline: 3px solid var(--m17-accent); outline-offset: 2px;
 
 .marca { display: flex; flex-direction: column; gap: 4px; }
 .marca__logo { display: inline-flex; }
-.marca__logo img { height: 60px; width: auto; }
-.marca__logo--rodape img { height: 40px; }
+.marca__logo img { height: 44px; width: auto; }
+.marca__logo--rodape img { height: 30px; }
 .marca__nome {
 	font-family: var(--m17-serif); font-weight: 800; font-size: 44px; line-height: 1;
 	letter-spacing: -0.02em; color: var(--m17-ink);
@@ -435,7 +435,7 @@ input:focus-visible { outline: 3px solid var(--m17-accent); outline-offset: 2px;
 	.menu-abrir { display: inline-flex; }
 	.marca { align-items: center; text-align: center; flex: 1; }
 	.marca__nome { font-size: 30px; }
-	.marca__logo img { height: 40px; }
+	.marca__logo img { height: 30px; }
 	.marca__slogan { display: none; }
 	.cabecalho__acoes { display: none; }
 

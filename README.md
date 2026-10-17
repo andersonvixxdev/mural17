@@ -33,7 +33,7 @@ Em **Aparência › Personalizar › Mural 17**:
 
 | Opção | Para que serve |
 |---|---|
-| Cor de destaque | Vermelho por padrão; muda botões, chapéus e detalhes |
+| Cor de destaque | Vermelho sinal (#E5232D) por padrão; muda botões, chapéus e detalhes |
 | Slogan | Texto abaixo do logo ("Tudo que acontece no 17") |
 | WhatsApp da redação | Ativa os botões "Envie sua notícia", "Divulgar evento", "Anunciar vaga" e "Anunciar". Use só números, com 55 e DDD (ex.: 5517999999999) |
 | E-mail, Instagram, Facebook | Rodapé |

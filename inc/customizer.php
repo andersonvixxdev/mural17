@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function mural17_defaults() {
 	return array(
-		'mural17_cor'        => '#B3261E',
+		'mural17_cor'        => '#E5232D',
 		'mural17_slogan'     => 'Tudo que acontece no 17',
 		'mural17_whatsapp'   => '',
 		'mural17_email'      => '',
@@ -122,7 +122,7 @@ add_action( 'customize_register', 'mural17_customize_register' );
 function mural17_accent_css() {
 	$cor = sanitize_hex_color( mural17_opt( 'mural17_cor' ) );
 	if ( ! $cor ) {
-		$cor = '#B3261E';
+		$cor = '#E5232D';
 	}
 	return ':root{--m17-accent:' . $cor . ';}';
 }

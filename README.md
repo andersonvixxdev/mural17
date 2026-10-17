@@ -66,6 +66,14 @@ Sugestões de feeds (teste cada um no navegador antes de cadastrar):
 | `https://news.google.com/rss/search?q=Mirassol+SP+-futebol&hl=pt-BR&gl=BR&ceid=BR:pt-419` | Mirassol |
 | `https://news.google.com/rss/search?q=%22Rio+Preto%22+(pol%C3%ADcia+OR+acidente+OR+pris%C3%A3o)&hl=pt-BR&gl=BR&ceid=BR:pt-419` | Polícia |
 
+## Portal de Notícias PRO
+
+O tema já conversa com o plugin **Portal de Notícias PRO — Suite**:
+
+- **Fonte da matéria:** o tema lê o endereço de origem que o plugin grava e mostra a caixa "Fonte" e o botão "Ler na fonte original". Deixe o "Crédito da fonte" do plugin **desligado**, senão a fonte aparece duas vezes.
+- **Cidade por feed:** ao ativar o tema, ele liga a opção do plugin que mostra a taxonomia **Cidade** no cadastro de cada feed. Escolha a cidade do feed e toda matéria importada já entra nela (e aparece na home, na página da cidade e no bloco "Por cidade").
+- **Cards do Instagram e Stories:** use a logo personalizada com `assets/marca/mural17-logo-negativo.png` (fundo escuro) ou `mural17-logo.png` (fundo claro). Cores da marca: vermelho `#E5232D`, tinta `#0E1014`, amarelo `#FFC531`.
+
 ## Plugins recomendados
 
 - **WP RSS Aggregator** ou **Feedzy**: notícias automáticas.

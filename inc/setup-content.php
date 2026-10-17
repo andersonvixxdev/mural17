@@ -53,6 +53,11 @@ function mural17_ativar() {
 		mural17_garante_termo( $nome, $slug, 'categoria-anuncio' );
 	}
 
+	// Portal de Notícias PRO: mostra a taxonomia Cidade no cadastro de cada
+	// feed, para a matéria importada já entrar na cidade certa. add_option
+	// não sobrescreve se o dono do site já tiver escolhido outra coisa.
+	add_option( 'pfai_feed_tax_ativo', 1 );
+
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'mural17_ativar' );

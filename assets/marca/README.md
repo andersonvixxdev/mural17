@@ -13,6 +13,7 @@ O 1 e o 7 dividem a mesma barra e viram um desenho só: o 17 que liga Neves Paul
 | `mural17-icone-512.png` | Ícone do site (Personalizar › Identidade do site) |
 | `mural17-icone-180.png` | Ícone do iPhone |
 | `mural17-compartilhamento.png` | Imagem padrão de compartilhamento, 1200 × 630 |
+| `mural17-logo.png`, `mural17-logo-negativo.png` | Logo em PNG transparente, para os cards do Portal de Notícias PRO |
 
 ## Cores
 

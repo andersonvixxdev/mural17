@@ -106,7 +106,7 @@ function mural17_imagem( $size = 'mural17-card', $class = 'midia' ) {
 
 /**
  * Fonte original de notícias agregadas. Lê o campo do tema e os campos
- * gravados pelos plugins WP RSS Aggregator e Feedzy.
+ * gravados pelos plugins Portal de Notícias PRO, WP RSS Aggregator e Feedzy.
  *
  * @param int|null $post_id ID do post.
  * @return array{nome:string,url:string}|null
@@ -116,6 +116,12 @@ function mural17_fonte( $post_id = null ) {
 	$url     = mural17_meta( 'fonte_url', $post_id );
 	$nome    = mural17_meta( 'fonte_nome', $post_id );
 
+	if ( ! $url ) {
+		$url = (string) get_post_meta( $post_id, '_pfai_source_url', true );
+		if ( $url && ! $nome && class_exists( 'PFAI_Credito_Fonte' ) ) {
+			$nome = PFAI_Credito_Fonte::nome_da_fonte( $post_id );
+		}
+	}
 	if ( ! $url ) {
 		$url = (string) get_post_meta( $post_id, 'wprss_item_permalink', true );
 	}

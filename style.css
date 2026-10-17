@@ -1,0 +1,17 @@
+/*
+Theme Name: Mural 17
+Theme URI: https://mural17.com.br
+Author: Anderson Martins
+Author URI: https://github.com/andersonvixxdev
+Description: Tema do portal Mural 17 — notícias, anúncios, eventos e empregos de Neves Paulista, Mirassol, Jaci e São José do Rio Preto (DDD 17).
+Version: 1.0.0
+Requires at least: 6.2
+Tested up to: 6.8
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mural17
+Tags: news, blog, two-columns, custom-menu, custom-colors, featured-images, translation-ready
+*/
+
+/* Os estilos ficam em assets/css/main.css (carregado por functions.php). */

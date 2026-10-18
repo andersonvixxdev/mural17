@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MURAL17_VERSION', '2.2.2' );
+define( 'MURAL17_VERSION', '2.2.3' );
 define( 'MURAL17_CIDADES_VERSAO', 1 );
 define( 'MURAL17_OFICIAL_VERSAO', 1 );
 define( 'MURAL17_SERVICOS_VERSAO', 1 );
@@ -31,6 +31,7 @@ require MURAL17_DIR . '/inc/servicos-admin.php';
 require MURAL17_DIR . '/inc/alertas.php';
 require MURAL17_DIR . '/inc/combustivel.php';
 require MURAL17_DIR . '/inc/setup-content.php';
+require MURAL17_DIR . '/inc/feeds.php';
 
 /**
  * Configuração básica do tema.

@@ -123,6 +123,21 @@ function mural17_meta_vagas_abertas() {
 }
 
 /**
+ * Vagas abertas num escopo, somando portal, PATs, Balcão e outros sites
+ * (a mesma conta da página Empregos).
+ *
+ * @param WP_Term|null $escopo Escopo.
+ * @return int
+ */
+function mural17_total_vagas( $escopo ) {
+	$c = mural17_contagem_vagas();
+	if ( ! $escopo ) {
+		return (int) array_sum( $c );
+	}
+	return (int) array_sum( array_intersect_key( $c, array_flip( mural17_ids_escopo( $escopo ) ) ) );
+}
+
+/**
  * Números do topo ("Hoje no 17"). Guardados por 10 minutos.
  *
  * @param WP_Term|null $escopo Escopo.
@@ -153,12 +168,7 @@ function mural17_numeros( $escopo ) {
 
 	$numeros = array(
 		'noticias'   => $conta( array( 'date_query' => array( array( 'after' => $hoje . ' 00:00:00', 'inclusive' => true ) ) ) ),
-		'vagas'      => $conta(
-			array(
-				'post_type'  => 'vaga',
-				'meta_query' => mural17_meta_vagas_abertas(), // phpcs:ignore WordPress.DB.SlowDBQuery
-			)
-		),
+		'vagas'      => mural17_total_vagas( $escopo ),
 		'eventos'    => $conta(
 			array(
 				'post_type'  => 'evento',

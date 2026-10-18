@@ -1,15 +1,17 @@
 # Mural 17 — tema WordPress
 
-Tema do portal **Mural 17**: notícias, anúncios, eventos e empregos de Neves Paulista, Mirassol, Jaci e São José do Rio Preto (DDD 17).
+Tema do portal **Mural 17**: notícias, anúncios, eventos e empregos das 117 cidades do DDD 17, organizadas em 8 regiões.
 
 ## O que o tema traz
 
-- **Home de portal:** manchete principal e duas secundárias, notícias por cidade, polícia e trânsito, mais lidas, empregos, classificados e agenda.
+- **Home "mural vivo":** o topo "Hoje no 17" com os números do dia e atalhos em bolinhas; um painel em blocos com manchete, plantão (últimas notícias com horário), evento e vaga do dia, mais lidas, trânsito, classificado e o convite para mandar notícia pelo WhatsApp; depois notícias por região, agenda da semana e classificados. Tudo se monta sozinho com o que é publicado.
+- **Páginas de região e de cidade** (`/cidade/regiao-catanduva`, `/cidade/mirassol`) com o mesmo mural, só com o que é de lá, e a lista completa de notícias embaixo.
+- **"Escolha sua cidade":** busca entre as 117 cidades no cabeçalho; a escolha fica guardada no aparelho da pessoa.
 - **Três tipos de conteúdo próprios** no painel:
   - **Eventos** (`/agenda`): data, horário, local, entrada e link. A agenda mostra só os eventos futuros, em ordem de data.
   - **Vagas** (`/empregos`): empresa, tipo (CLT, concurso etc.), salário, contato e prazo. O botão "Quero me candidatar" abre o WhatsApp, o e-mail ou o link informado.
   - **Classificados** (`/classificados`): preço, WhatsApp do anunciante e categorias (Veículos, Imóveis, Móveis e casa, Serviços, Diversos).
-- **Cidade** como taxonomia comum a notícias, eventos, vagas e anúncios (`/cidade/mirassol`). As listagens de agenda, empregos e classificados têm filtro por cidade.
+- **Cidade** como taxonomia comum a notícias, eventos, vagas e anúncios, com as regiões em cima e as cidades dentro (região inclui as cidades nas listagens). As listagens de agenda, empregos e classificados têm filtro por região.
 - **Notícias agregadas por RSS:** a matéria mostra "Fonte: …" e o botão "Ler na fonte original". O tema lê o link original gravado pelo **WP RSS Aggregator** ou pelo **Feedzy**. Se preferir, preencha à mão a caixa "Fonte da notícia" no editor.
 - **Mais lidas:** contador de visualizações próprio. Ignora robôs e quem está logado como editor.
 - **Áreas de anúncio** (Aparência › Widgets): topo e meio da home (728×90), lateral (300×250) e dentro da matéria. É só colar o código do AdSense num widget "HTML personalizado".
@@ -22,7 +24,7 @@ Tema do portal **Mural 17**: notícias, anúncios, eventos e empregos de Neves P
 2. Descompacte e renomeie a pasta `mural17-main` para `mural17`. Compacte de novo em `mural17.zip`.
 3. No WordPress, vá em **Aparência › Temas › Adicionar novo › Enviar tema** e envie o `mural17.zip`.
 4. Ative o tema. Na ativação, ele cria sozinho:
-   - as cidades Neves Paulista, Mirassol, Jaci e Rio Preto;
+   - as 8 regiões e as 117 cidades do DDD 17 (em sites que já usavam o tema, isso acontece no primeiro acesso ao painel);
    - as categorias Polícia e Trânsito;
    - as categorias de classificados.
 5. Em **Configurações › Links permanentes**, escolha "Nome do post" e salve.
@@ -41,9 +43,9 @@ Em **Aparência › Personalizar › Mural 17**:
 
 Sem logo escolhido em **Personalizar › Identidade do site**, o tema usa o logo da marca (`assets/marca/`) no cabeçalho e no rodapé, e o favicon da marca. Cores, versões do logo e regras de uso estão em [`assets/marca/README.md`](assets/marca/README.md).
 
-**Menus** (Aparência › Menus): o tema tem três posições, *Menu principal*, *Barra do topo* e *Rodapé*. Se o menu principal ficar vazio, o tema monta um automático com as cidades, Polícia, Trânsito, Empregos, Classificados e Agenda.
+**Menus** (Aparência › Menus): o tema tem três posições, *Menu principal*, *Barra do topo* e *Rodapé*. Se o menu principal ficar vazio, o tema monta um automático com Polícia, Trânsito, Empregos, Classificados e Agenda. As cidades ficam no botão "Escolha sua cidade".
 
-**Destaques da home:** marque a notícia como **Fixar no topo do blog** para ela virar a manchete principal. Sem posts fixados, entram as três mais recentes.
+**Manchete:** marque a notícia como **Fixar no topo do blog** para ela virar a manchete da home e da página da cidade dela (vale por 3 dias). Sem post fixado, entra a mais recente com foto.
 
 ## Como publicar cada coisa
 
@@ -92,12 +94,16 @@ mural17/
 │   ├── meta-boxes.php     campos extras de cada tipo
 │   ├── customizer.php     opções em Aparência › Personalizar
 │   ├── helpers.php        funções usadas nos templates
+│   ├── mural.php          dados do mural (números do dia, plantão, agenda da semana)
+│   ├── cidades.php        as 8 regiões e as 117 cidades do DDD 17
 │   └── setup-content.php  cidades e categorias criadas na ativação
-├── template-parts/        cartões e blocos reutilizados
+├── template-parts/        cartões e blocos reutilizados (mural.php é a home)
 ├── front-page.php         home
+├── taxonomy-cidade.php    página de região e de cidade
 ├── single*.php            matéria, evento, vaga, classificado
 ├── archive-*.php          agenda, empregos, classificados
-└── assets/                CSS e JS
+├── assets/                CSS, JS e a marca (assets/marca)
+└── docs/                  levantamento das fontes de notícia do DDD 17
 ```
 
 Requer WordPress 6.2+ e PHP 7.4+.

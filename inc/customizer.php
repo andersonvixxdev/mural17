@@ -20,8 +20,8 @@ function mural17_defaults() {
 		'mural17_slogan'     => 'Tudo que acontece no 17',
 		'mural17_whatsapp'   => '',
 		'mural17_email'      => '',
-		'mural17_instagram'  => 'https://instagram.com/mural17',
-		'mural17_facebook'   => 'https://facebook.com/mural17',
+		'mural17_instagram'  => 'https://www.instagram.com/mural17sp/',
+		'mural17_facebook'   => '',
 		'mural17_ultimahora' => true,
 	);
 }

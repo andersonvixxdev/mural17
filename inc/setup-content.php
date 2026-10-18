@@ -23,20 +23,52 @@ function mural17_garante_termo( $nome, $slug, $taxonomy ) {
 }
 
 /**
+ * Cria as regiões e as 117 cidades do DDD 17, cada cidade dentro da sua região.
+ * Termos que já existem (pelo slug) só ganham nome e região corretos.
+ */
+function mural17_cria_cidades() {
+	foreach ( mural17_regioes() as $slug_regiao => $regiao ) {
+		$r = term_exists( $slug_regiao, 'cidade' );
+		if ( ! $r ) {
+			$r = wp_insert_term( $regiao['nome'], 'cidade', array( 'slug' => $slug_regiao ) );
+		}
+		if ( is_wp_error( $r ) ) {
+			continue;
+		}
+		$id_regiao = (int) $r['term_id'];
+
+		foreach ( $regiao['cidades'] as $slug => $nome ) {
+			$c = term_exists( $slug, 'cidade' );
+			if ( $c ) {
+				wp_update_term(
+					(int) $c['term_id'],
+					'cidade',
+					array(
+						'name'   => $nome,
+						'parent' => $id_regiao,
+					)
+				);
+			} else {
+				wp_insert_term(
+					$nome,
+					'cidade',
+					array(
+						'slug'   => $slug,
+						'parent' => $id_regiao,
+					)
+				);
+			}
+		}
+	}
+}
+
+/**
  * Conteúdo inicial do portal.
  */
 function mural17_ativar() {
 	mural17_register_types();
-
-	$cidades = array(
-		'neves-paulista' => 'Neves Paulista',
-		'mirassol'       => 'Mirassol',
-		'jaci'           => 'Jaci',
-		'rio-preto'      => 'Rio Preto',
-	);
-	foreach ( $cidades as $slug => $nome ) {
-		mural17_garante_termo( $nome, $slug, 'cidade' );
-	}
+	mural17_cria_cidades();
+	update_option( 'mural17_cidades_versao', MURAL17_CIDADES_VERSAO );
 
 	foreach ( array( 'policia' => 'Polícia', 'transito' => 'Trânsito' ) as $slug => $nome ) {
 		mural17_garante_termo( $nome, $slug, 'category' );
@@ -61,3 +93,16 @@ function mural17_ativar() {
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'mural17_ativar' );
+
+/**
+ * Sites que já tinham o tema ativo recebem as regiões e cidades novas no
+ * primeiro acesso ao painel depois da atualização.
+ */
+function mural17_atualiza_cidades() {
+	if ( (int) get_option( 'mural17_cidades_versao' ) >= MURAL17_CIDADES_VERSAO ) {
+		return;
+	}
+	mural17_cria_cidades();
+	update_option( 'mural17_cidades_versao', MURAL17_CIDADES_VERSAO );
+}
+add_action( 'admin_init', 'mural17_atualiza_cidades' );

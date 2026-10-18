@@ -9,14 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MURAL17_VERSION', '1.0.0' );
+define( 'MURAL17_VERSION', '2.0.0' );
+define( 'MURAL17_CIDADES_VERSAO', 1 );
 define( 'MURAL17_DIR', get_template_directory() );
 define( 'MURAL17_URI', get_template_directory_uri() );
 
+require MURAL17_DIR . '/inc/cidades.php';
 require MURAL17_DIR . '/inc/post-types.php';
 require MURAL17_DIR . '/inc/meta-boxes.php';
 require MURAL17_DIR . '/inc/customizer.php';
 require MURAL17_DIR . '/inc/helpers.php';
+require MURAL17_DIR . '/inc/mural.php';
 require MURAL17_DIR . '/inc/setup-content.php';
 
 /**
@@ -87,7 +90,7 @@ add_action( 'widgets_init', 'mural17_widgets_init' );
 function mural17_assets() {
 	wp_enqueue_style(
 		'mural17-fonts',
-		'https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap',
+		'https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700;8..60,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap',
 		array(),
 		null
 	);

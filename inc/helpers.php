@@ -224,23 +224,26 @@ add_action( 'template_redirect', 'mural17_conta_visita' );
 /**
  * Consulta das mais lidas dos últimos dias.
  *
- * @param int $qtd  Quantidade.
- * @param int $dias Janela em dias.
+ * @param int          $qtd    Quantidade.
+ * @param int          $dias   Janela em dias.
+ * @param WP_Term|null $escopo Região ou cidade; null para o 17 inteiro.
  * @return WP_Query
  */
-function mural17_mais_lidas( $qtd = 5, $dias = 7 ) {
-	return new WP_Query(
-		array(
-			'post_type'           => 'post',
-			'posts_per_page'      => $qtd,
-			'meta_key'            => '_mural17_views', // phpcs:ignore WordPress.DB.SlowDBQuery
-			'orderby'             => 'meta_value_num',
-			'order'               => 'DESC',
-			'ignore_sticky_posts' => true,
-			'no_found_rows'       => true,
-			'date_query'          => array( array( 'after' => $dias . ' days ago' ) ),
-		)
+function mural17_mais_lidas( $qtd = 5, $dias = 7, $escopo = null ) {
+	$args = array(
+		'post_type'           => 'post',
+		'posts_per_page'      => $qtd,
+		'meta_key'            => '_mural17_views', // phpcs:ignore WordPress.DB.SlowDBQuery
+		'orderby'             => 'meta_value_num',
+		'order'               => 'DESC',
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+		'date_query'          => array( array( 'after' => $dias . ' days ago' ) ),
 	);
+	if ( $escopo ) {
+		$args['tax_query'] = mural17_tax_escopo( $escopo ); // phpcs:ignore WordPress.DB.SlowDBQuery
+	}
+	return new WP_Query( $args );
 }
 
 /**
@@ -289,23 +292,11 @@ function mural17_cat_link( $slug ) {
 }
 
 /**
- * Menu de reserva quando nenhum menu foi definido: cidades + seções.
+ * Menu de reserva quando nenhum menu foi definido: as seções do portal.
+ * As cidades ficam no botão "Escolha sua cidade".
  */
 function mural17_menu_padrao() {
 	echo '<ul class="nav__lista">';
-	echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">Início</a></li>';
-	$cidades = get_terms(
-		array(
-			'taxonomy'   => 'cidade',
-			'hide_empty' => false,
-			'parent'     => 0,
-		)
-	);
-	if ( ! is_wp_error( $cidades ) ) {
-		foreach ( $cidades as $c ) {
-			echo '<li><a href="' . esc_url( get_term_link( $c ) ) . '">' . esc_html( $c->name ) . '</a></li>';
-		}
-	}
 	foreach ( array( 'policia' => 'Polícia', 'transito' => 'Trânsito' ) as $slug => $nome ) {
 		$link = mural17_cat_link( $slug );
 		if ( $link ) {

@@ -294,3 +294,163 @@ add_action(
 		mural17_volta_admin_servicos( is_wp_error( $r ) ? 'gn-erro' : 'gn', 'google-news' );
 	}
 );
+
+/**
+ * Editorias das matérias importadas e as palavras que puxam cada uma. As
+ * palavras são começos de palavra, sem acento ("prend" pega prende, prendeu,
+ * prendem). Na dúvida entre duas, vale a que vem antes na lista.
+ *
+ * @return array<string, array{nome:string, palavras:string[]}>
+ */
+function mural17_editorias() {
+	return array(
+		'policia'   => array(
+			'nome'     => 'Polícia',
+			'palavras' => array( 'polici', 'pm ', 'delegaci', 'preso', 'presos', 'presa ', 'presas', 'prend', 'prisao', 'crime', 'criminos', 'homicid', 'assassin', 'feminicid', 'latrocin', 'furt', 'roub', 'assalt', 'trafic', 'droga', 'cocaina', 'maconha', 'golpe', 'golpist', 'estelionat', 'flagrante', 'mandado de', 'suspeit', 'baleado', 'a tiros', 'facada', 'esfaque', 'apreens', 'gcm', 'guarda civil', 'investigad', 'boletim de ocorrencia', 'agress', 'violencia domestica' ),
+		),
+		'transito'  => array(
+			'nome'     => 'Trânsito',
+			'palavras' => array( 'acidente', 'batida', 'bate de frente', 'batem de frente', 'colisao', 'capot', 'atropel', 'engavet', 'rodovia', 'transito', 'motorista', 'motociclist', 'caminhao', 'carreta', 'sp 310', 'sp 425', 'sp 320', 'sp 326', 'br 153', 'radar', 'cnh', 'detran', 'pedagio', 'recapeamento', 'semaforo', 'sinalizacao' ),
+		),
+		'politica'  => array(
+			'nome'     => 'Política',
+			'palavras' => array( 'prefeito', 'vice prefeit', 'vereador', 'camara municipal', 'sessao ordinaria', 'sessao extraordinaria', 'projeto de lei', 'eleic', 'eleit', 'votacao', 'candidat', 'deputad', 'governador', 'senador', 'partido', 'mandato', 'cassa', 'tomou posse', 'toma posse', 'apuracao', 'urna' ),
+		),
+		'saude'     => array(
+			'nome'     => 'Saúde',
+			'palavras' => array( 'saude', 'vacin', 'imuniza', 'dengue', 'chikungunya', 'hospital', 'santa casa', 'ubs', 'pronto socorro', 'upa ', 'sus ', 'medic', 'enferm', 'cirurgi', 'paciente', 'covid', 'gripe', 'setembro amarelo', 'outubro rosa', 'novembro azul', 'mamograf', 'hemocentro', 'doacao de sangue', 'farmacia', 'zoonose', 'castracao' ),
+		),
+		'educacao'  => array(
+			'nome'     => 'Educação',
+			'palavras' => array( 'escola', 'educac', 'aluno', 'alunos', 'estudante', 'professor', 'ensino', 'creche', 'matricula', 'enem', 'vestibular', 'universidade', 'faculdade', 'fatec', 'etec', 'unesp', 'famerp', 'merenda', 'sala de aula', 'volta as aulas', 'formatura' ),
+		),
+		'empregos'  => array(
+			'nome'     => 'Empregos e concursos',
+			'palavras' => array( 'concurso', 'processo seletivo', 'vagas de emprego', 'vaga de emprego', 'pat ', 'posto de atendimento ao trabalhador', 'inscric', 'edital', 'estagi', 'jovem aprendiz', 'contrata' ),
+		),
+		'economia'  => array(
+			'nome'     => 'Economia',
+			'palavras' => array( 'economi', 'empresa', 'empreendedor', 'comercio', 'comerciant', 'industria', 'agronegocio', 'safra', 'cana de acucar', 'canavi', 'laranja', 'preco', 'inflacao', 'imposto', 'iptu', 'refis', 'credito', 'investiment', 'mei ', 'sebrae', 'emprego', 'desemprego', 'caged', 'black friday', 'combustiv', 'gasolina' ),
+		),
+		'esporte'   => array(
+			'nome'     => 'Esporte',
+			'palavras' => array( 'esport', 'futebol', 'campeonato', 'paulistao', 'serie a', 'serie b', 'serie c', 'serie d', 'mirassol fc', 'rio preto ec', 'america fc', 'atleta', 'corrida', 'maratona', 'copa ', 'torneio', 'jogos regionais', 'jogos abertos', 'volei', 'basquete', 'futsal', 'campeao', 'campea', 'olimpi', 'judo', 'karate', 'natacao', 'ciclismo' ),
+		),
+		'cultura'   => array(
+			'nome'     => 'Cultura e lazer',
+			'palavras' => array( 'cultur', 'show', 'festa', 'festival', 'teatro', 'cinema', 'musica', 'musical', 'exposicao', 'artesanato', 'carnaval', 'rodeio', 'quermesse', 'biblioteca', 'turismo', 'aniversario da cidade', 'aniversario de', 'natal', 'cantata', 'apresentacao', 'danca', 'feira livre', 'feira de artesanato', 'expo ' ),
+		),
+		'clima'     => array(
+			'nome'     => 'Clima e meio ambiente',
+			'palavras' => array( 'chuva', 'temporal', 'tempestade', 'vendaval', 'granizo', 'calor', 'onda de frio', 'frente fria', 'previsao do tempo', 'defesa civil', 'queimada', 'incendio', 'seca ', 'estiagem', 'umidade', 'meio ambiente', 'arboriza', 'reciclag', 'coleta de lixo', 'desmatament', 'enchente', 'alagamento' ),
+		),
+	);
+}
+
+/**
+ * Editoria de uma matéria pelo título e texto. Título vale 3 vezes.
+ *
+ * @param string $titulo Título.
+ * @param string $texto  Texto.
+ * @return string Slug da editoria, ou 'geral' quando nada pesa.
+ */
+function mural17_editoria_do_texto( $titulo, $texto ) {
+	$tit = ' ' . mural17_normaliza( wp_strip_all_tags( (string) $titulo ) ) . ' ';
+	$txt = ' ' . mural17_normaliza( wp_strip_all_tags( (string) $texto ) ) . ' ';
+	$melhor = 'geral';
+	$maior  = 1; // Uma palavra solta no texto não basta.
+	foreach ( mural17_editorias() as $slug => $e ) {
+		$pontos = 0;
+		foreach ( $e['palavras'] as $p ) {
+			$p   = mural17_normaliza( $p ) . ( ' ' === substr( $p, -1 ) ? ' ' : '' );
+			$re  = '/ ' . preg_quote( $p, '/' ) . '/';
+			$pontos += 3 * preg_match_all( $re, $tit ) + min( 3, preg_match_all( $re, $txt ) );
+		}
+		if ( $pontos > $maior ) {
+			$maior  = $pontos;
+			$melhor = $slug;
+		}
+	}
+	return $melhor;
+}
+
+/**
+ * ID da categoria de uma editoria, criando se ainda não existe.
+ *
+ * @param string $slug Slug da editoria ou 'geral'.
+ * @return int
+ */
+function mural17_categoria_editoria( $slug ) {
+	$editorias = mural17_editorias();
+	$nome      = isset( $editorias[ $slug ] ) ? $editorias[ $slug ]['nome'] : 'Geral';
+	$termo     = get_term_by( 'slug', $slug, 'category' );
+	if ( $termo ) {
+		return (int) $termo->term_id;
+	}
+	$novo = wp_insert_term( $nome, 'category', array( 'slug' => $slug ) );
+	return is_wp_error( $novo ) ? 0 : (int) $novo['term_id'];
+}
+
+/**
+ * A matéria está sem editoria de verdade (nenhuma, ou só a padrão)?
+ *
+ * @param int $post_id Post.
+ * @return bool
+ */
+function mural17_sem_editoria( $post_id ) {
+	$cats   = wp_get_post_categories( $post_id );
+	$padrao = (int) get_option( 'default_category' );
+	return ! $cats || ( 1 === count( $cats ) && (int) $cats[0] === $padrao );
+}
+
+/**
+ * Matéria importada sem editoria no feed ganha uma pelo texto.
+ *
+ * @param int    $meta_id Meta.
+ * @param int    $post_id Post.
+ * @param string $chave   Chave.
+ * @param mixed  $valor   Valor.
+ */
+function mural17_editoria_na_importacao( $meta_id, $post_id, $chave, $valor ) {
+	if ( '_pfai_feed_id' !== $chave || ! (int) $valor || ! mural17_sem_editoria( $post_id ) ) {
+		return;
+	}
+	$post = get_post( $post_id );
+	if ( ! $post ) {
+		return;
+	}
+	$cat = mural17_categoria_editoria( mural17_editoria_do_texto( $post->post_title, $post->post_excerpt . ' ' . $post->post_content ) );
+	if ( $cat ) {
+		wp_set_post_categories( $post_id, array( $cat ), false );
+	}
+}
+add_action( 'added_post_meta', 'mural17_editoria_na_importacao', 21, 4 );
+add_action( 'updated_post_meta', 'mural17_editoria_na_importacao', 21, 4 );
+
+/**
+ * Matérias que já entraram sem editoria são classificadas uma vez, no
+ * primeiro acesso ao painel depois da atualização (200 por vez).
+ */
+function mural17_classifica_antigas() {
+	if ( (int) get_option( 'mural17_editorias_versao' ) >= 1 ) {
+		return;
+	}
+	$ids = get_posts(
+		array(
+			'post_type'      => 'post',
+			'post_status'    => array( 'publish', 'draft', 'pending', 'future' ),
+			'posts_per_page' => 200,
+			'fields'         => 'ids',
+			'meta_key'       => '_pfai_feed_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'cat'            => (int) get_option( 'default_category' ),
+			'no_found_rows'  => true,
+		)
+	);
+	foreach ( $ids as $id ) {
+		mural17_editoria_na_importacao( 0, $id, '_pfai_feed_id', 1 );
+	}
+	if ( count( $ids ) < 200 ) {
+		update_option( 'mural17_editorias_versao', 1 );
+	}
+}
+add_action( 'admin_init', 'mural17_classifica_antigas' );

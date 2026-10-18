@@ -143,7 +143,10 @@ $plantao = mural17_consulta(
 							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( mural17_hora_plantao() ); ?></time>
 							<div>
 								<a class="plantao__titulo" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-								<?php if ( $cid ) : ?>
+								<?php $org = mural17_orgao_do_post(); ?>
+								<?php if ( $org ) : ?>
+									<span class="plantao__onde plantao__onde--oficial"><?php echo mural17_icone_oficial( 11 ); // phpcs:ignore WordPress.Security.EscapeOutput ?> Oficial · <?php echo esc_html( $org->name ); ?></span>
+								<?php elseif ( $cid ) : ?>
 									<span class="plantao__onde"><?php echo esc_html( $cid->name ); ?></span>
 								<?php endif; ?>
 							</div>
@@ -319,6 +322,27 @@ $plantao = mural17_consulta(
 			<?php endif; ?>
 		</div>
 	</div>
+
+	<?php
+	$notas = $escopo ? mural17_notas_oficiais( $escopo, 3 ) : null;
+	if ( $notas && $notas->have_posts() ) :
+		?>
+		<section class="secao" aria-labelledby="oficiais-titulo">
+			<div class="secao__topo">
+				<h2 class="secao__titulo" id="oficiais-titulo">Comunicados oficiais</h2>
+				<a class="secao__link secao__link--oficial" href="<?php echo esc_url( mural17_link_oficial( 'cadastro' ) ); ?>">Seu órgão publica aqui?</a>
+			</div>
+			<div class="comunicados">
+				<?php
+				while ( $notas->have_posts() ) :
+					$notas->the_post();
+					get_template_part( 'template-parts/card-oficial' );
+				endwhile;
+				wp_reset_postdata();
+				?>
+			</div>
+		</section>
+	<?php endif; ?>
 
 	<?php
 	$lugares = mural17_por_lugar( $escopo, $exibidos );

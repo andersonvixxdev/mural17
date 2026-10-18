@@ -6,7 +6,7 @@
  */
 
 $mural17_wa    = mural17_whatsapp_link( mural17_opt( 'mural17_whatsapp' ), 'Olá, Mural 17! Tenho uma notícia:' );
-$mural17_mural = is_front_page() || is_tax( 'cidade' );
+$mural17_mural = is_front_page() || is_tax( 'cidade' ) || is_tax( 'orgao' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>

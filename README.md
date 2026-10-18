@@ -68,6 +68,17 @@ Sugestões de feeds (teste cada um no navegador antes de cadastrar):
 | `https://news.google.com/rss/search?q=Mirassol+SP+-futebol&hl=pt-BR&gl=BR&ceid=BR:pt-419` | Mirassol |
 | `https://news.google.com/rss/search?q=%22Rio+Preto%22+(pol%C3%ADcia+OR+acidente+OR+pris%C3%A3o)&hl=pt-BR&gl=BR&ceid=BR:pt-419` | Polícia |
 
+## Notas oficiais (prefeituras, câmaras e Justiça)
+
+Órgãos públicos do DDD 17 podem enviar comunicados, que saem com o selo azul **Oficial**:
+
+- **Cadastro:** a página *Cadastro de órgão* (criada sozinha) aceita só e-mail institucional (`.sp.gov.br`, `.sp.leg.br`, `.jus.br`, `.mp.br`, `.def.br`, `.gov.br`). O pedido chega por e-mail e aparece em **Posts › Notas oficiais › Pedidos de cadastro**. Confirme pelo telefone oficial e clique em *Liberar acesso*: o órgão recebe o link para criar a senha.
+- **Envio:** o órgão entra na página *Painel do órgão* (não tem acesso ao painel do WordPress) e envia título, resumo, texto, foto e o bloco "Serviço". A cidade é a do órgão.
+- **Revisão:** as notas caem em **Posts › Notas oficiais**, com *Aprovar e publicar*, *Revisar texto* e *Devolver* (o órgão vê o motivo e pode reenviar). Na aba *Órgãos ativos* dá para ligar a **publicação direta** para órgãos confiáveis.
+- **Período eleitoral:** no topo da mesma tela, defina as datas (ou ligue à mão). Em vigor, nada de prefeituras, câmaras e órgãos municipais é publicado sozinho; tudo cai na fila, marcado, para você aprovar só aviso urgente. Judiciário, Ministério Público, Defensoria e polícias seguem normais. Confirme as datas e as regras com a assessoria jurídica.
+- **No site:** a nota tem faixa "Nota oficial", quadro "Serviço" e cartão do órgão; cada órgão tem a página `/orgao/<nome>/`; as páginas de cidade e região mostram a faixa "Comunicados oficiais"; no Plantão aparece "Oficial · <órgão>". Notas oficiais não viram manchete automática (fixar à mão continua valendo).
+- **Brasão:** em **Posts › Órgãos oficiais**, edite o órgão para escolher o brasão, o tipo, a cidade e os contatos. Sem brasão, aparecem as iniciais.
+
 ## Portal de Notícias PRO
 
 O tema já conversa com o plugin **Portal de Notícias PRO — Suite**:
@@ -95,11 +106,13 @@ mural17/
 │   ├── customizer.php     opções em Aparência › Personalizar
 │   ├── helpers.php        funções usadas nos templates
 │   ├── mural.php          dados do mural (números do dia, plantão, agenda da semana)
+│   ├── oficial*.php       notas oficiais: órgãos, cadastro, painel do órgão e tela da redação
 │   ├── cidades.php        as 8 regiões e as 117 cidades do DDD 17
 │   └── setup-content.php  cidades e categorias criadas na ativação
 ├── template-parts/        cartões e blocos reutilizados (mural.php é a home)
 ├── front-page.php         home
 ├── taxonomy-cidade.php    página de região e de cidade
+├── taxonomy-orgao.php     página de cada órgão oficial
 ├── single*.php            matéria, evento, vaga, classificado
 ├── archive-*.php          agenda, empregos, classificados
 ├── assets/                CSS, JS e a marca (assets/marca)

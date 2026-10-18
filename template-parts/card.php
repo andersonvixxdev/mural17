@@ -34,6 +34,7 @@ $tamanhos = array(
 		<?php if ( 'grande' === $variante && has_excerpt() ) : ?>
 			<p class="card__linha-fina"><?php echo esc_html( get_the_excerpt() ); ?></p>
 		<?php endif; ?>
-		<p class="card__meta"><?php echo esc_html( mural17_quando() ); ?></p>
+		<?php $orgao = mural17_orgao_do_post(); ?>
+		<p class="card__meta"><?php echo esc_html( ( $orgao ? 'Enviado por ' . $orgao->name . ' · ' : '' ) . mural17_quando() ); ?></p>
 	</div>
 </article>

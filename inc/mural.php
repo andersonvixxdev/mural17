@@ -209,18 +209,35 @@ function mural17_manchete( $escopo ) {
 			return $q->posts[0];
 		}
 	}
-	$q = mural17_consulta(
-		$escopo,
+	// Manchete automática é da redação: notas oficiais ficam de fora (fixadas à mão, entram).
+	$tax = array_merge(
+		array( 'relation' => 'AND' ),
+		mural17_tax_escopo( $escopo ),
 		array(
-			'posts_per_page' => 1,
-			'meta_key'       => '_thumbnail_id', // phpcs:ignore WordPress.DB.SlowDBQuery
+			array(
+				'taxonomy' => 'orgao',
+				'operator' => 'NOT EXISTS',
+			),
 		)
 	);
-	if ( $q->posts ) {
-		return $q->posts[0];
+	foreach ( array( array( 'meta_key' => '_thumbnail_id' ), array() ) as $extra ) {
+		$q = new WP_Query(
+			array_merge(
+				array(
+					'post_type'           => 'post',
+					'posts_per_page'      => 1,
+					'ignore_sticky_posts' => true,
+					'no_found_rows'       => true,
+					'tax_query'           => $tax, // phpcs:ignore WordPress.DB.SlowDBQuery
+				),
+				$extra
+			)
+		);
+		if ( $q->posts ) {
+			return $q->posts[0];
+		}
 	}
-	$q = mural17_consulta( $escopo, array( 'posts_per_page' => 1 ) );
-	return $q->posts ? $q->posts[0] : null;
+	return null;
 }
 
 /**

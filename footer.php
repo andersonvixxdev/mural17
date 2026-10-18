@@ -91,6 +91,7 @@ $fb    = mural17_opt( 'mural17_facebook' );
 				<?php if ( $email ) : ?>
 					<li><a href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a></li>
 				<?php endif; ?>
+				<li><a href="<?php echo esc_url( mural17_link_oficial( 'cadastro' ) ); ?>">Órgãos públicos: publiquem aqui</a></li>
 				<?php if ( ! $wa && ! $email ) : ?>
 					<li>Configure o WhatsApp e o e-mail em Aparência › Personalizar › Mural 17.</li>
 				<?php endif; ?>

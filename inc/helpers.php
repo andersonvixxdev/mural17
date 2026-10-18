@@ -67,7 +67,9 @@ function mural17_chapeu( $class = '' ) {
  * Selo de Polícia/Trânsito quando o post está nessas categorias.
  */
 function mural17_selo() {
-	if ( has_category( 'transito' ) ) {
+	if ( function_exists( 'mural17_orgao_do_post' ) && mural17_orgao_do_post() ) {
+		echo '<span class="selo selo--oficial">' . mural17_icone_oficial( 11 ) . ' Oficial</span>'; // phpcs:ignore WordPress.Security.EscapeOutput
+	} elseif ( has_category( 'transito' ) ) {
 		echo '<span class="selo selo--transito">Trânsito</span>';
 	} elseif ( has_category( 'policia' ) ) {
 		echo '<span class="selo selo--policia">Polícia</span>';

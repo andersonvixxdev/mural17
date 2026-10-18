@@ -10,9 +10,16 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	$fonte = mural17_fonte();
+	$orgao = mural17_orgao_do_post();
 	?>
 	<div class="secao--com-lateral materia-wrap">
-		<article <?php post_class( 'materia' ); ?>>
+		<article <?php post_class( 'materia' . ( $orgao ? ' materia--oficial' : '' ) ); ?>>
+			<?php if ( $orgao ) : ?>
+				<div class="faixa-oficial">
+					<?php echo mural17_icone_oficial( 26 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+					<p><b>Nota oficial</b> Texto enviado por <?php echo esc_html( $orgao->name ); ?>. A redação do Mural 17 revisou, mas não produziu este conteúdo.</p>
+				</div>
+			<?php endif; ?>
 			<header class="materia__topo">
 				<div class="card__rotulos">
 					<?php mural17_selo(); ?>
@@ -23,7 +30,9 @@ while ( have_posts() ) :
 					<p class="materia__linha-fina"><?php echo esc_html( get_the_excerpt() ); ?></p>
 				<?php endif; ?>
 				<p class="materia__meta">
-					<?php if ( $fonte ) : ?>
+					<?php if ( $orgao ) : ?>
+						<?php echo esc_html( $orgao->name ); ?>
+					<?php elseif ( $fonte ) : ?>
 						Fonte: <?php echo esc_html( $fonte['nome'] ); ?>
 					<?php else : ?>
 						Por <?php the_author(); ?>
@@ -45,7 +54,13 @@ while ( have_posts() ) :
 				<?php the_content(); ?>
 			</div>
 
-			<?php if ( $fonte ) : ?>
+			<?php
+			if ( $orgao ) {
+				get_template_part( 'template-parts/servico-oficial', null, array( 'orgao' => $orgao ) );
+			}
+			?>
+
+			<?php if ( $fonte && ! $orgao ) : ?>
 				<aside class="fonte">
 					<p>Este é um resumo. A matéria completa foi publicada por <strong><?php echo esc_html( $fonte['nome'] ); ?></strong>.</p>
 					<a class="botao" href="<?php echo esc_url( $fonte['url'] ); ?>" target="_blank" rel="noopener nofollow">Ler na fonte original</a>

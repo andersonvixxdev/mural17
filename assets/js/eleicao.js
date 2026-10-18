@@ -63,7 +63,13 @@
 		} );
 	}
 	function foto( c ) {
-		return c && cfg.fotos && cfg.fotos[ c.num ] ? cfg.fotos[ c.num ] : '';
+		if ( ! c ) {
+			return '';
+		}
+		if ( cfg.fotos && cfg.fotos[ c.num ] ) {
+			return cfg.fotos[ c.num ];
+		}
+		return dados && dados.fotos && dados.fotos[ c.num ] ? dados.fotos[ c.num ] : '';
 	}
 
 	function aberta() {
@@ -94,7 +100,7 @@
 			q( '[data-ap-nome]', el ).textContent = c ? c.nome : ( aberta() ? 'Apuração começa às ' + hora( cfg.fecha ) : 'Aguardando o TSE' );
 			var ini = q( '[data-ap-inicial]', el );
 			if ( foto( c ) ) {
-				ini.innerHTML = '<img src="' + esc( foto( c ) ) + '" alt="">';
+				ini.innerHTML = '<img src="' + esc( foto( c ) ) + '" alt="" onerror="this.parentNode.textContent=\'' + esc( c.nome.charAt( 0 ) ) + '\'">';
 			} else {
 				ini.textContent = c ? c.nome.charAt( 0 ) : '·';
 			}
@@ -262,7 +268,7 @@
 		}
 		var t = p[ 0 ].pct + p[ 1 ].pct || 1;
 		var lado = function ( c ) {
-			return ( foto( c ) ? '<img class="ap-rosto" src="' + esc( foto( c ) ) + '" alt="">' : '' ) + esc( c.nome.split( ' ' )[ 0 ] ) + ' ' + num( c.pct, 1 ) + '%';
+			return ( foto( c ) ? '<img class="ap-rosto" src="' + esc( foto( c ) ) + '" alt="" onerror="this.remove()">' : '' ) + esc( c.nome.split( ' ' )[ 0 ] ) + ' ' + num( c.pct, 1 ) + '%';
 		};
 		return '<span>' + lado( p[ 0 ] ) + '</span>' +
 			'<span class="ap-mini ap-mini--faixa"><i style="width:' + ( 100 * p[ 0 ].pct / t ) + '%;background:' + COR[ 0 ] + '"></i><i style="width:' + ( 100 * p[ 1 ].pct / t ) + '%;background:' + COR[ 1 ] + '"></i></span>' +

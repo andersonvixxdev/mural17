@@ -23,7 +23,7 @@ require_once __DIR__ . '/eleicao-ibge.php';
  * @return array
  */
 function mural17_eleicao_config() {
-	return wp_parse_args(
+	$c = wp_parse_args(
 		(array) get_option( 'mural17_eleicao' ),
 		array(
 			'modo'          => 'auto', // auto | ligado | desligado.
@@ -37,12 +37,18 @@ function mural17_eleicao_config() {
 			'pasta'         => 'ele2026',
 			'eleicao'       => '', // Código do 2º turno (federal). Vazio = descobre sozinho.
 			'eleicao_teste' => '', // Código do 1º turno, para o teste.
-			'modelo_res'    => '{base}/{pasta}/{e}/dados-simplificados/{abr}/{abr}{mun}-c{cargo}-e{e6}-r.json',
+			'modelo_res'    => '{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e6}-u.json',
 			'modelo_mun'    => '{base}/{pasta}/{e}/config/mun-e{e6}-cm.json',
+			'modelo_foto'   => '{base}/{pasta}/{e}/fotos/br/{sq}.jpeg',
 			'publicar'      => 1,  // Marcos principais viram matéria (e vão para as redes).
 			'fotos'         => array( '13' => '', '22' => '' ), // Número do candidato => endereço da foto.
 		)
 	);
+	// Endereço salvo antes de 18/10, no formato de 2022 ("-r"), que não existe em 2026.
+	if ( false !== strpos( $c['modelo_res'], 'dados-simplificados' ) ) {
+		$c['modelo_res'] = '{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e6}-u.json';
+	}
+	return $c;
 }
 
 /**
@@ -176,6 +182,29 @@ function mural17_tse_diagnostico() {
 				'http'   => $cod,
 				'inicio' => 200 === $cod ? substr( wp_remote_retrieve_body( $x ), 0, 400 ) : '',
 			);
+			if ( 200 === $cod && false !== strpos( $m, '{abr}{mun}-c' ) && empty( $saida['amostra'] ) ) {
+				$corpo            = json_decode( wp_remote_retrieve_body( $x ), true );
+				$res              = is_array( $corpo ) ? mural17_tse_resultado( $corpo ) : null;
+				$saida['amostra'] = array(
+					'url'     => $url,
+					'lido'    => $res,
+					'inicio'  => substr( wp_remote_retrieve_body( $x ), 0, 5000 ),
+					'eleicao' => $cd,
+				);
+				foreach ( $res ? array_slice( $res['cand'], 0, 1 ) : array() as $cand ) {
+					foreach ( array( 'jpeg', 'jpg', 'png' ) as $ext ) {
+						$f   = mural17_tse_modelo( '{base}/{pasta}/{e}/fotos/br/' . $cand['sq'] . '.' . $ext, $cd );
+						$y   = wp_remote_head( $f, array( 'timeout' => 8 ) );
+						$saida['testes'][] = array(
+							'codigo' => $cd,
+							'modelo' => 'foto',
+							'url'    => $f,
+							'http'   => is_wp_error( $y ) ? 0 : (int) wp_remote_retrieve_response_code( $y ),
+							'inicio' => '',
+						);
+					}
+				}
+			}
 		}
 	}
 	return $saida;
@@ -217,6 +246,7 @@ function mural17_tse_eleicoes() {
 				'cd'    => (string) ( $e['cd'] ?? '' ),
 				'nm'    => (string) ( $e['nm'] ?? '' ),
 				'turno' => (string) ( $e['t'] ?? '' ),
+				'cdt2'  => (string) ( $e['cdt2'] ?? '' ),
 				'data'  => (string) ( $pleito['dt'] ?? '' ),
 				'pasta' => (string) ( $j['c'] ?? '' ),
 			);
@@ -252,6 +282,10 @@ function mural17_eleicao_codigo( $teste = false ) {
 		}
 		if ( '1' === $e['turno'] ) {
 			$achados['eleicao_teste'] = $e['cd'];
+			// O 1º turno já traz o código do 2º (cdt2), antes de o TSE listá-lo.
+			if ( '' !== $e['cdt2'] && empty( $achados['eleicao'] ) ) {
+				$achados['eleicao'] = $e['cdt2'];
+			}
 		} elseif ( '2' === $e['turno'] ) {
 			$achados['eleicao'] = $e['cd'];
 		}
@@ -341,14 +375,26 @@ function mural17_nome_urna( $nome ) {
  * @return array
  */
 function mural17_tse_resultado( $j ) {
+	// Formato de 2026 ("-u"): os candidatos ficam dentro do cargo, aninhados
+	// em federações e partidos. O antigo ("-r") trazia "cand" no topo. Os
+	// dois são lidos procurando os campos pelo nome, em qualquer nível.
+	$cargo = $j;
+	foreach ( isset( $j['carg'] ) && is_array( $j['carg'] ) ? $j['carg'] : array() as $cg ) {
+		if ( '1' === ltrim( (string) ( $cg['cd'] ?? '' ), '0' ) ) {
+			$cargo = $cg;
+			break;
+		}
+	}
 	$cands = array();
-	foreach ( isset( $j['cand'] ) && is_array( $j['cand'] ) ? $j['cand'] : array() as $c ) {
+	foreach ( mural17_tse_candidatos( $cargo ) as $c ) {
+		$st       = (string) ( $c['st'] ?? '' );
 		$cands[] = array(
 			'num'    => (string) ( $c['n'] ?? '' ),
-			'nome'   => mural17_nome_urna( $c['nm'] ?? '' ),
+			'nome'   => mural17_nome_urna( isset( $c['nmu'] ) && '' !== $c['nmu'] ? $c['nmu'] : ( $c['nm'] ?? '' ) ),
 			'votos'  => (int) mural17_tse_num( $c['vap'] ?? 0 ),
 			'pct'    => mural17_tse_num( $c['pvap'] ?? 0 ),
-			'eleito' => 's' === strtolower( (string) ( $c['e'] ?? '' ) ) || false !== stripos( (string) ( $c['st'] ?? '' ), 'eleito' ) && false === stripos( (string) ( $c['st'] ?? '' ), 'não' ),
+			'sq'     => (string) ( $c['sqcand'] ?? '' ),
+			'eleito' => 's' === strtolower( (string) ( $c['e'] ?? '' ) ) || ( false !== stripos( $st, 'eleito' ) && false === stripos( $st, 'não' ) && false === stripos( $st, 'nao' ) ),
 		);
 	}
 	// Ordem fixa pelo número: a cor de cada candidato não muda durante a noite.
@@ -358,17 +404,77 @@ function mural17_tse_resultado( $j ) {
 			return (int) $a['num'] <=> (int) $b['num'];
 		}
 	);
+	$resto = $j;
+	unset( $resto['carg'], $resto['cand'] );
+	$num = function ( $chaves ) use ( $resto ) {
+		foreach ( (array) $chaves as $k ) {
+			$v = mural17_tse_campo( $resto, $k );
+			if ( null !== $v ) {
+				return mural17_tse_num( $v );
+			}
+		}
+		return 0;
+	};
+	$hora = isset( $j['ht'] ) ? trim( ( $j['dt'] ?? '' ) . ' ' . $j['ht'] ) : trim( ( $j['dg'] ?? '' ) . ' ' . ( $j['hg'] ?? '' ) );
 	return array(
-		'pst'     => mural17_tse_num( $j['pst'] ?? 0 ),
-		's'       => (int) mural17_tse_num( $j['s'] ?? 0 ),
-		'st'      => (int) mural17_tse_num( $j['st'] ?? 0 ),
-		'hora'    => trim( (string) ( $j['dg'] ?? '' ) . ' ' . (string) ( $j['hg'] ?? '' ) ),
+		'pst'     => $num( 'pst' ),
+		's'       => (int) $num( array( 'ts', 's' ) ),
+		'st'      => (int) $num( 'st' ),
+		'hora'    => $hora,
 		'cand'    => $cands,
-		'vv'      => (int) mural17_tse_num( $j['vv'] ?? 0 ),
-		'brancos' => mural17_tse_num( $j['pvb'] ?? 0 ),
-		'nulos'   => mural17_tse_num( $j['ptvn'] ?? ( $j['pvn'] ?? 0 ) ),
-		'abst'    => mural17_tse_num( $j['pa'] ?? 0 ),
+		'vv'      => (int) $num( array( 'vv', 'vvc', 'tvv' ) ),
+		'brancos' => $num( 'pvb' ),
+		'nulos'   => $num( array( 'ptvn', 'pvn' ) ),
+		'abst'    => $num( 'pa' ),
 	);
+}
+
+/**
+ * Candidatos dentro de um bloco do TSE: todo objeto com número, nome e
+ * votos apurados, em qualquer nível.
+ *
+ * @param array $a Bloco.
+ * @return array[]
+ */
+function mural17_tse_candidatos( $a ) {
+	$saida = array();
+	if ( ! is_array( $a ) ) {
+		return $saida;
+	}
+	if ( isset( $a['n'], $a['vap'] ) && ( isset( $a['nmu'] ) || isset( $a['nm'] ) ) && ! is_array( $a['vap'] ) ) {
+		return array( $a );
+	}
+	foreach ( $a as $v ) {
+		if ( is_array( $v ) ) {
+			$saida = array_merge( $saida, mural17_tse_candidatos( $v ) );
+		}
+	}
+	return $saida;
+}
+
+/**
+ * Primeiro valor escalar de um campo, em qualquer nível.
+ *
+ * @param array  $a     Bloco.
+ * @param string $chave Campo.
+ * @return string|null
+ */
+function mural17_tse_campo( $a, $chave ) {
+	if ( ! is_array( $a ) ) {
+		return null;
+	}
+	if ( isset( $a[ $chave ] ) && is_scalar( $a[ $chave ] ) ) {
+		return (string) $a[ $chave ];
+	}
+	foreach ( $a as $v ) {
+		if ( is_array( $v ) ) {
+			$r = mural17_tse_campo( $v, $chave );
+			if ( null !== $r ) {
+				return $r;
+			}
+		}
+	}
+	return null;
 }
 
 /**
@@ -460,8 +566,9 @@ function mural17_apuracao_atualiza( $teste = false ) {
 			$respostas = mural17_requisicoes_juntas( $lote );
 			foreach ( $respostas as $slug => $corpo ) {
 				$j = is_string( $corpo ) ? json_decode( $corpo, true ) : null;
-				if ( is_array( $j ) && isset( $j['cand'] ) ) {
-					$cidades[ $slug ] = mural17_tse_resultado( $j );
+				$res = is_array( $j ) ? mural17_tse_resultado( $j ) : null;
+				if ( $res && $res['cand'] ) {
+					$cidades[ $slug ] = $res;
 				} else {
 					++$falhas;
 				}
@@ -816,7 +923,25 @@ function mural17_apuracao_publico( $dados ) {
 		'marcos' => isset( $dados['marcos'] ) ? $dados['marcos'] : array(),
 		'posts'  => isset( $dados['posts'] ) ? $dados['posts'] : array(),
 		'fecha'  => mural17_eleicao_hora( 'fechamento' ),
+		'fotos'  => mural17_fotos_tse( $dados ),
 	);
+}
+
+/**
+ * Foto oficial de cada candidato na pasta de fotos do TSE (número => endereço).
+ *
+ * @param array $dados Leitura.
+ * @return array<string, string>
+ */
+function mural17_fotos_tse( $dados ) {
+	$c     = mural17_eleicao_config();
+	$fotos = array();
+	foreach ( isset( $dados['br']['cand'] ) ? $dados['br']['cand'] : array() as $cand ) {
+		if ( ! empty( $cand['sq'] ) ) {
+			$fotos[ $cand['num'] ] = str_replace( '{sq}', $cand['sq'], mural17_tse_modelo( $c['modelo_foto'], $dados['eleicao'] ?? '' ) );
+		}
+	}
+	return $fotos;
 }
 
 /**

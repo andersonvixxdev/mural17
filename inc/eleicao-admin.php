@@ -122,6 +122,28 @@ function mural17_pagina_eleicao_admin() {
 					<tr<?php echo 200 === $x['http'] ? ' style="background:#e6f4ea"' : ''; ?>><td><?php echo esc_html( $x['codigo'] ); ?></td><td><b><?php echo (int) $x['http']; ?></b></td><td><code style="font-size:11px"><?php echo esc_html( $x['url'] ); ?></code><?php echo $x['inicio'] ? '<br><code style="font-size:11px;color:#555">' . esc_html( $x['inicio'] ) . '</code>' : ''; ?></td></tr>
 				<?php endforeach; ?>
 			</tbody></table>
+			<?php if ( ! empty( $diag['amostra'] ) ) : ?>
+				<p><b>Como o site leu o resultado (<?php echo esc_html( $diag['amostra']['eleicao'] ); ?>):</b>
+				<?php
+				$l = $diag['amostra']['lido'];
+				if ( $l && $l['cand'] ) {
+					usort(
+						$l['cand'],
+						function ( $a, $b ) {
+							return $b['votos'] <=> $a['votos'];
+						}
+					);
+					echo esc_html( number_format( $l['pst'], 2, ',', '.' ) . '% das seções · ' );
+					foreach ( array_slice( $l['cand'], 0, 4 ) as $x ) {
+						echo esc_html( $x['num'] . ' ' . $x['nome'] . ' ' . number_format( $x['pct'], 2, ',', '.' ) . '% (' . number_format( $x['votos'], 0, ',', '.' ) . ') · ' );
+					}
+				} else {
+					echo 'não achei candidatos no arquivo.';
+				}
+				?>
+				</p>
+				<textarea readonly rows="8" class="large-text code"><?php echo esc_textarea( $diag['amostra']['inicio'] ); ?></textarea>
+			<?php endif; ?>
 			<p><b>Lista de eleições do TSE (ele-c.json):</b></p>
 			<textarea readonly rows="10" class="large-text code"><?php echo esc_textarea( $diag['config'] ); ?></textarea>
 		<?php endif; ?>

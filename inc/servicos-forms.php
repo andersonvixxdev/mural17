@@ -22,6 +22,8 @@ function mural17_mensagens_servicos() {
 		'interrupcao-volta'     => array( 'ok', 'Marcado como normalizado. O aviso sai da lista em 6 horas.' ),
 		'erro-interrupcao'      => array( 'erro', 'Preencha o que falta, os bairros e quando começa.' ),
 		'plantao-ok'            => array( 'ok', 'Escala salva. O site troca a farmácia sozinho no horário de cada plantão.' ),
+		'pat-ok'                => array( 'ok', 'Lista publicada. Ela aparece em Empregos, na sua cidade, e entra no resumo de vagas por e-mail.' ),
+		'erro-pat'              => array( 'erro', 'Nenhuma linha da lista foi entendida. Use uma vaga por linha: quantidade; cargo; requisito.' ),
 		'erro-plantao'          => array( 'erro', 'Nenhuma linha da escala foi entendida. Use uma linha por dia: data; farmácia; endereço; telefone.' ),
 		'concurso-ok'           => array( 'ok', 'Concurso publicado. Quem pediu aviso de concursos na região vai receber um e-mail.' ),
 		'erro-concurso'         => array( 'erro', 'Preencha cargos, órgão, data final das inscrições e o link do edital.' ),
@@ -195,6 +197,7 @@ function mural17_abas_painel( $orgao ) {
 	);
 	if ( in_array( $tipo, array( 'prefeitura', 'municipal' ), true ) ) {
 		$abas['plantao'] = 'Farmácia de plantão';
+		$abas['pat']     = 'Vagas do PAT';
 	}
 	if ( ! in_array( $tipo, array( 'saneamento', 'energia' ), true ) ) {
 		$abas['concursos'] = 'Concursos';
@@ -277,6 +280,9 @@ function mural17_painel_servico( $aba, $orgao ) {
 	switch ( $aba ) {
 		case 'interrupcoes':
 			mural17_painel_interrupcoes( $orgao );
+			break;
+		case 'pat':
+			mural17_painel_pat( $orgao );
 			break;
 		case 'plantao':
 			mural17_painel_plantao( $orgao );
@@ -1397,6 +1403,7 @@ function mural17_temas_aviso() {
 		'alertas'   => 'Alertas de tempo e Defesa Civil',
 		'agua-luz'  => 'Falta de água e luz',
 		'concursos' => 'Concursos e processos seletivos',
+		'vagas'     => 'Vagas de emprego (resumo diário)',
 	);
 }
 

@@ -58,6 +58,11 @@ function mural17_pagina_servicos_admin() {
 		'gn'        => 'Feeds do Google News cadastrados.',
 		'gn-erro'   => 'Não foi possível cadastrar os feeds do Google News. Veja o erro abaixo.',
 		'transito'      => 'Trânsito lido agora.',
+		'pat'           => 'Lista do PAT publicada.',
+		'pat-0'         => 'Nenhuma linha da lista do PAT foi entendida.',
+		'jooble'        => 'Vagas do Jooble atualizadas.',
+		'jooble-erro'   => 'Não foi possível ler o Jooble. Veja o erro abaixo.',
+		'jooble-sem'    => 'Chave do Jooble apagada. As vagas de outros sites saíram do ar.',
 		'transito-erro' => 'Não foi possível ler a TomTom agora. Veja o erro abaixo.',
 		'transito-sem'  => 'Chave da TomTom apagada. O trânsito ao vivo foi desligado.',
 	);
@@ -123,6 +128,28 @@ function mural17_pagina_servicos_admin() {
 				</form>
 			</div>
 
+			<div class="m17-card" id="vagas">
+				<h2>Vagas de outros sites (Jooble)</h2>
+				<p>Vagas das 20 maiores cidades do 17 nos sites de emprego, lidas 2 vezes por dia e mostradas em Empregos com o link para a vaga original. Peça a chave grátis em <a href="https://jooble.org/api/about" target="_blank" rel="noopener">jooble.org/api/about</a>.</p>
+				<?php
+				$m17_ext  = get_option( 'mural17_vagas_ext' );
+				$m17_ext_e = get_option( 'mural17_jooble_erro' );
+				?>
+				<p><b>Última leitura:</b> <?php echo is_array( $m17_ext ) ? esc_html( wp_date( 'd/m H:i', $m17_ext['em'] ) . ' · ' . count( $m17_ext['itens'] ) . ' vaga(s) no 17' ) : ( mural17_jooble_chave() ? 'ainda não leu' : 'desligado, falta a chave' ); ?></p>
+				<?php if ( is_array( $m17_ext_e ) ) : ?>
+					<p class="m17-erro"><b>Erro em <?php echo esc_html( wp_date( 'd/m H:i', $m17_ext_e[1] ) ); ?>:</b> <?php echo esc_html( $m17_ext_e[0] ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_jooble' ); ?>
+					<?php if ( ! ( defined( 'MURAL17_JOOBLE_CHAVE' ) && MURAL17_JOOBLE_CHAVE ) ) : ?>
+						<p><label>Chave da API <input type="password" name="chave" class="regular-text" autocomplete="off" placeholder="<?php echo mural17_jooble_chave() ? esc_attr( 'guardada · termina em ' . substr( mural17_jooble_chave(), -4 ) ) : 'cole a chave aqui'; ?>"></label></p>
+					<?php endif; ?>
+					<?php submit_button( mural17_jooble_chave() ? 'Ler agora' : 'Salvar e ler', 'secondary', 'submit', false ); ?>
+					<?php if ( get_option( 'mural17_jooble_chave' ) ) : ?>
+						<button type="submit" name="apagar" value="1" class="button-link" onclick="this.form.chave.value='';">Apagar chave</button>
+					<?php endif; ?>
+				</form>
+			</div>
+
 			<div class="m17-card" id="google-news">
 				<h2>Google News das 117 cidades</h2>
 				<p>Cadastra no Portal de Notícias PRO um feed de busca do Google News para cada cidade do 17, já com a cidade no nome. Os que já existem ficam como estão.</p>
@@ -157,6 +184,16 @@ function mural17_pagina_servicos_admin() {
 			</table>
 			<div class="m17-escala"><?php mural17_campos_escala(); ?></div>
 			<?php submit_button( 'Salvar escala' ); ?>
+		</form>
+
+		<h2 id="pat">Lista de vagas do PAT</h2>
+		<p>Para cidades em que a prefeitura não manda a lista pelo painel do órgão. Cole a lista do dia como sai no site, no PDF ou no WhatsApp do PAT; ela fica no ar por 4 dias.</p>
+		<?php $form( 'mural17_admin_pat' ); ?>
+			<table class="form-table">
+				<tr><th><label for="adm-pat-cidade">Cidade</label></th><td><select id="adm-pat-cidade" name="cidade" required><?php mural17_opcoes_cidades(); ?></select></td></tr>
+			</table>
+			<div class="m17-escala"><?php mural17_campos_pat(); ?></div>
+			<?php submit_button( 'Publicar a lista' ); ?>
 		</form>
 
 		<h2 id="alerta">Alerta da redação</h2>

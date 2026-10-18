@@ -57,7 +57,12 @@ function mural17_pagina_servicos_admin() {
 		'inmet-erro' => 'Não foi possível ler o INMET agora. Veja o erro abaixo.',
 		'gn'        => 'Feeds do Google News cadastrados.',
 		'gn-erro'   => 'Não foi possível cadastrar os feeds do Google News. Veja o erro abaixo.',
+		'transito'      => 'Trânsito lido agora.',
+		'transito-erro' => 'Não foi possível ler a TomTom agora. Veja o erro abaixo.',
+		'transito-sem'  => 'Chave da TomTom apagada. O trânsito ao vivo foi desligado.',
 	);
+	$transito   = get_option( 'mural17_transito' );
+	$transito_e = get_option( 'mural17_transito_erro' );
 	$gn       = get_option( 'mural17_google_news' );
 	$form     = function ( $acao ) {
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
@@ -98,6 +103,26 @@ function mural17_pagina_servicos_admin() {
 			</div>
 
 			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+			<div class="m17-card" id="transito">
+				<h2>Trânsito ao vivo (TomTom)</h2>
+				<p>Acidentes, interdições e lentidão nas rodovias do 17, lidos a cada 15 minutos e mostrados no quadro Trânsito. Crie a chave grátis em <a href="https://developer.tomtom.com/" target="_blank" rel="noopener">developer.tomtom.com</a> (2.500 consultas por dia; o site usa cerca de 1.000).</p>
+				<p><b>Última leitura:</b> <?php echo is_array( $transito ) ? esc_html( wp_date( 'd/m H:i', $transito['em'] ) . ' · ' . count( $transito['itens'] ) . ' ocorrência(s) no 17' ) : ( mural17_tomtom_chave() ? 'ainda não leu' : 'desligado, falta a chave' ); ?></p>
+				<?php if ( is_array( $transito_e ) ) : ?>
+					<p class="m17-erro"><b>Erro em <?php echo esc_html( wp_date( 'd/m H:i', $transito_e[1] ) ); ?>:</b> <?php echo esc_html( $transito_e[0] ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_transito' ); ?>
+					<?php if ( defined( 'MURAL17_TOMTOM_CHAVE' ) && MURAL17_TOMTOM_CHAVE ) : ?>
+						<p>A chave está no wp-config.php.</p>
+					<?php else : ?>
+						<p><label>Chave da API <input type="password" name="chave" class="regular-text" autocomplete="off" placeholder="<?php echo mural17_tomtom_chave() ? esc_attr( 'guardada · termina em ' . substr( mural17_tomtom_chave(), -4 ) ) : 'cole a chave aqui'; ?>"></label></p>
+					<?php endif; ?>
+					<?php submit_button( mural17_tomtom_chave() ? 'Ler agora' : 'Salvar e ler', 'secondary', 'submit', false ); ?>
+					<?php if ( get_option( 'mural17_tomtom_chave' ) ) : ?>
+						<button type="submit" name="apagar" value="1" class="button-link" onclick="this.form.chave.value='';">Apagar chave</button>
+					<?php endif; ?>
+				</form>
+			</div>
+
 			<div class="m17-card" id="google-news">
 				<h2>Google News das 117 cidades</h2>
 				<p>Cadastra no Portal de Notícias PRO um feed de busca do Google News para cada cidade do 17, já com a cidade no nome. Os que já existem ficam como estão.</p>

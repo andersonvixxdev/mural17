@@ -249,19 +249,32 @@ $plantao = mural17_consulta(
 			)
 		) : null;
 		?>
+		<?php $ao_vivo = mural17_transito_agora( $escopo, 3 ); ?>
 		<section class="t t--transito" aria-labelledby="transito-titulo">
-			<div class="t__cab"><h2 class="t__titulo" id="transito-titulo">Trânsito</h2><span class="t__lugar">7 dias</span></div>
+			<div class="t__cab"><h2 class="t__titulo" id="transito-titulo">Trânsito</h2><span class="t__lugar"><?php echo $ao_vivo ? '<span class="t--transito__vivo">agora</span>' : '7 dias'; ?></span></div>
+			<?php if ( $ao_vivo ) : ?>
+				<ul class="vias vias--vivo">
+					<?php foreach ( $ao_vivo as $oc ) : ?>
+						<li class="<?php echo $oc['grave'] ? 'is-grave' : ''; ?>"><b><?php echo esc_html( $oc['tipo'] ); ?></b><span><?php echo esc_html( mural17_linha_transito( $oc ) ); ?></span></li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 			<?php if ( $tq && $tq->have_posts() ) : ?>
 				<ul class="vias">
 					<?php
-					while ( $tq->have_posts() ) :
+					$n = 0;
+					while ( $tq->have_posts() && $n < 4 - count( $ao_vivo ) ) :
 						$tq->the_post();
+						++$n;
 						?>
 						<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a><span><?php echo esc_html( mural17_hora_plantao() ); ?></span></li>
 					<?php endwhile; ?>
 				</ul>
-			<?php else : ?>
-				<p class="t--transito__ok"><b>Sem ocorrências</b> registradas <?php echo esc_html( $em ); ?> nos últimos 7 dias.</p>
+			<?php elseif ( ! $ao_vivo ) : ?>
+				<p class="t--transito__ok"><b>Sem ocorrências</b> <?php echo mural17_tomtom_chave() ? esc_html( 'informadas agora nas vias ' . ( $escopo ? 'de ' . mural17_nome_curto( $escopo ) : 'do 17' ) . ' nem nos últimos 7 dias.' ) : esc_html( 'registradas ' . $em . ' nos últimos 7 dias.' ); ?></p>
+			<?php endif; ?>
+			<?php if ( $ao_vivo ) : ?>
+				<p class="t--transito__fonte">Ao vivo: TomTom</p>
 			<?php endif; ?>
 			<?php wp_reset_postdata(); ?>
 		</section>

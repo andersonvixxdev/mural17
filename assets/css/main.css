@@ -442,6 +442,18 @@ a.t--vaga:hover { color: #FFFFFF; }
 .vias li span { flex-shrink: 0; font-size: 12px; color: var(--m17-orange); font-weight: 700; }
 .t--transito__ok { margin: auto 0 0; font-size: 15px; color: var(--m17-ink-2); }
 .t--transito__ok b { display: block; font: 900 20px/1.1 var(--m17-marca); color: #0B5E31; margin-bottom: 4px; }
+.vias--vivo li { flex-direction: column; align-items: flex-start; gap: 2px; padding-left: 12px; position: relative; }
+.vias--vivo li::before { content: ""; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--m17-orange); }
+.vias--vivo li.is-grave::before { background: var(--m17-accent); }
+.vias--vivo li b { font: 700 14px/1.2 var(--m17-sans); color: var(--m17-ink); }
+.vias--vivo li.is-grave b { color: var(--m17-accent-esc); }
+.vias--vivo li span { font-size: 12.5px; font-weight: 500; color: var(--m17-ink-2); }
+.vias--vivo + .vias li:first-child { border-top-width: 2px; }
+.t--transito__vivo { display: inline-flex; align-items: center; gap: 6px; color: var(--m17-accent); }
+.t--transito__vivo::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--m17-accent); animation: m17-pulsa 1.6s ease-in-out infinite; }
+@keyframes m17-pulsa { 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .t--transito__vivo::before { animation: none; } }
+.t--transito__fonte { margin: auto 0 0; padding-top: 8px; font-size: 11px; color: var(--m17-muted); }
 
 .t--envie { grid-column: span 5; background: var(--m17-accent); color: #FFFFFF; flex-direction: row; align-items: center; gap: 18px; }
 a.t--envie:hover { color: #FFFFFF; }

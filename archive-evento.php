@@ -48,6 +48,19 @@ if ( in_array( $mural17_quando, array( 'semana', 'fds' ), true ) ) {
 	);
 	$mural17_dest = array_slice( $mural17_fds, 0, 3 );
 }
+// Evento de mais de 4 dias (exposição, mostra, temporada) vai para "Em cartaz"
+// e só aparece no dia a dia no dia em que começa.
+$mural17_longo  = function ( $e ) {
+	return strtotime( $e['fim'] . ' 12:00' ) - strtotime( $e['data'] . ' 12:00' ) > 4 * DAY_IN_SECONDS;
+};
+$mural17_cartaz = array_values(
+	array_filter(
+		$mural17_itens,
+		function ( $e ) use ( $mural17_longo, $mural17_ini ) {
+			return $mural17_longo( $e ) && $e['data'] <= $mural17_ini;
+		}
+	)
+);
 $mural17_hora = function ( $h ) {
 	if ( ! preg_match( '/^(\d{1,2}):(\d{2})/', (string) $h, $m ) ) {
 		return '';
@@ -126,6 +139,24 @@ $mural17_hora = function ( $h ) {
 				</section>
 			<?php endif; ?>
 
+			<?php if ( $mural17_cartaz ) : ?>
+				<section class="ag-caixa">
+					<h2 class="ag-caixa__titulo">Em cartaz</h2>
+					<ul class="ag-lista">
+						<?php foreach ( $mural17_cartaz as $mural17_e ) : ?>
+							<li>
+								<span class="ag-lista__hora">até <?php echo esc_html( wp_date( 'j/m', strtotime( $mural17_e['fim'] . ' 12:00' ) ) ); ?></span>
+								<span class="ag-lista__info">
+									<a class="ag-lista__titulo" href="<?php echo esc_url( $mural17_e['link'] ); ?>"<?php echo 'post' === $mural17_e['tipo'] ? '' : ' target="_blank" rel="noopener"'; ?>><?php echo esc_html( $mural17_e['titulo'] ); ?></a>
+									<span class="ag-lista__onde"><?php echo esc_html( implode( ' · ', array_filter( array( $mural17_e['local'], $mural17_e['cidade'] ? $mural17_e['cidade']->name : '' ) ) ) ); ?> <?php echo mural17_selo_evento( $mural17_e ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
+								</span>
+								<span class="ag-lista__valor<?php echo mural17_evento_gratis( $mural17_e['valor'] ) ? ' is-gratis' : ''; ?>"><?php echo esc_html( mural17_evento_gratis( $mural17_e['valor'] ) ? 'Grátis' : $mural17_e['valor'] ); ?></span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</section>
+			<?php endif; ?>
+
 			<section class="ag-caixa">
 				<div class="ag-caixa__cab">
 					<h2 class="ag-caixa__titulo"><?php echo 'mes' === $mural17_quando ? 'Próximos 30 dias' : ( 'fds' === $mural17_quando ? 'Fim de semana' : 'Dia a dia' ); ?></h2>
@@ -139,8 +170,8 @@ $mural17_hora = function ( $h ) {
 					$mural17_ymd = $mural17_d->format( 'Y-m-d' );
 					$mural17_dia = array_filter(
 						$mural17_itens,
-						function ( $e ) use ( $mural17_ymd ) {
-							return $e['data'] <= $mural17_ymd && $e['fim'] >= $mural17_ymd;
+						function ( $e ) use ( $mural17_ymd, $mural17_longo ) {
+							return $mural17_longo( $e ) ? $e['data'] === $mural17_ymd : ( $e['data'] <= $mural17_ymd && $e['fim'] >= $mural17_ymd );
 						}
 					);
 					if ( ! $mural17_dia ) {
@@ -164,7 +195,7 @@ $mural17_hora = function ( $h ) {
 						<?php endforeach; ?>
 					</ul>
 				<?php endfor; ?>
-				<?php if ( ! $mural17_teve ) : ?>
+				<?php if ( ! $mural17_teve && ! $mural17_cartaz ) : ?>
 					<p class="vazio">Nenhum evento <?php echo $mural17_escopo ? 'em ' . esc_html( $mural17_onde ) : 'no 17'; ?> nesse período<?php echo $mural17_cat || $mural17_gratis ? ' com esse filtro' : ''; ?>. <a href="<?php echo esc_url( $mural17_url( array( 'quando' => 'mes', 'cat' => '', 'gratis' => '' ) ) ); ?>">Veja os próximos 30 dias</a><?php echo $mural17_wa ? ' ou <a href="' . esc_url( $mural17_wa ) . '" target="_blank" rel="noopener">divulgue o seu</a>' : ''; ?>.</p>
 				<?php endif; ?>
 			</section>

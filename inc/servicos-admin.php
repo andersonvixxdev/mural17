@@ -60,6 +60,8 @@ function mural17_pagina_servicos_admin() {
 		'transito'      => 'Trânsito lido agora.',
 		'pat'           => 'Lista do PAT publicada.',
 		'sympla'        => 'Eventos do Sympla lidos.',
+		'sjrp'          => 'Agenda da Prefeitura de Rio Preto e bilheterias lidas.',
+		'sjrp-erro'     => 'A agenda de Rio Preto não abriu. Veja o erro abaixo.',
 		'sympla-erro'   => 'Algumas páginas do Sympla não abriram. Veja o erro abaixo.',
 		'pat-0'         => 'Nenhuma linha da lista do PAT foi entendida.',
 		'jooble'        => 'Vagas do Jooble atualizadas.',
@@ -143,6 +145,23 @@ function mural17_pagina_servicos_admin() {
 				<?php endif; ?>
 				<?php $form( 'mural17_admin_sympla' ); ?>
 				<?php submit_button( 'Ler agora', 'secondary', 'submit', false ); ?>
+				</form>
+			</div>
+
+			<div class="m17-card" id="agenda-oficial">
+				<h2>Agenda oficial de Rio Preto e bilheterias</h2>
+				<p>Eventos de eventos.riopreto.sp.gov.br entram na agenda com o selo da prefeitura, foto, local e preço, uma vez por dia. As bilheterias abaixo são lidas como o Sympla (só eventos com cidade do 17).</p>
+				<?php
+				$m17_sj   = get_option( 'mural17_sjrp' );
+				$m17_sj_e = get_option( 'mural17_sjrp_erro' );
+				?>
+				<p><b>Última leitura:</b> <?php echo is_array( $m17_sj ) ? esc_html( wp_date( 'd/m H:i', $m17_sj['em'] ) . ' · ' . (int) $m17_sj['feitos'] . ' evento(s) de Rio Preto' ) : 'ainda não leu'; ?></p>
+				<?php if ( is_array( $m17_sj_e ) ) : ?>
+					<p class="m17-erro"><b>Erro em <?php echo esc_html( wp_date( 'd/m H:i', $m17_sj_e[1] ) ); ?>:</b> <?php echo esc_html( $m17_sj_e[0] ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_sjrp' ); ?>
+					<p><label>Bilheterias (uma por linha)<br><textarea name="bilheterias" rows="3" class="large-text code"><?php echo esc_textarea( implode( "\n", mural17_bilheterias() ) ); ?></textarea></label></p>
+					<?php submit_button( 'Salvar e ler agora', 'secondary', 'submit', false ); ?>
 				</form>
 			</div>
 

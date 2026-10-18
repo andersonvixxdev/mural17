@@ -142,7 +142,7 @@ function mural17_item_evento( $p ) {
 	return array(
 		'tipo'   => 'post',
 		'id'     => $p->ID,
-		'titulo' => get_the_title( $p ),
+		'titulo' => html_entity_decode( get_the_title( $p ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ),
 		'data'   => $m( 'evento_data' ),
 		'fim'    => $m( 'evento_fim' ) ? $m( 'evento_fim' ) : $m( 'evento_data' ),
 		'hora'   => $m( 'evento_hora' ),
@@ -153,7 +153,7 @@ function mural17_item_evento( $p ) {
 		'link'   => get_permalink( $p ),
 		'img'    => get_the_post_thumbnail_url( $p, 'medium_large' ),
 		'origem' => $o && ! is_wp_error( $o ) ? 'oficial' : $origem,
-		'quem'   => $o && ! is_wp_error( $o ) ? $o->name : '',
+		'quem'   => $o && ! is_wp_error( $o ) ? $o->name : $m( 'evento_quem' ),
 	);
 }
 
@@ -169,6 +169,8 @@ function mural17_selo_evento( $i ) {
 			return '<span class="ag-selo ag-selo--oficial">' . esc_html( ( $i['quem'] ? $i['quem'] : 'Prefeitura' ) . ' · oficial' ) . '</span>';
 		case 'sympla':
 			return '<span class="ag-selo ag-selo--sympla">Ingressos via Sympla</span>';
+		case 'bilheteria':
+			return '<span class="ag-selo ag-selo--sympla">' . esc_html( 'Ingressos via ' . preg_replace( '/^www\./', '', $i['quem'] ) ) . '</span>';
 		case 'leitor':
 			return '<span class="ag-selo">Enviado por leitor</span>';
 		case 'noticia':
@@ -222,6 +224,7 @@ function mural17_sympla_atualiza() {
 			}
 		}
 	}
+	$itens = apply_filters( 'mural17_sympla_extras', $itens );
 	update_option(
 		'mural17_sympla',
 		array(
@@ -827,3 +830,260 @@ function mural17_consulta_agenda( $q ) {
 	$q->set( 'posts_per_page', 1 );
 }
 add_action( 'pre_get_posts', 'mural17_consulta_agenda', 5 );
+
+/* ---- Agenda oficial da Prefeitura de Rio Preto -------------------------- */
+
+/**
+ * Categoria do portal para a categoria da agenda de Rio Preto.
+ *
+ * @param string $cat Categoria de lá.
+ * @return string
+ */
+function mural17_categoria_sjrp( $cat ) {
+	$c = mural17_normaliza( $cat );
+	$m = array(
+		'Shows'            => array( 'show', 'musica', 'concerto' ),
+		'Festas e rodeios' => array( 'festa', 'festival', 'desfile', 'movimento' ),
+		'Teatro e cinema'  => array( 'teatro', 'danca', 'mostra' ),
+		'Feiras'           => array( 'feira', 'exposicao', 'gastronomia' ),
+		'Esporte'          => array( 'corrida', 'campeonato', 'torneio' ),
+	);
+	foreach ( $m as $nome => $lista ) {
+		if ( in_array( $c, $lista, true ) ) {
+			return $nome;
+		}
+	}
+	return 'Outros';
+}
+
+/**
+ * Lê a agenda oficial de Rio Preto (eventos.riopreto.sp.gov.br): a lista
+ * vem no HTML da página e o detalhe de cada evento (local, descrição, link,
+ * se cobra ingresso) num JSON que o próprio site busca por POST.
+ *
+ * @return int|WP_Error Quantos eventos foram criados ou atualizados.
+ */
+function mural17_sjrp_atualiza() {
+	$base = apply_filters( 'mural17_sjrp_base', 'https://eventos.riopreto.sp.gov.br/' );
+	$r    = wp_remote_get( $base . 'agenda', array( 'timeout' => 20, 'user-agent' => 'Mozilla/5.0 (compatible; Mural17/1.0)' ) );
+	if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+		$e = is_wp_error( $r ) ? $r->get_error_message() : 'HTTP ' . wp_remote_retrieve_response_code( $r );
+		update_option( 'mural17_sjrp_erro', array( $e, time() ), false );
+		return new WP_Error( 'sjrp', $e );
+	}
+	$cidade = get_term_by( 'slug', 'rio-preto', 'cidade' );
+	$feitos = 0;
+	$det    = 0;
+	foreach ( mural17_cartoes_sjrp( wp_remote_retrieve_body( $r ) ) as $c ) {
+		$ini = DateTime::createFromFormat( 'd/m/Y - H:i', $c['ini'], wp_timezone() );
+		$fim = DateTime::createFromFormat( 'd/m/Y - H:i', $c['fim'], wp_timezone() );
+		if ( ! $ini || ! $fim || $fim->getTimestamp() < time() ) {
+			continue;
+		}
+		// Atração permanente (exposição de meses, caminho de peregrinação) não é evento de agenda.
+		if ( $fim->getTimestamp() - $ini->getTimestamp() > 45 * DAY_IN_SECONDS ) {
+			continue;
+		}
+		$ext = 'sjrp-' . $c['id'];
+		$ja  = get_posts(
+			array(
+				'post_type'      => 'evento',
+				'post_status'    => 'any',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'meta_key'       => '_mural17_evento_ext', // phpcs:ignore WordPress.DB.SlowDBQuery
+				'meta_value'     => $ext, // phpcs:ignore WordPress.DB.SlowDBQuery
+			)
+		);
+		if ( $ja && 'trash' === get_post_status( $ja[0] ) ) {
+			continue; // A redação descartou: não volta.
+		}
+		$info = array();
+		// Detalhe para evento novo ou para o que ficou sem ele na leitura anterior.
+		if ( ( ! $ja || '' === (string) get_post_meta( $ja[0], '_mural17_evento_link', true ) ) && $det < 30 ) {
+			++$det;
+			$d = wp_remote_post( $base . 'informacoesEvento/' . rawurlencode( $c['id'] ) . '/', array( 'timeout' => 15, 'user-agent' => 'Mozilla/5.0 (compatible; Mural17/1.0)' ) );
+			if ( ! is_wp_error( $d ) && 200 === (int) wp_remote_retrieve_response_code( $d ) ) {
+				$corpo = wp_remote_retrieve_body( $d );
+				$corpo = mb_check_encoding( $corpo, 'UTF-8' ) ? $corpo : mb_convert_encoding( $corpo, 'UTF-8', 'ISO-8859-1' );
+				$info  = (array) json_decode( $corpo, true );
+			}
+		}
+		$titulo = html_entity_decode( (string) ( $info['nomeEvento'] ?? $c['titulo'] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+		$desc   = isset( $info['descricao'] ) ? wp_kses_post( wpautop( str_replace( array( "\r<br>", '<br>' ), "\n", (string) $info['descricao'] ) ) ) : esc_html( $c['resumo'] );
+		$id     = wp_insert_post(
+			array(
+				'ID'           => $ja ? $ja[0] : 0,
+				'post_type'    => 'evento',
+				'post_status'  => $ja ? get_post_status( $ja[0] ) : 'publish',
+				'post_title'   => mb_substr( trim( $titulo ), 0, 140 ),
+				'post_content' => $ja ? get_post_field( 'post_content', $ja[0] ) : $desc,
+			),
+			true
+		);
+		if ( is_wp_error( $id ) ) {
+			continue;
+		}
+		++$feitos;
+		update_post_meta( $id, '_mural17_evento_ext', $ext );
+		update_post_meta( $id, '_mural17_evento_origem', 'oficial' );
+		update_post_meta( $id, '_mural17_evento_quem', 'Prefeitura de Rio Preto' );
+		update_post_meta( $id, '_mural17_evento_data', $ini->format( 'Y-m-d' ) );
+		update_post_meta( $id, '_mural17_evento_fim', $fim->format( 'Y-m-d' ) > $ini->format( 'Y-m-d' ) ? $fim->format( 'Y-m-d' ) : '' );
+		update_post_meta( $id, '_mural17_evento_hora', '00:00' === $ini->format( 'H:i' ) ? '' : $ini->format( 'H:i' ) );
+		update_post_meta( $id, '_mural17_evento_categoria', mural17_categoria_sjrp( $c['cat'] ) );
+		if ( $info ) {
+			$local = isset( $info['locais'][0]['endereco'] ) ? (string) $info['locais'][0]['endereco'] : '';
+			$local = trim( preg_replace( '/\s*-\s*Endere[cç]o:.*$/iu', '', $local ) );
+			update_post_meta( $id, '_mural17_evento_local', mb_substr( $local, 0, 120 ) );
+			$valor = '';
+			if ( isset( $info['cobraIngresso'] ) && ! $info['cobraIngresso'] ) {
+				$valor = 'Gratuita';
+			} elseif ( preg_match( '/R\$\s?\d[\d.,]*/u', wp_strip_all_tags( (string) ( $info['descricao'] ?? '' ) ), $p ) ) {
+				$valor = 'a partir de ' . $p[0];
+			}
+			update_post_meta( $id, '_mural17_evento_valor', $valor );
+			update_post_meta( $id, '_mural17_evento_link', esc_url_raw( ! empty( $info['urlWebsite'] ) ? $info['urlWebsite'] : $base . 'agenda?evento=' . rawurlencode( $c['id'] ) ) );
+		}
+		if ( $cidade ) {
+			wp_set_object_terms( $id, array( (int) $cidade->term_id ), 'cidade' );
+		}
+		if ( ! has_post_thumbnail( $id ) ) {
+			mural17_foto_sjrp( $id, $base . 'RecuperarImagem?id_evento=' . rawurlencode( $c['id'] ) . '&i=0', $c['id'] );
+		}
+	}
+	update_option( 'mural17_sjrp', array( 'em' => time(), 'feitos' => $feitos ), false );
+	delete_option( 'mural17_sjrp_erro' );
+	return $feitos;
+}
+
+/**
+ * Cartões de evento da página da agenda de Rio Preto.
+ *
+ * @param string $html Página.
+ * @return array[] id, ini, fim, cat, titulo, resumo.
+ */
+function mural17_cartoes_sjrp( $html ) {
+	$saida = array();
+	$partes = preg_split( '/<div class="single-package/', (string) $html );
+	array_shift( $partes );
+	foreach ( $partes as $p ) {
+		$g = function ( $re ) use ( $p ) {
+			// O site codifica duas vezes ("&amp;#8211;"): decodifica até sumir.
+			return preg_match( $re, $p, $m ) ? trim( html_entity_decode( html_entity_decode( wp_strip_all_tags( $m[1] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) : '';
+		};
+		$id = $g( '/name="abrirModal"\s+id="(\d+)"/' );
+		if ( '' === $id ) {
+			continue;
+		}
+		$saida[ $id ] = array(
+			'id'     => $id,
+			'ini'    => $g( '/id="dataEvento"[^>]*>([^<]+)</' ),
+			'fim'    => $g( '/id="dataFimEvento"[^>]*>([^<]+)</' ),
+			'cat'    => $g( '/id="categoriaCard"[^>]*>([^<]+)</' ),
+			'titulo' => $g( '/<h4>(.*?)<\/h4>/s' ),
+			'resumo' => preg_replace( '/\s*\.\.\.\s*$/', '…', $g( '/<p style="height: auto[^"]*">(.*?)<\/p>/s' ) ),
+		);
+	}
+	return array_values( $saida );
+}
+
+/**
+ * Baixa a foto do evento de Rio Preto e põe como destaque.
+ *
+ * @param int    $post_id Evento.
+ * @param string $url     Endereço da imagem.
+ * @param string $ext_id  Código lá.
+ */
+function mural17_foto_sjrp( $post_id, $url, $ext_id ) {
+	$r = wp_remote_get( $url, array( 'timeout' => 20 ) );
+	if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+		return;
+	}
+	$tipo = (string) wp_remote_retrieve_header( $r, 'content-type' );
+	$ext  = false !== strpos( $tipo, 'png' ) ? 'png' : ( false !== strpos( $tipo, 'webp' ) ? 'webp' : 'jpg' );
+	$up   = wp_upload_bits( 'evento-rio-preto-' . sanitize_file_name( $ext_id ) . '.' . $ext, null, wp_remote_retrieve_body( $r ) );
+	if ( ! empty( $up['error'] ) ) {
+		return;
+	}
+	$tipo_wp = wp_check_filetype( $up['file'] );
+	if ( empty( $tipo_wp['type'] ) || 0 !== strpos( $tipo_wp['type'], 'image/' ) ) {
+		wp_delete_file( $up['file'] );
+		return;
+	}
+	$a = wp_insert_attachment(
+		array(
+			'post_mime_type' => $tipo_wp['type'],
+			'post_title'     => get_the_title( $post_id ),
+			'post_status'    => 'inherit',
+		),
+		$up['file'],
+		$post_id
+	);
+	if ( $a && ! is_wp_error( $a ) ) {
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		wp_update_attachment_metadata( $a, wp_generate_attachment_metadata( $a, $up['file'] ) );
+		update_post_meta( $a, '_wp_attachment_image_alt', get_the_title( $post_id ) );
+		set_post_thumbnail( $post_id, $a );
+	}
+}
+
+/* ---- Outras bilheterias (Zé do Ingresso e afins) ------------------------ */
+
+/**
+ * Páginas de bilheterias lidas pelo mesmo padrão do Sympla (schema.org/Event).
+ *
+ * @return string[]
+ */
+function mural17_bilheterias() {
+	$lista = array_filter( array_map( 'trim', explode( "\n", (string) get_option( 'mural17_bilheterias', "https://zedoingresso.com.br\nhttps://www.ingressodigital.com" ) ) ) );
+	return array_values( array_filter( $lista, 'wp_http_validate_url' ) );
+}
+
+add_filter(
+	'mural17_sympla_extras',
+	function ( $itens ) {
+		$rp = get_term_by( 'slug', 'rio-preto', 'cidade' );
+		foreach ( mural17_bilheterias() as $url ) {
+			$r = wp_remote_get( $url, array( 'timeout' => 15, 'user-agent' => 'Mozilla/5.0 (compatible; Mural17/1.0)' ) );
+			if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+				continue;
+			}
+			foreach ( mural17_eventos_ldjson( wp_remote_retrieve_body( $r ) ) as $e ) {
+				// Sem cidade no evento não dá para saber se é do 17: só entra com cidade.
+				$loc = isset( $e['location'] ) && is_array( $e['location'] ) ? ( isset( $e['location'][0] ) ? $e['location'][0] : $e['location'] ) : array();
+				if ( empty( $loc['address']['addressLocality'] ) ) {
+					continue;
+				}
+				$it = mural17_le_evento_sympla( $e, $rp );
+				if ( $it ) {
+					$it['origem']        = 'bilheteria';
+					$it['quem']          = (string) wp_parse_url( $url, PHP_URL_HOST );
+					$itens[ $it['id'] ] = $it;
+				}
+			}
+		}
+		return $itens;
+	}
+);
+
+add_action(
+	'mural17_le_sympla',
+	function () {
+		mural17_sjrp_atualiza();
+	},
+	20
+);
+
+add_action(
+	'admin_post_mural17_admin_sjrp',
+	function () {
+		mural17_confere_admin_servicos( 'mural17_admin_sjrp' );
+		if ( isset( $_POST['bilheterias'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			update_option( 'mural17_bilheterias', sanitize_textarea_field( wp_unslash( $_POST['bilheterias'] ) ), false ); // phpcs:ignore WordPress.Security.NonceVerification
+		}
+		$r = mural17_sjrp_atualiza();
+		mural17_sympla_atualiza();
+		mural17_volta_admin_servicos( is_wp_error( $r ) ? 'sjrp-erro' : 'sjrp', 'sympla' );
+	}
+);

@@ -1,0 +1,117 @@
+Google News - Adolfo | https://news.google.com/rss/search?q=%22Adolfo%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Altair | https://news.google.com/rss/search?q=%22Altair%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Bady Bassitt | https://news.google.com/rss/search?q=%22Bady%20Bassitt%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Bálsamo | https://news.google.com/rss/search?q=%22B%C3%A1lsamo%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Cedral | https://news.google.com/rss/search?q=%22Cedral%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Guapiaçu | https://news.google.com/rss/search?q=%22Guapia%C3%A7u%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Ibirá | https://news.google.com/rss/search?q=%22Ibir%C3%A1%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Icém | https://news.google.com/rss/search?q=%22Ic%C3%A9m%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Ipiguá | https://news.google.com/rss/search?q=%22Ipigu%C3%A1%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Irapuã | https://news.google.com/rss/search?q=%22Irapu%C3%A3%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Jaci | https://news.google.com/rss/search?q=%22Jaci%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - José Bonifácio | https://news.google.com/rss/search?q=%22Jos%C3%A9%20Bonif%C3%A1cio%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Macaubal | https://news.google.com/rss/search?q=%22Macaubal%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Mendonça | https://news.google.com/rss/search?q=%22Mendon%C3%A7a%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Mirassol | https://news.google.com/rss/search?q=%22Mirassol%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Mirassolândia | https://news.google.com/rss/search?q=%22Mirassol%C3%A2ndia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Monte Aprazível | https://news.google.com/rss/search?q=%22Monte%20Apraz%C3%ADvel%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Neves Paulista | https://news.google.com/rss/search?q=%22Neves%20Paulista%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nipoã | https://news.google.com/rss/search?q=%22Nipo%C3%A3%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nova Aliança | https://news.google.com/rss/search?q=%22Nova%20Alian%C3%A7a%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nova Granada | https://news.google.com/rss/search?q=%22Nova%20Granada%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Novo Horizonte | https://news.google.com/rss/search?q=%22Novo%20Horizonte%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Onda Verde | https://news.google.com/rss/search?q=%22Onda%20Verde%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Orindiúva | https://news.google.com/rss/search?q=%22Orindi%C3%BAva%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Palestina | https://news.google.com/rss/search?q=%22Palestina%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Paulo de Faria | https://news.google.com/rss/search?q=%22Paulo%20de%20Faria%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Poloni | https://news.google.com/rss/search?q=%22Poloni%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Potirendaba | https://news.google.com/rss/search?q=%22Potirendaba%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Sales | https://news.google.com/rss/search?q=%22Sales%22%20%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - São José do Rio Preto | https://news.google.com/rss/search?q=%22S%C3%A3o%20Jos%C3%A9%20do%20Rio%20Preto%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Tanabi | https://news.google.com/rss/search?q=%22Tanabi%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Ubarana | https://news.google.com/rss/search?q=%22Ubarana%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Uchoa | https://news.google.com/rss/search?q=%22Uchoa%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - União Paulista | https://news.google.com/rss/search?q=%22Uni%C3%A3o%20Paulista%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Urupês | https://news.google.com/rss/search?q=%22Urup%C3%AAs%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Ariranha | https://news.google.com/rss/search?q=%22Ariranha%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Catanduva | https://news.google.com/rss/search?q=%22Catanduva%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Catiguá | https://news.google.com/rss/search?q=%22Catigu%C3%A1%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Elisiário | https://news.google.com/rss/search?q=%22Elisi%C3%A1rio%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Embaúba | https://news.google.com/rss/search?q=%22Emba%C3%BAba%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Itajobi | https://news.google.com/rss/search?q=%22Itajobi%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Marapoama | https://news.google.com/rss/search?q=%22Marapoama%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Novais | https://news.google.com/rss/search?q=%22Novais%22%20%22Catanduva%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Palmares Paulista | https://news.google.com/rss/search?q=%22Palmares%20Paulista%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Paraíso | https://news.google.com/rss/search?q=%22Para%C3%ADso%22%20%22Catanduva%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Pindorama | https://news.google.com/rss/search?q=%22Pindorama%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Pirangi | https://news.google.com/rss/search?q=%22Pirangi%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Adélia | https://news.google.com/rss/search?q=%22Santa%20Ad%C3%A9lia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Tabapuã | https://news.google.com/rss/search?q=%22Tabapu%C3%A3%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Américo de Campos | https://news.google.com/rss/search?q=%22Am%C3%A9rico%20de%20Campos%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Álvares Florence | https://news.google.com/rss/search?q=%22%C3%81lvares%20Florence%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Cardoso | https://news.google.com/rss/search?q=%22Cardoso%22%20%22Votuporanga%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Cosmorama | https://news.google.com/rss/search?q=%22Cosmorama%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Floreal | https://news.google.com/rss/search?q=%22Floreal%22%20%22Votuporanga%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nhandeara | https://news.google.com/rss/search?q=%22Nhandeara%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Parisi | https://news.google.com/rss/search?q=%22Parisi%22%20%22Votuporanga%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Pontes Gestal | https://news.google.com/rss/search?q=%22Pontes%20Gestal%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Riolândia | https://news.google.com/rss/search?q=%22Riol%C3%A2ndia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Sebastianópolis do Sul | https://news.google.com/rss/search?q=%22Sebastian%C3%B3polis%20do%20Sul%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Valentim Gentil | https://news.google.com/rss/search?q=%22Valentim%20Gentil%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Votuporanga | https://news.google.com/rss/search?q=%22Votuporanga%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Estrela d'Oeste | https://news.google.com/rss/search?q=%22Estrela%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Fernandópolis | https://news.google.com/rss/search?q=%22Fernand%C3%B3polis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Guarani d'Oeste | https://news.google.com/rss/search?q=%22Guarani%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Indiaporã | https://news.google.com/rss/search?q=%22Indiapor%C3%A3%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Macedônia | https://news.google.com/rss/search?q=%22Maced%C3%B4nia%22%20%22Fernand%C3%B3polis%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Meridiano | https://news.google.com/rss/search?q=%22Meridiano%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Mira Estrela | https://news.google.com/rss/search?q=%22Mira%20Estrela%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Ouroeste | https://news.google.com/rss/search?q=%22Ouroeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Pedranópolis | https://news.google.com/rss/search?q=%22Pedran%C3%B3polis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - São João das Duas Pontes | https://news.google.com/rss/search?q=%22S%C3%A3o%20Jo%C3%A3o%20das%20Duas%20Pontes%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - São João de Iracema | https://news.google.com/rss/search?q=%22S%C3%A3o%20Jo%C3%A3o%20de%20Iracema%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Aparecida d'Oeste | https://news.google.com/rss/search?q=%22Aparecida%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Aspásia | https://news.google.com/rss/search?q=%22Asp%C3%A1sia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Dirce Reis | https://news.google.com/rss/search?q=%22Dirce%20Reis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Dolcinópolis | https://news.google.com/rss/search?q=%22Dolcin%C3%B3polis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Jales | https://news.google.com/rss/search?q=%22Jales%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Marinópolis | https://news.google.com/rss/search?q=%22Marin%C3%B3polis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Mesópolis | https://news.google.com/rss/search?q=%22Mes%C3%B3polis%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Palmeira d'Oeste | https://news.google.com/rss/search?q=%22Palmeira%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Paranapuã | https://news.google.com/rss/search?q=%22Paranapu%C3%A3%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Pontalinda | https://news.google.com/rss/search?q=%22Pontalinda%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Populina | https://news.google.com/rss/search?q=%22Populina%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Albertina | https://news.google.com/rss/search?q=%22Santa%20Albertina%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Salete | https://news.google.com/rss/search?q=%22Santa%20Salete%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - São Francisco | https://news.google.com/rss/search?q=%22S%C3%A3o%20Francisco%22%20%22Jales%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Turmalina | https://news.google.com/rss/search?q=%22Turmalina%22%20%22Jales%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Urânia | https://news.google.com/rss/search?q=%22Ur%C3%A2nia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Vitória Brasil | https://news.google.com/rss/search?q=%22Vit%C3%B3ria%20Brasil%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nova Canaã Paulista | https://news.google.com/rss/search?q=%22Nova%20Cana%C3%A3%20Paulista%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Rubinéia | https://news.google.com/rss/search?q=%22Rubin%C3%A9ia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Clara d'Oeste | https://news.google.com/rss/search?q=%22Santa%20Clara%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Fé do Sul | https://news.google.com/rss/search?q=%22Santa%20F%C3%A9%20do%20Sul%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santa Rita d'Oeste | https://news.google.com/rss/search?q=%22Santa%20Rita%20d%27Oeste%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Santana da Ponte Pensa | https://news.google.com/rss/search?q=%22Santana%20da%20Ponte%20Pensa%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Três Fronteiras | https://news.google.com/rss/search?q=%22Tr%C3%AAs%20Fronteiras%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Barretos | https://news.google.com/rss/search?q=%22Barretos%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Bebedouro | https://news.google.com/rss/search?q=%22Bebedouro%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Cajobi | https://news.google.com/rss/search?q=%22Cajobi%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Colina | https://news.google.com/rss/search?q=%22Colina%22%20%22Barretos%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Colômbia | https://news.google.com/rss/search?q=%22Col%C3%B4mbia%22%20%22Barretos%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Guaíra | https://news.google.com/rss/search?q=%22Gua%C3%ADra%22%20%22Barretos%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Guaraci | https://news.google.com/rss/search?q=%22Guaraci%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Jaborandi | https://news.google.com/rss/search?q=%22Jaborandi%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Monte Azul Paulista | https://news.google.com/rss/search?q=%22Monte%20Azul%20Paulista%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Olímpia | https://news.google.com/rss/search?q=%22Ol%C3%ADmpia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Severínia | https://news.google.com/rss/search?q=%22Sever%C3%ADnia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Terra Roxa | https://news.google.com/rss/search?q=%22Terra%20Roxa%22%20%22Barretos%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Viradouro | https://news.google.com/rss/search?q=%22Viradouro%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Auriflama | https://news.google.com/rss/search?q=%22Auriflama%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Gastão Vidigal | https://news.google.com/rss/search?q=%22Gast%C3%A3o%20Vidigal%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - General Salgado | https://news.google.com/rss/search?q=%22General%20Salgado%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Guzolândia | https://news.google.com/rss/search?q=%22Guzol%C3%A2ndia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Magda | https://news.google.com/rss/search?q=%22Magda%22%20%22Ara%C3%A7atuba%22&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Monções | https://news.google.com/rss/search?q=%22Mon%C3%A7%C3%B5es%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nova Castilho | https://news.google.com/rss/search?q=%22Nova%20Castilho%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419
+Google News - Nova Luzitânia | https://news.google.com/rss/search?q=%22Nova%20Luzit%C3%A2nia%22%20SP&hl=pt-BR&gl=BR&ceid=BR:pt-419

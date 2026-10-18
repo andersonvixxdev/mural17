@@ -37,6 +37,8 @@ function mural17_eleicao_config() {
 			'pasta'         => 'ele2026',
 			'eleicao'       => '', // Código do 2º turno (federal). Vazio = descobre sozinho.
 			'eleicao_teste' => '', // Código do 1º turno, para o teste.
+			'modelo_res'    => '{base}/{pasta}/{e}/dados-simplificados/{abr}/{abr}{mun}-c{cargo}-e{e6}-r.json',
+			'modelo_mun'    => '{base}/{pasta}/{e}/config/mun-e{e6}-cm.json',
 			'publicar'      => 1,  // Marcos principais viram matéria (e vão para as redes).
 			'fotos'         => array( '13' => '', '22' => '' ), // Número do candidato => endereço da foto.
 		)
@@ -90,20 +92,93 @@ function mural17_eleicao_teste() {
  * @return string
  */
 function mural17_tse_url( $tipo, $eleicao = '', $abr = 'br', $mun = '' ) {
-	$c   = mural17_eleicao_config();
-	$e6  = str_pad( (string) $eleicao, 6, '0', STR_PAD_LEFT );
+	$c    = mural17_eleicao_config();
 	$raiz = untrailingslashit( $c['base'] );
-	switch ( $tipo ) {
-		case 'config':
-			$url = $raiz . '/comum/config/ele-c.json';
-			break;
-		case 'municipios':
-			$url = "{$raiz}/{$c['pasta']}/{$eleicao}/config/mun-e{$e6}-cm.json";
-			break;
-		default:
-			$url = "{$raiz}/{$c['pasta']}/{$eleicao}/dados-simplificados/{$abr}/{$abr}{$mun}-c0001-e{$e6}-r.json";
+	if ( 'config' === $tipo ) {
+		$url = $raiz . '/comum/config/ele-c.json';
+	} else {
+		$url = mural17_tse_modelo( 'municipios' === $tipo ? $c['modelo_mun'] : $c['modelo_res'], $eleicao, $abr, $mun );
 	}
 	return apply_filters( 'mural17_tse_url', $url, $tipo, $eleicao, $abr, $mun );
+}
+
+/**
+ * Preenche um modelo de endereço do TSE.
+ *
+ * {base} {pasta} {e} (código) {e6} (código com 6 dígitos) {abr} (br, sp)
+ * {mun} (código TSE do município, vazio no Brasil e no estado) {cargo} (0001).
+ *
+ * @param string $modelo  Modelo.
+ * @param string $eleicao Código.
+ * @param string $abr     Abrangência.
+ * @param string $mun     Município.
+ * @return string
+ */
+function mural17_tse_modelo( $modelo, $eleicao, $abr = 'br', $mun = '' ) {
+	$c = mural17_eleicao_config();
+	return strtr(
+		$modelo,
+		array(
+			'{base}'  => untrailingslashit( $c['base'] ),
+			'{pasta}' => $c['pasta'],
+			'{e}'     => (string) $eleicao,
+			'{e6}'    => str_pad( (string) $eleicao, 6, '0', STR_PAD_LEFT ),
+			'{abr}'   => $abr,
+			'{mun}'   => $mun,
+			'{cargo}' => '0001',
+		)
+	);
+}
+
+/**
+ * Diagnóstico: o que o TSE publica e quais formatos de endereço respondem.
+ *
+ * @return array
+ */
+function mural17_tse_diagnostico() {
+	$saida = array(
+		'config' => '',
+		'testes' => array(),
+	);
+	$r = wp_remote_get( mural17_tse_url( 'config' ), array( 'timeout' => 10 ) );
+	$saida['config'] = is_wp_error( $r ) ? 'ERRO: ' . $r->get_error_message() : 'HTTP ' . wp_remote_retrieve_response_code( $r ) . "\n" . substr( wp_remote_retrieve_body( $r ), 0, 6000 );
+	$j = is_wp_error( $r ) ? null : json_decode( wp_remote_retrieve_body( $r ), true );
+
+	$codigos = array();
+	foreach ( isset( $j['pl'] ) ? (array) $j['pl'] : array() as $pl ) {
+		foreach ( isset( $pl['e'] ) ? (array) $pl['e'] : array() as $e ) {
+			$codigos[] = (string) ( $e['cd'] ?? '' );
+		}
+		$codigos[] = (string) ( $pl['cd'] ?? '' );
+	}
+	$codigos = array_slice( array_values( array_unique( array_filter( $codigos ) ) ), 0, 6 );
+
+	$modelos = array(
+		'{base}/{pasta}/{e}/dados-simplificados/{abr}/{abr}{mun}-c{cargo}-e{e6}-r.json',
+		'{base}/{pasta}/{e}/dados-simplificados/{abr}/{abr}{mun}-c{cargo}-e{e}-r.json',
+		'{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e6}-u.json',
+		'{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e6}-v.json',
+		'{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e6}-f.json',
+		'{base}/{pasta}/{e}/dados/{abr}/{abr}{mun}-c{cargo}-e{e}-u.json',
+		'{base}/{pasta}/{e}/dados-simplificados/{abr}/{abr}{mun}-c{cargo}-e{e6}-u.json',
+		'{base}/{pasta}/{e}/config/mun-e{e6}-cm.json',
+		'{base}/{pasta}/{e}/config/mun-e{e}-cm.json',
+	);
+	foreach ( $codigos as $cd ) {
+		foreach ( $modelos as $m ) {
+			$url = mural17_tse_modelo( $m, $cd, 'br' );
+			$x   = wp_remote_get( $url, array( 'timeout' => 8 ) );
+			$cod = is_wp_error( $x ) ? 0 : (int) wp_remote_retrieve_response_code( $x );
+			$saida['testes'][] = array(
+				'codigo' => $cd,
+				'modelo' => $m,
+				'url'    => $url,
+				'http'   => $cod,
+				'inicio' => 200 === $cod ? substr( wp_remote_retrieve_body( $x ), 0, 400 ) : '',
+			);
+		}
+	}
+	return $saida;
 }
 
 /**

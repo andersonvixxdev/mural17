@@ -92,6 +92,8 @@ function mural17_pagina_eleicao_admin() {
 				<table class="form-table">
 					<tr><th>Endereço base</th><td><input class="regular-text" name="base" value="<?php echo esc_attr( $c['base'] ); ?>"></td></tr>
 					<tr><th>Pasta da eleição</th><td><input name="pasta" value="<?php echo esc_attr( $c['pasta'] ); ?>"></td></tr>
+					<tr><th>Endereço do resultado</th><td><input class="large-text code" name="modelo_res" value="<?php echo esc_attr( $c['modelo_res'] ); ?>"></td></tr>
+					<tr><th>Endereço dos municípios</th><td><input class="large-text code" name="modelo_mun" value="<?php echo esc_attr( $c['modelo_mun'] ); ?>"><p class="description">{base} {pasta} {e} = código, {e6} = código com 6 dígitos, {abr} = br ou sp, {mun} = código TSE do município, {cargo} = 0001 (presidente).</p></td></tr>
 					<tr><th>Código do 2º turno</th><td><input name="eleicao" value="<?php echo esc_attr( $c['eleicao'] ); ?>" placeholder="<?php echo esc_attr( $achados['eleicao'] ?? 'automático' ); ?>"> <span class="description">vazio = descobre no TSE (achado: <?php echo esc_html( $achados['eleicao'] ?? 'ainda não' ); ?>)</span></td></tr>
 					<tr><th>Código do 1º turno</th><td><input name="eleicao_teste" value="<?php echo esc_attr( $c['eleicao_teste'] ); ?>" placeholder="<?php echo esc_attr( $achados['eleicao_teste'] ?? 'automático' ); ?>"> <span class="description">usado no teste (achado: <?php echo esc_html( $achados['eleicao_teste'] ?? 'ainda não' ); ?>)</span></td></tr>
 				</table>
@@ -111,6 +113,18 @@ function mural17_pagina_eleicao_admin() {
 			<a class="button" href="<?php echo esc_url( home_url( '/?teste=1' ) ); ?>" target="_blank">Ver a capa com o destaque</a>
 		<?php endif; ?>
 		<?php $form( 'lista' ); ?><?php submit_button( 'Ver eleições publicadas no TSE', 'secondary', 'submit', false ); ?></form>
+		<?php $form( 'diagnostico' ); ?><?php submit_button( 'Diagnóstico do TSE', 'secondary', 'submit', false ); ?></form>
+		<?php $diag = get_transient( 'mural17_eleicao_diag' ); ?>
+		<?php if ( is_array( $diag ) ) : ?>
+			<h3>Diagnóstico</h3>
+			<table class="widefat striped" style="margin-top:8px"><thead><tr><th>Código</th><th>HTTP</th><th>Endereço testado</th></tr></thead><tbody>
+				<?php foreach ( $diag['testes'] as $x ) : ?>
+					<tr<?php echo 200 === $x['http'] ? ' style="background:#e6f4ea"' : ''; ?>><td><?php echo esc_html( $x['codigo'] ); ?></td><td><b><?php echo (int) $x['http']; ?></b></td><td><code style="font-size:11px"><?php echo esc_html( $x['url'] ); ?></code><?php echo $x['inicio'] ? '<br><code style="font-size:11px;color:#555">' . esc_html( $x['inicio'] ) . '</code>' : ''; ?></td></tr>
+				<?php endforeach; ?>
+			</tbody></table>
+			<p><b>Lista de eleições do TSE (ele-c.json):</b></p>
+			<textarea readonly rows="10" class="large-text code"><?php echo esc_textarea( $diag['config'] ); ?></textarea>
+		<?php endif; ?>
 		<?php if ( is_array( $lista ) ) : ?>
 			<table class="widefat striped" style="max-width:720px;margin-top:12px"><thead><tr><th>Código</th><th>Eleição</th><th>Turno</th><th>Data</th><th>Pasta</th></tr></thead><tbody>
 				<?php foreach ( $lista as $e ) : ?>
@@ -177,6 +191,12 @@ add_action(
 			}
 			$c['base']          = esc_url_raw( wp_unslash( $_POST['base'] ?? $c['base'] ) );
 			$c['pasta']         = sanitize_key( wp_unslash( $_POST['pasta'] ?? $c['pasta'] ) );
+			foreach ( array( 'modelo_res', 'modelo_mun' ) as $k ) {
+				$v = trim( sanitize_text_field( wp_unslash( $_POST[ $k ] ?? '' ) ) );
+				if ( '' !== $v ) {
+					$c[ $k ] = $v;
+				}
+			}
 			$c['eleicao']       = preg_replace( '/\D/', '', (string) wp_unslash( $_POST['eleicao'] ?? '' ) );
 			$c['eleicao_teste'] = preg_replace( '/\D/', '', (string) wp_unslash( $_POST['eleicao_teste'] ?? '' ) );
 			update_option( 'mural17_eleicao', $c, false );
@@ -189,6 +209,10 @@ add_action(
 			}
 			set_transient( 'mural17_eleicao_lista', $l, HOUR_IN_SECONDS );
 			$volta( 'success', count( $l ) . ' eleição(ões) publicadas no TSE.' );
+		}
+		if ( 'diagnostico' === $o_que ) {
+			set_transient( 'mural17_eleicao_diag', mural17_tse_diagnostico(), HOUR_IN_SECONDS );
+			$volta( 'success', 'Diagnóstico feito. Veja a tabela abaixo dos botões de teste.' );
 		}
 		if ( 'teste' === $o_que || 'agora' === $o_que ) {
 			$teste = 'teste' === $o_que;

@@ -67,6 +67,10 @@ $fb    = mural17_opt( 'mural17_facebook' );
 				<li><a href="<?php echo esc_url( get_post_type_archive_link( 'vaga' ) ); ?>">Empregos</a></li>
 				<li><a href="<?php echo esc_url( get_post_type_archive_link( 'classificado' ) ); ?>">Classificados</a></li>
 				<li><a href="<?php echo esc_url( get_post_type_archive_link( 'evento' ) ); ?>">Agenda</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/servicos/' ) ); ?>">Serviços</a></li>
+				<li><a href="<?php echo esc_url( mural17_servicos()['farmacia']['url'] ); ?>">Farmácia de plantão</a></li>
+				<li><a href="<?php echo esc_url( get_post_type_archive_link( 'concurso' ) ); ?>">Concursos</a></li>
+				<li><a href="<?php echo esc_url( get_post_type_archive_link( 'falecimento' ) ); ?>">Falecimentos</a></li>
 			</ul>
 			<?php
 			if ( has_nav_menu( 'rodape' ) ) {
@@ -116,8 +120,8 @@ $fb    = mural17_opt( 'mural17_facebook' );
 	<a class="abas__item<?php echo is_post_type_archive( 'classificado' ) || is_singular( 'classificado' ) || is_tax( 'categoria-anuncio' ) ? ' is-ativo' : ''; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'classificado' ) ); ?>">
 		<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h9l7 7-9 9-7-7Z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>Classif.
 	</a>
-	<a class="abas__item<?php echo is_post_type_archive( 'evento' ) || is_singular( 'evento' ) ? ' is-ativo' : ''; ?>" href="<?php echo esc_url( get_post_type_archive_link( 'evento' ) ); ?>">
-		<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Agenda
+	<a class="abas__item<?php echo mural17_servico_atual() || is_post_type_archive( array( 'concurso', 'falecimento' ) ) || is_singular( array( 'concurso', 'falecimento' ) ) ? ' is-ativo' : ''; ?>" href="<?php echo esc_url( home_url( '/servicos/' ) ); ?>">
+		<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7Z"/></svg>Serviços
 	</a>
 </nav>
 

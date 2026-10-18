@@ -79,6 +79,25 @@ Sugestões de feeds (teste cada um no navegador antes de cadastrar):
 - **No site:** a nota tem faixa "Nota oficial", quadro "Serviço" e cartão do órgão; cada órgão tem a página `/orgao/<nome>/`; as páginas de cidade e região mostram a faixa "Comunicados oficiais"; no Plantão aparece "Oficial · <órgão>". Notas oficiais não viram manchete automática (fixar à mão continua valendo).
 - **Brasão:** em **Posts › Órgãos oficiais**, edite o órgão para escolher o brasão, o tipo, a cidade e os contatos. Sem brasão, aparecem as iniciais.
 
+## Serviços de utilidade pública
+
+Ficam em `/servicos/` (menu **Serviços**, aba "Serviços" no celular) e numa faixa "Serviços de hoje em <cidade>" na home e nas páginas de cidade. Tudo é gerenciado no menu **Serviços** do painel do WordPress.
+
+| Serviço | Página | De onde vêm os dados |
+|---|---|---|
+| Farmácia de plantão | `/servicos/farmacia-de-plantao/` | A prefeitura cola a escala do mês no Painel do órgão (aba *Farmácia de plantão*), ou a redação em **Serviços › Importar escala**. Uma linha por dia: `17/10; Farmácia X; Rua Y, 100; (17) 3242-0000`. O site troca a farmácia sozinho. |
+| Falta de água e luz | `/servicos/falta-de-agua-e-luz/` | Prefeituras, serviços de água e concessionárias publicam pelo Painel do órgão e clicam em "Já voltou" quando normaliza. A redação também pode cadastrar em **Serviços › Falta de água e luz**. |
+| Alertas e tempo | `/servicos/alertas/` | Avisos do **INMET** lidos sozinhos a cada 30 minutos (faixa colorida no topo de todas as páginas). Alerta manual da redação (Defesa Civil etc.) e estoque de sangue em **Serviços**. Previsão do tempo pela Open-Meteo (sem chave). |
+| Preço da gasolina | `/servicos/combustivel/` | Planilha semanal da **ANP**, importada sozinha duas vezes por dia. A ANP pesquisa 8 cidades do 17; as outras usam a mais próxima. |
+| Concursos | `/concursos/` | Órgãos publicam pelo Painel (aba *Concursos*) ou a redação em **Serviços › Concursos**. |
+| Falecimentos | `/falecimentos/` | Funerárias se cadastram como órgão do tipo "Funerária" e enviam pelo Painel; a redação revisa (ou libera a publicação direta). Só com autorização da família. |
+| Fala, 17 | `/servicos/fala-17/` | O morador envia com foto; a redação publica em **Serviços › Fala, 17**; a prefeitura responde pela aba *Fala, 17* do Painel. |
+| Guia da cidade | `/servicos/guia/` | A redação cadastra em **Serviços › Guia da cidade** (seções: saúde, serviços públicos, transporte, feiras, coleta). Os números nacionais de emergência já vêm prontos. |
+
+**Avisos por e-mail:** o leitor escolhe cidade (ou região) e temas (alertas, falta de água e luz, concursos) e confirma pelo link enviado. Os e-mails saem em segundo plano, em lotes, sempre com link para cancelar. Para chegarem na caixa de entrada, instale um plugin de SMTP (WP Mail SMTP, por exemplo) com um serviço de envio.
+
+**Agendador:** INMET, ANP e e-mails usam o agendador do WordPress, que roda quando alguém visita o site. Em site com pouco acesso, configure na hospedagem um cron real chamando `wp-cron.php` a cada 5 ou 10 minutos.
+
 ## Portal de Notícias PRO
 
 O tema já conversa com o plugin **Portal de Notícias PRO — Suite**:
@@ -107,14 +126,18 @@ mural17/
 │   ├── helpers.php        funções usadas nos templates
 │   ├── mural.php          dados do mural (números do dia, plantão, agenda da semana)
 │   ├── oficial*.php       notas oficiais: órgãos, cadastro, painel do órgão e tela da redação
+│   ├── servicos*.php      serviços: tipos, páginas, formulários, avisos por e-mail e menu Serviços
+│   ├── alertas.php        avisos do INMET, alerta da redação, tempo e estoque de sangue
+│   ├── combustivel.php    leitura da planilha semanal da ANP
 │   ├── cidades.php        as 8 regiões e as 117 cidades do DDD 17
 │   └── setup-content.php  cidades e categorias criadas na ativação
 ├── template-parts/        cartões e blocos reutilizados (mural.php é a home)
 ├── front-page.php         home
 ├── taxonomy-cidade.php    página de região e de cidade
 ├── taxonomy-orgao.php     página de cada órgão oficial
-├── single*.php            matéria, evento, vaga, classificado
-├── archive-*.php          agenda, empregos, classificados
+├── servicos.php           páginas /servicos/... (conteúdo em template-parts/servicos/)
+├── single*.php            matéria, evento, vaga, classificado, concurso, falecimento
+├── archive-*.php          agenda, empregos, classificados, concursos, falecimentos
 ├── assets/                CSS, JS e a marca (assets/marca)
 └── docs/                  levantamento das fontes de notícia do DDD 17
 ```

@@ -306,6 +306,7 @@ function mural17_menu_padrao() {
 		}
 	}
 	echo '<li><a href="' . esc_url( get_post_type_archive_link( 'vaga' ) ) . '">Empregos</a></li>';
+	echo '<li><a href="' . esc_url( home_url( '/servicos/' ) ) . '">Serviços</a></li>';
 	echo '<li><a href="' . esc_url( get_post_type_archive_link( 'classificado' ) ) . '">Classificados</a></li>';
 	echo '<li><a href="' . esc_url( get_post_type_archive_link( 'evento' ) ) . '">Agenda</a></li>';
 	echo '</ul>';

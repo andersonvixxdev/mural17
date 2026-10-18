@@ -57,6 +57,7 @@
 
 	// Seletor "Escolha sua cidade", localização e bloco "Agora em ...".
 	var dados = window.mural17 || { cidades: [], rest: '' };
+	var paginaServico = document.querySelector( '[data-servico-cidade]' );
 	var dialogo = document.getElementById( 'cidades' );
 	var minha = guardado.ler( 'm17_cidade', null );
 
@@ -156,6 +157,7 @@
 	function escolher( cidade ) {
 		minha = { id: cidade.id, nome: cidade.n, url: cidade.u };
 		guardado.gravar( 'm17_cidade', minha );
+		document.dispatchEvent( new CustomEvent( 'm17:cidade', { detail: minha } ) );
 	}
 
 	function avisar( msg ) {
@@ -280,12 +282,136 @@
 		} );
 
 		dialogo.querySelectorAll( '[data-id]' ).forEach( function ( a ) {
-			a.addEventListener( 'click', function () {
+			a.addEventListener( 'click', function ( e ) {
 				var c = porId( parseInt( a.getAttribute( 'data-id' ), 10 ) );
 				if ( c ) {
+					// Numa página de serviço, a cidade troca ali mesmo.
+					if ( paginaServico ) {
+						e.preventDefault();
+					}
 					escolher( c );
 				}
 			} );
+		} );
+	}
+
+	// Páginas de serviço: abrem na cidade guardada no aparelho.
+	function irPara( id ) {
+		var url = new URL( window.location.href );
+		url.searchParams.set( 'cidade', id );
+		url.hash = '';
+		window.location.assign( url.toString() );
+	}
+	if ( paginaServico ) {
+		var naPagina = parseInt( paginaServico.getAttribute( 'data-servico-cidade' ), 10 ) || 0;
+		if ( minha && minha.id && '1' === paginaServico.getAttribute( 'data-servico-auto' ) && minha.id !== naPagina ) {
+			var troca = new URL( window.location.href );
+			troca.searchParams.set( 'cidade', minha.id );
+			window.location.replace( troca.toString() );
+		}
+		document.addEventListener( 'm17:cidade', function ( e ) {
+			if ( e.detail.id !== naPagina ) {
+				irPara( e.detail.id );
+			}
+		} );
+	}
+
+	// Seletores que se enviam sozinhos.
+	document.querySelectorAll( '[data-seletor-cidade] select, select[data-envia]' ).forEach( function ( sel ) {
+		sel.addEventListener( 'change', function () {
+			if ( sel.form ) {
+				sel.form.submit();
+			}
+		} );
+	} );
+
+	// Home: a faixa "Serviços de hoje" vem da cidade do aparelho.
+	var faixa = document.querySelector( '.home [data-faixa-servicos]' );
+	if ( faixa && minha && minha.id && dados.servicos && String( minha.id ) !== faixa.getAttribute( 'data-faixa-servicos' ) && window.fetch ) {
+		faixa.classList.add( 'is-carregando' );
+		window.fetch( dados.servicos + ( -1 === dados.servicos.indexOf( '?' ) ? '?' : '&' ) + 'cidade=' + encodeURIComponent( minha.id ) ).then( function ( r ) {
+			return r.ok ? r.json() : Promise.reject();
+		} ).then( function ( j ) {
+			var tmp = document.createElement( 'div' );
+			tmp.innerHTML = j.html;
+			var nova = tmp.querySelector( '[data-faixa-servicos]' );
+			if ( nova ) {
+				faixa.replaceWith( nova );
+			}
+		} ).catch( function () {
+			faixa.classList.remove( 'is-carregando' );
+		} );
+	}
+
+	// Faixa de alerta: "em Mirassol e outras 23 cidades".
+	var alertaCidades = document.querySelector( '[data-alerta-cidades]' );
+	if ( alertaCidades && minha && minha.id ) {
+		var ids = alertaCidades.getAttribute( 'data-alerta-cidades' ).split( ',' );
+		var qtd = parseInt( alertaCidades.getAttribute( 'data-alerta-qtd' ), 10 ) || ids.length;
+		if ( -1 !== ids.indexOf( String( minha.id ) ) ) {
+			alertaCidades.textContent = 'em ' + minha.nome + ( qtd > 1 ? ' e outras ' + ( qtd - 1 ) + ( 2 === qtd ? ' cidade' : ' cidades' ) : '' );
+		}
+	}
+
+	// Fala 17: "eu também" sem recarregar a página.
+	document.querySelectorAll( '[data-eutambem]' ).forEach( function ( form ) {
+		form.addEventListener( 'submit', function ( e ) {
+			if ( ! window.fetch || ! window.FormData ) {
+				return;
+			}
+			e.preventDefault();
+			var botao = form.querySelector( 'button' );
+			var corpo = new FormData( form );
+			corpo.append( 'json', '1' );
+			botao.disabled = true;
+			window.fetch( form.action, { method: 'POST', body: corpo, credentials: 'same-origin' } ).then( function ( r ) {
+				return r.json();
+			} ).then( function ( j ) {
+				botao.innerHTML = 'Você disse “eu também” · <span data-eutambem-qtd>' + parseInt( j.qtd, 10 ) + '</span>';
+			} ).catch( function () {
+				botao.disabled = false;
+			} );
+		} );
+	} );
+
+	// Etanol ou gasolina: a conta do posto.
+	var calc = document.querySelector( '[data-calc-etanol]' );
+	if ( calc ) {
+		var numero = function ( el ) {
+			return parseFloat( String( el.value ).replace( /[^\d,.]/g, '' ).replace( ',', '.' ) );
+		};
+		var conta = function () {
+			var g = numero( calc.querySelector( '[data-calc-g]' ) );
+			var e = numero( calc.querySelector( '[data-calc-e]' ) );
+			var saida = calc.querySelector( '[data-calc-resultado]' );
+			if ( ! g || ! e ) {
+				saida.textContent = 'Digite os dois preços.';
+				return;
+			}
+			var p = e / g * 100;
+			saida.textContent = 'O etanol está a ' + p.toFixed( 1 ).replace( '.', ',' ) + '% da gasolina: abasteça com ' + ( p <= 70 ? 'etanol.' : 'gasolina.' );
+		};
+		calc.querySelectorAll( 'input' ).forEach( function ( i ) {
+			i.addEventListener( 'input', conta );
+		} );
+		conta();
+	}
+
+	// Falta de água e luz: filtra pelo bairro digitado.
+	var buscaBairro = document.querySelector( '[data-busca-bairro]' );
+	var listaBairros = document.querySelector( '[data-lista-bairros]' );
+	if ( buscaBairro && listaBairros ) {
+		buscaBairro.addEventListener( 'input', function () {
+			var t = sem( buscaBairro.value.trim() ).replace( /[^a-z0-9 ]+/g, ' ' );
+			var achou = 0;
+			listaBairros.querySelectorAll( '[data-texto]' ).forEach( function ( el ) {
+				var ok = ! t || -1 !== el.getAttribute( 'data-texto' ).indexOf( t );
+				el.hidden = ! ok;
+				if ( ok ) {
+					achou++;
+				}
+			} );
+			listaBairros.querySelector( '[data-busca-vazio]' ).hidden = ! t || achou > 0;
 		} );
 	}
 

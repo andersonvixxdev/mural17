@@ -9,9 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MURAL17_VERSION', '2.1.0' );
+define( 'MURAL17_VERSION', '2.2.0' );
 define( 'MURAL17_CIDADES_VERSAO', 1 );
 define( 'MURAL17_OFICIAL_VERSAO', 1 );
+define( 'MURAL17_SERVICOS_VERSAO', 1 );
 define( 'MURAL17_DIR', get_template_directory() );
 define( 'MURAL17_URI', get_template_directory_uri() );
 
@@ -24,6 +25,11 @@ require MURAL17_DIR . '/inc/mural.php';
 require MURAL17_DIR . '/inc/oficial.php';
 require MURAL17_DIR . '/inc/oficial-forms.php';
 require MURAL17_DIR . '/inc/oficial-admin.php';
+require MURAL17_DIR . '/inc/servicos.php';
+require MURAL17_DIR . '/inc/servicos-forms.php';
+require MURAL17_DIR . '/inc/servicos-admin.php';
+require MURAL17_DIR . '/inc/alertas.php';
+require MURAL17_DIR . '/inc/combustivel.php';
 require MURAL17_DIR . '/inc/setup-content.php';
 
 /**
@@ -106,8 +112,9 @@ function mural17_assets() {
 		'mural17-main',
 		'window.mural17 = ' . wp_json_encode(
 			array(
-				'rest'    => esc_url_raw( rest_url( 'wp/v2/posts' ) ),
-				'cidades' => mural17_cidades_js(),
+				'rest'     => esc_url_raw( rest_url( 'wp/v2/posts' ) ),
+				'servicos' => esc_url_raw( rest_url( 'mural17/v1/servicos' ) ),
+				'cidades'  => mural17_cidades_js(),
 			)
 		) . ';',
 		'before'

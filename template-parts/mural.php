@@ -88,6 +88,7 @@ $plantao = mural17_consulta(
 </section>
 
 <div class="wrap mural">
+	<?php get_template_part( 'template-parts/servicos/faixa', null, array( 'cidade' => mural17_cidade_da_faixa( $escopo ) ) ); ?>
 	<?php if ( ! $escopo ) : ?>
 		<section class="sua-cidade" data-sua-cidade hidden aria-labelledby="sua-cidade-titulo">
 			<div class="sua-cidade__topo">

@@ -23,7 +23,7 @@ function mural17_mensagens_oficial() {
 		'nota-publicada'  => array( 'ok', 'Nota publicada.' ),
 		'nota-rascunho'   => array( 'ok', 'Rascunho salvo. Ele só vai para a redação quando você clicar em “Enviar para revisão”.' ),
 		'erro-nonce'      => array( 'erro', 'A página ficou aberta por muito tempo. Recarregue e tente de novo.' ),
-		'erro-email'      => array( 'erro', 'Use o e-mail institucional do órgão (terminado em .sp.gov.br, .sp.leg.br, .jus.br, .mp.br, .def.br ou .gov.br).' ),
+		'erro-email'      => array( 'erro', 'Use o e-mail institucional do órgão (terminado em .sp.gov.br, .sp.leg.br, .jus.br, .mp.br, .def.br ou .gov.br). Funerárias, serviços de água e concessionárias de energia podem usar o e-mail da empresa.' ),
 		'erro-email-uso'  => array( 'erro', 'Já existe uma conta com este e-mail. Entre pelo Painel do órgão ou peça uma nova senha.' ),
 		'erro-campos'     => array( 'erro', 'Preencha os campos obrigatórios: tipo, cidade, nome do órgão, responsável e telefone.' ),
 		'erro-orgao'      => array( 'erro', 'Este órgão já tem cadastro no Mural 17. Fale com a redação para incluir outra pessoa.' ),
@@ -40,7 +40,7 @@ function mural17_mensagens_oficial() {
  */
 function mural17_aviso_oficial() {
 	$codigo = isset( $_GET['m17'] ) ? sanitize_key( wp_unslash( $_GET['m17'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
-	$msgs   = mural17_mensagens_oficial();
+	$msgs   = array_merge( mural17_mensagens_oficial(), mural17_mensagens_servicos() );
 	if ( isset( $msgs[ $codigo ] ) ) {
 		printf( '<p class="aviso aviso--%1$s" role="status">%2$s</p>', esc_attr( $msgs[ $codigo ][0] ), esc_html( $msgs[ $codigo ][1] ) );
 	}
@@ -94,7 +94,7 @@ function mural17_sc_cadastro() {
 		<section class="oficial-cadastro__lado">
 			<span class="selo-oficial selo-oficial--claro"><?php echo mural17_icone_oficial( 14 ); // phpcs:ignore WordPress.Security.EscapeOutput ?> Para órgãos públicos</span>
 			<h2>Publique os comunicados do seu órgão no Mural 17</h2>
-			<p>Prefeituras, câmaras, fóruns, promotorias, defensorias e polícias das 117 cidades do DDD 17. Sem custo.</p>
+			<p>Prefeituras, câmaras, fóruns, promotorias, defensorias e polícias das 117 cidades do DDD 17. Serviços de água, concessionárias de energia e funerárias também têm acesso, para avisos de falta de água e luz e notas de falecimento. Sem custo.</p>
 			<ol class="oficial-passos">
 				<li><b>Peça o cadastro</b> com o e-mail institucional do órgão.</li>
 				<li><b>A redação confere</b> pelo telefone oficial e libera em até 1 dia útil.</li>
@@ -134,7 +134,7 @@ function mural17_sc_cadastro() {
 			<p class="campo">
 				<label for="cad-email">E-mail institucional</label>
 				<input id="cad-email" name="email" type="email" required value="<?php echo esc_attr( $g( 'email' ) ); ?>" placeholder="imprensa@suacidade.sp.gov.br">
-				<span class="campo__dica">Aceitamos <?php echo esc_html( implode( ', ', mural17_dominios_oficiais() ) ); ?>. E-mail pessoal (Gmail, Hotmail) não é aceito.</span>
+				<span class="campo__dica">Aceitamos <?php echo esc_html( implode( ', ', mural17_dominios_oficiais() ) ); ?>. E-mail pessoal (Gmail, Hotmail) não é aceito. Funerárias, serviços de água e concessionárias de energia usam o e-mail da empresa.</span>
 			</p>
 			<div class="formulario__tripla">
 				<p class="campo"><label for="cad-resp">Responsável</label><input id="cad-resp" name="responsavel" required maxlength="80" value="<?php echo esc_attr( $g( 'responsavel' ) ); ?>"></p>
@@ -193,7 +193,10 @@ function mural17_recebe_cadastro() {
 	if ( ! isset( mural17_tipos_orgao()[ $d['tipo'] ] ) || ! $cidade || is_wp_error( $cidade ) || ! $cidade->parent || ! $d['nome'] || ! $d['responsavel'] || ! $d['telefone'] ) {
 		$volta( 'erro-campos' );
 	}
-	if ( ! mural17_email_oficial( $d['email'] ) ) {
+	if ( ! mural17_tipo_livre( $d['tipo'] ) && ! mural17_email_oficial( $d['email'] ) ) {
+		$volta( 'erro-email' );
+	}
+	if ( ! is_email( $d['email'] ) ) {
 		$volta( 'erro-email' );
 	}
 	if ( email_exists( $d['email'] ) ) {
@@ -321,6 +324,16 @@ function mural17_sc_painel() {
 		return ob_get_clean();
 	}
 
+	// Abas de serviço (falta de água e luz, plantão, concursos, Fala 17, falecimentos).
+	$aba = mural17_aba_painel( $orgao );
+	if ( 'notas' !== $aba ) {
+		echo '<div class="oficial-painel">';
+		mural17_painel_quem( $orgao, $aba );
+		mural17_painel_servico( $aba, $orgao );
+		echo '</div>';
+		return ob_get_clean();
+	}
+
 	// Edição de uma nota que ainda não foi publicada.
 	$nota   = null;
 	$editar = isset( $_GET['editar'] ) ? absint( $_GET['editar'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification
@@ -354,12 +367,7 @@ function mural17_sc_painel() {
 	);
 	?>
 	<div class="oficial-painel">
-		<div class="oficial-painel__quem">
-			<?php mural17_brasao( $orgao ); ?>
-			<span><b><?php echo esc_html( $orgao->name ); ?></b><small><?php echo esc_html( wp_get_current_user()->user_email ); ?></small></span>
-			<a href="<?php echo esc_url( get_term_link( $orgao ) ); ?>">Ver página do órgão</a>
-			<a href="<?php echo esc_url( wp_logout_url( mural17_link_oficial( 'painel' ) ) ); ?>">Sair</a>
-		</div>
+		<?php mural17_painel_quem( $orgao, 'notas' ); ?>
 
 		<div class="oficial-painel__grade">
 			<form class="formulario" method="post" enctype="multipart/form-data" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">

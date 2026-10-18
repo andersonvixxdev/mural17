@@ -6,7 +6,8 @@
  */
 
 $mural17_wa    = mural17_whatsapp_link( mural17_opt( 'mural17_whatsapp' ), 'Olá, Mural 17! Tenho uma notícia:' );
-$mural17_mural = is_front_page() || is_tax( 'cidade' ) || is_tax( 'orgao' );
+// ?cidade= nas listas de vagas, concursos etc. também marca is_tax: o mural é só a página da cidade.
+$mural17_mural = is_front_page() || ( ( is_tax( 'cidade' ) || is_tax( 'orgao' ) ) && ! is_post_type_archive() );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -66,6 +67,8 @@ $mural17_mural = is_front_page() || is_tax( 'cidade' ) || is_tax( 'orgao' );
 		<div class="wrap"><?php get_search_form(); ?></div>
 	</div>
 </header>
+
+<?php mural17_faixa_alerta(); ?>
 
 <dialog class="cidades" id="cidades" aria-labelledby="cidades-titulo">
 	<div class="cidades__topo">
@@ -135,3 +138,4 @@ if ( ! $mural17_mural ) {
 ?>
 
 <main id="conteudo" class="<?php echo $mural17_mural ? 'principal principal--mural' : 'wrap principal'; ?>">
+<?php mural17_aviso_global(); ?>

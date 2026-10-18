@@ -29,8 +29,35 @@ function mural17_tipos_orgao() {
 		'mp'         => array( 'nome' => 'Ministério Público', 'eleitoral' => false ),
 		'defensoria' => array( 'nome' => 'Defensoria Pública', 'eleitoral' => false ),
 		'policia'    => array( 'nome' => 'Polícia', 'eleitoral' => false ),
+		'saneamento' => array( 'nome' => 'Serviço de água e esgoto', 'eleitoral' => false, 'livre' => true ),
+		'energia'    => array( 'nome' => 'Concessionária de energia', 'eleitoral' => false, 'livre' => true ),
 		'outro'      => array( 'nome' => 'Outro órgão público', 'eleitoral' => false ),
+		'funeraria'  => array( 'nome' => 'Funerária', 'eleitoral' => false, 'livre' => true, 'privado' => true ),
 	);
+}
+
+/**
+ * O tipo de órgão aceita e-mail de qualquer domínio? (concessionárias e
+ * funerárias não usam .gov.br; a redação confere pelo telefone do mesmo jeito.)
+ *
+ * @param string $tipo Tipo.
+ * @return bool
+ */
+function mural17_tipo_livre( $tipo ) {
+	$tipos = mural17_tipos_orgao();
+	return ! empty( $tipos[ $tipo ]['livre'] );
+}
+
+/**
+ * Funerária (empresa privada): não publica notas oficiais, só falecimentos.
+ *
+ * @param WP_Term $orgao Órgão.
+ * @return bool
+ */
+function mural17_orgao_privado( $orgao ) {
+	$tipos = mural17_tipos_orgao();
+	$tipo  = mural17_orgao_meta( $orgao, 'tipo' );
+	return ! empty( $tipos[ $tipo ]['privado'] );
 }
 
 /**

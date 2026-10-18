@@ -114,6 +114,11 @@ $ultima = new WP_Query(
 							'key'   => 'mural17_status',
 							'value' => 'ativo',
 						),
+						array(
+							'key'     => 'mural17_tipo',
+							'value'   => 'funeraria',
+							'compare' => '!=',
+						),
 					),
 				)
 			) : array();

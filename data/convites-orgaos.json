@@ -1,0 +1,2108 @@
+[
+{
+"regiao": "Rio Preto",
+"cidade": "Adolfo",
+"orgao": "Prefeitura",
+"email": "prefeitura@adolfo.sp.gov.br",
+"telefone": "(17) 3814-9028",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Adolfo",
+"orgao": "Câmara",
+"email": "camara@adolfo.sp.gov.br",
+"telefone": "(17) 3814-1333",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); fonte: Diário Oficial de Adolfo (2021); site camaraadolfo.sp.gov.br não resolve; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Altair",
+"orgao": "Prefeitura",
+"email": "prefeito@altair.sp.gov.br",
+"telefone": "(17) 3889-9500",
+"situacao": "Pronto",
+"obs": "e-mail do gabinete/prefeito; alternativa geral cidadao@altair.sp.gov.br (home)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Altair",
+"orgao": "Câmara",
+"email": "camaramunicipalaltair@camaraaltair.sp.gov.br",
+"telefone": "(17) 3889-1220",
+"situacao": "Pronto",
+"obs": "e-mail geral; presidencia@camaraaltair.sp.gov.br na página /contact"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Bady Bassitt",
+"orgao": "Prefeitura",
+"email": "prefeitura@badybassitt.sp.gov.br",
+"telefone": "(17) 3818-5100",
+"situacao": "Pronto",
+"obs": "e-mail geral; alternativa governo@badybassitt.sp.gov.br (portal/secretarias)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Bady Bassitt",
+"orgao": "Câmara",
+"email": "contato@camarabadybassitt.sp.gov.br",
+"telefone": "(17) 3258-1200",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Bálsamo",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3264-1209",
+"situacao": "Sem e-mail",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); e-mail geral ofuscado/inacessível; só achado licitacao@ e juridico@ (não registrados)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Bálsamo",
+"orgao": "Câmara",
+"email": "camara@cmbalsamo.sp.gov.br",
+"telefone": "(17) 3264-1518",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); site oficial da câmara (captcha); confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Cedral",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3266-9600",
+"situacao": "Sem e-mail",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); site cedral.sp.gov.br bloqueado; só achado licitacao@cedral.sp.gov.br (não registrado)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Cedral",
+"orgao": "Câmara",
+"email": "cmcedral@hotmail.com",
+"telefone": "(17) 3266-1115",
+"situacao": "Pronto",
+"obs": "hotmail publicado no site oficial da câmara"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Guapiaçu",
+"orgao": "Prefeitura",
+"email": "prefeitura@guapiacu.sp.gov.br",
+"telefone": "(17) 3267-9700",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Guapiaçu",
+"orgao": "Câmara",
+"email": "diretoria@camaraguapiacu.sp.gov.br",
+"telefone": "(17) 3267-9066",
+"situacao": "Pronto",
+"obs": "e-mail da diretoria (único publicado)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ibirá",
+"orgao": "Prefeitura",
+"email": "imprensa@ibira.sp.gov.br",
+"telefone": "(17) 3551-9900",
+"situacao": "Pronto",
+"obs": "imprensa; gabinete@ibira.sp.gov.br também publicado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ibirá",
+"orgao": "Câmara",
+"email": "camara@camaraibira.sp.gov.br",
+"telefone": "(17) 3551-1422",
+"situacao": "Pronto",
+"obs": "e-mail geral; contato@camaraibira.sp.gov.br também publicado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Icém",
+"orgao": "Prefeitura",
+"email": "contato@icem.sp.gov.br",
+"telefone": "(17) 3282-9090",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); e-mail visto na página oficial da prefeitura no Facebook e em Diário Oficial; tel. do site oficial (alt. (17) 3282-9111)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Icém",
+"orgao": "Câmara",
+"email": "camaraicem@hotmail.com",
+"telefone": "(17) 3282-2135",
+"situacao": "Pronto",
+"obs": "hotmail publicado no site oficial da câmara"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ipiguá",
+"orgao": "Prefeitura",
+"email": "comunicacao@ipigua.sp.gov.br",
+"telefone": "(17) 3269-9000",
+"situacao": "Pronto",
+"obs": "comunicação"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ipiguá",
+"orgao": "Câmara",
+"email": "contato@ipigua.sp.leg.br",
+"telefone": "(17) 3269-1240",
+"situacao": "Pronto",
+"obs": "e-mail geral; cmipigua@hotmail.com também publicado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Irapuã",
+"orgao": "Prefeitura",
+"email": "prefeitura@irapua.sp.gov.br",
+"telefone": "(17) 3556-1600",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Irapuã",
+"orgao": "Câmara",
+"email": "contato@camarairapua.sp.gov.br",
+"telefone": "(17) 3556-1266",
+"situacao": "Pronto",
+"obs": "e-mail geral; camaramirapua@gmail.com também publicado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Jaci",
+"orgao": "Prefeitura",
+"email": "comunicacao@jaci.sp.gov.br",
+"telefone": "(17) 3283-9930",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); comunicação via página da prefeitura no Facebook; gabinete@jaci.sp.gov.br em Diário Oficial (dosp.com.br/exibe_do.php?i=NDgwNTk0); tel. de Diário Oficial; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Jaci",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3283-1300",
+"situacao": "Sem e-mail",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); e-mail ofuscado no site oficial, não confirmado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "José Bonifácio",
+"orgao": "Prefeitura",
+"email": "imprensa@josebonifacio.sp.gov.br",
+"telefone": "(17) 3245-9200",
+"situacao": "Pronto",
+"obs": "imprensa"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "José Bonifácio",
+"orgao": "Câmara",
+"email": "secretaria@camarajosebonifacio.sp.gov.br",
+"telefone": "(17) 3265-9922",
+"situacao": "Pronto",
+"obs": "e-mail da secretaria"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Macaubal",
+"orgao": "Prefeitura",
+"email": "prefeitura@macaubal.sp.gov.br",
+"telefone": "(17) 3874-6080",
+"situacao": "Pronto",
+"obs": "e-mail geral; gabinete@macaubal.sp.gov.br em /portal/telefones; rodapé mostra também (17) 98224-0580"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Macaubal",
+"orgao": "Câmara",
+"email": "camara@camaramacaubal.sp.gov.br",
+"telefone": "(17) 3874-2550",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mendonça",
+"orgao": "Prefeitura",
+"email": "imprensa@mendonca.sp.gov.br",
+"telefone": "(17) 3248-9000",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); imprensa via página da prefeitura no Facebook; telefone do site oficial"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mendonça",
+"orgao": "Câmara",
+"email": "secretaria@camaramendonca.sp.gov.br",
+"telefone": "(17) 3248-1424",
+"situacao": "Pronto",
+"obs": "secretaria; diretoria@camaramendonca.sp.gov.br também publicado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mirassol",
+"orgao": "Prefeitura",
+"email": "imprensa@mirassol.sp.gov.br",
+"telefone": "(17) 3243-8120",
+"situacao": "Pronto",
+"obs": "imprensa"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mirassol",
+"orgao": "Câmara",
+"email": "imprensa@camaramirassol.sp.gov.br",
+"telefone": "(17) 3243-3450",
+"situacao": "Pronto",
+"obs": "imprensa; geral administracao@camaramirassol.sp.gov.br"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mirassolândia",
+"orgao": "Prefeitura",
+"email": "prefeitura@mirassolandia.sp.gov.br",
+"telefone": "(17) 3263-1307",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Mirassolândia",
+"orgao": "Câmara",
+"email": "camara@camaramirassolandia.sp.gov.br",
+"telefone": "(17) 3263-1262",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Monte Aprazível",
+"orgao": "Prefeitura",
+"email": "imprensa@monteaprazivel.sp.gov.br",
+"telefone": "(17) 3275-9500",
+"situacao": "Pronto",
+"obs": "imprensa; gabinete@monteaprazivel.sp.gov.br na home"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Monte Aprazível",
+"orgao": "Câmara",
+"email": "cmmonteaprazivel@terra.com.br",
+"telefone": "(17) 3275-1735",
+"situacao": "Pronto",
+"obs": "terra.com.br publicado no site oficial da câmara"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Neves Paulista",
+"orgao": "Prefeitura",
+"email": "imprensa@nevespaulista.sp.gov.br",
+"telefone": "(17) 3271-9020",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); site oficial não publica e-mail; imprensa via página da prefeitura no Facebook; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Neves Paulista",
+"orgao": "Câmara",
+"email": "camara@camaranevespaulista.sp.gov.br",
+"telefone": "(17) 3271-1482",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nipoã",
+"orgao": "Prefeitura",
+"email": "nipoa@nipoa.sp.gov.br",
+"telefone": "(17) 3277-9220",
+"situacao": "Pronto",
+"obs": "e-mail geral; gabinete@nipoa.sp.gov.br em /portal/secretarias"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nipoã",
+"orgao": "Câmara",
+"email": "camara@camaranipoa.sp.gov.br",
+"telefone": "(17) 3277-1152",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nova Aliança",
+"orgao": "Prefeitura",
+"email": "pmna@terra.com.br",
+"telefone": "(17) 3811-9900",
+"situacao": "Pronto",
+"obs": "terra.com.br publicado no site oficial (único e-mail geral)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nova Aliança",
+"orgao": "Câmara",
+"email": "atendimento@camaranovaalianca.sp.gov.br",
+"telefone": "(17) 3200-0201",
+"situacao": "Pronto",
+"obs": "e-mail de atendimento"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nova Granada",
+"orgao": "Prefeitura",
+"email": "gabinete@novagranada.sp.gov.br",
+"telefone": "(17) 3262-5200",
+"situacao": "Pronto",
+"obs": "gabinete"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Nova Granada",
+"orgao": "Câmara",
+"email": "contato@camaranovagranada.sp.gov.br",
+"telefone": "(17) 3262-3658",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Novo Horizonte",
+"orgao": "Prefeitura",
+"email": "gabinete@novohorizonte.sp.gov.br",
+"telefone": "(17) 3543-9000",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); gabinete via página da prefeitura no Facebook; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Novo Horizonte",
+"orgao": "Câmara",
+"email": "camara@camaranh.sp.gov.br",
+"telefone": "(17) 3543-9050",
+"situacao": "Pronto",
+"obs": "e-mail geral (domínio camaranh.sp.gov.br)"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Onda Verde",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3268-1222",
+"situacao": "Sem e-mail",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); e-mail ofuscado no site oficial, não confirmado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Onda Verde",
+"orgao": "Câmara",
+"email": "camaraondaverde@cmondaverde.sp.gov.br",
+"telefone": "(17) 3268-1180",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); site oficial da câmara (captcha); confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Orindiúva",
+"orgao": "Prefeitura",
+"email": "prefeitura@orindiuva.sp.gov.br",
+"telefone": "(17) 3816-9600",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Orindiúva",
+"orgao": "Câmara",
+"email": "contato@orindiuva.sp.leg.br",
+"telefone": "(17) 3816-1238",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Palestina",
+"orgao": "Prefeitura",
+"email": "assessoria@palestina.sp.gov.br",
+"telefone": "(17) 3293-1265",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); site oficial não publica e-mail; assessoria via página da prefeitura no Facebook; tel. da lista da câmara; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Palestina",
+"orgao": "Câmara",
+"email": "camara@camarapalestina.sp.gov.br",
+"telefone": "(17) 3293-1644",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Paulo de Faria",
+"orgao": "Prefeitura",
+"email": "prefeitura@paulodefaria.sp.gov.br",
+"telefone": "(17) 3802-9200",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Paulo de Faria",
+"orgao": "Câmara",
+"email": "camara@camarapaulodefaria.sp.gov.br",
+"telefone": "(17) 3292-1360",
+"situacao": "Pronto",
+"obs": "e-mail geral; alt. tel. (17) 3292-1730"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Poloni",
+"orgao": "Prefeitura",
+"email": "prefeitura@poloni.sp.gov.br",
+"telefone": "(17) 3819-9900",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Poloni",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3819-1656",
+"situacao": "Sem e-mail",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); e-mail ofuscado no site oficial, não confirmado"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Potirendaba",
+"orgao": "Prefeitura",
+"email": "comunicacao@potirendaba.sp.gov.br",
+"telefone": "(17) 3827-9200",
+"situacao": "Pronto",
+"obs": "comunicação; geral pmpotirendaba@potirendaba.sp.gov.br"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Potirendaba",
+"orgao": "Câmara",
+"email": "camara@camarapotirendaba.sp.gov.br",
+"telefone": "(17) 3249-1551",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Sales",
+"orgao": "Prefeitura",
+"email": "protocolo@sales.sp.gov.br",
+"telefone": "(17) 3557-9100",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); protocolo (geral) citado em Diário Oficial de Sales; tel. do site oficial; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Sales",
+"orgao": "Câmara",
+"email": "contato@camarasales.sp.gov.br",
+"telefone": "(17) 3557-1255",
+"situacao": "Conferir",
+"obs": "visto via WebSearch (site bloqueado por Cloudflare/captcha para curl); citado em Diário Oficial de Sales; tel. do site oficial da câmara; confirmar"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "São José do Rio Preto",
+"orgao": "Prefeitura",
+"email": "comunicacao@riopreto.sp.gov.br",
+"telefone": "(17) 3203-1100",
+"situacao": "Pronto",
+"obs": "Secretaria de Comunicação Social"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "São José do Rio Preto",
+"orgao": "Câmara",
+"email": "camara@riopreto.sp.leg.br",
+"telefone": "(17) 3214-7777",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Tanabi",
+"orgao": "Prefeitura",
+"email": "imprensa@tanabi.sp.gov.br",
+"telefone": "(17) 3272-9000",
+"situacao": "Pronto",
+"obs": "imprensa"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Tanabi",
+"orgao": "Câmara",
+"email": "assessoriadeimprensa@tanabi.sp.leg.br",
+"telefone": "(17) 3274-2113",
+"situacao": "Pronto",
+"obs": "imprensa (site em camara.tanabi.sp.gov.br); geral secretaria@tanabi.sp.leg.br"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ubarana",
+"orgao": "Prefeitura",
+"email": "comunicacao@ubarana.sp.gov.br",
+"telefone": "(17) 3807-8700",
+"situacao": "Pronto",
+"obs": "comunicação"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Ubarana",
+"orgao": "Câmara",
+"email": "camara@camaraubarana.sp.gov.br",
+"telefone": "(17) 3807-1138",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Uchoa",
+"orgao": "Prefeitura",
+"email": "comunicacao@uchoa.sp.gov.br",
+"telefone": "(17) 3826-9500",
+"situacao": "Pronto",
+"obs": "comunicação"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Uchoa",
+"orgao": "Câmara",
+"email": "camarauchoa@camarauchoa.sp.gov.br",
+"telefone": "(17) 3101-0500",
+"situacao": "Pronto",
+"obs": "e-mail geral; alt. tel. (17) 3826-1687"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "União Paulista",
+"orgao": "Prefeitura",
+"email": "prefeitura@uniaopaulista.sp.gov.br",
+"telefone": "(17) 3278-1213",
+"situacao": "Pronto",
+"obs": "e-mail geral; alt. tel. (17) 3278-9020"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "União Paulista",
+"orgao": "Câmara",
+"email": "camara@camarauniaopaulista.sp.gov.br",
+"telefone": "(17) 3278-1200",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Urupês",
+"orgao": "Prefeitura",
+"email": "gabinete@urupes.sp.gov.br",
+"telefone": "(17) 3552-1144",
+"situacao": "Pronto",
+"obs": "gabinete"
+},
+{
+"regiao": "Rio Preto",
+"cidade": "Urupês",
+"orgao": "Câmara",
+"email": "contato@camaraurupes.sp.gov.br",
+"telefone": "(17) 3552-1252",
+"situacao": "Pronto",
+"obs": "e-mail geral"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Ariranha",
+"orgao": "Prefeitura",
+"email": "ouvidoria@ariranha.sp.gov.br",
+"telefone": "(17) 3576-9200",
+"situacao": "Pronto",
+"obs": "Não achei e-mail de comunicação nem de gabinete no site; este é o da Ouvidoria. A busca citou secretaria@ariranha.sp.gov.br num edital, mas não conferi"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Ariranha",
+"orgao": "Câmara",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "Site da Câmara não encontrado/acessível (camaraariranha.sp.gov.br recusa conexão; ariranha.sp.leg.br não existe)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Catanduva",
+"orgao": "Prefeitura",
+"email": "comunica@catanduva.sp.gov.br",
+"telefone": "(17) 3531-9100",
+"situacao": "Pronto",
+"obs": "Secretaria de Comunicação Social; gabinete@catanduva.sp.gov.br também publicado"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Catanduva",
+"orgao": "Câmara",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "Site da Câmara inacessível pelo proxy (catanduva.sp.leg.br recusa conexão); não achei contato verificável"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Catiguá",
+"orgao": "Prefeitura",
+"email": "prefeitura@catigua.sp.gov.br",
+"telefone": "(17) 3564-9500",
+"situacao": "Pronto",
+"obs": "E-mail geral (também no rodapé da home); gabinete@catigua.sp.gov.br na mesma página. Telefone do Paço (Av. José Zancaner, 312) usado por vários setores; o Gabinete aparece como (17) 92004-2320"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Catiguá",
+"orgao": "Câmara",
+"email": "secretaria@camaracatigua.sp.gov.br",
+"telefone": "(17) 3564-1091",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Catanduva",
+"cidade": "Elisiário",
+"orgao": "Prefeitura",
+"email": "pmelisiario@elisiario.sp.gov.br",
+"telefone": "(17) 3529-1221",
+"situacao": "Pronto",
+"obs": "E-mail geral; gabinete@elisiario.sp.gov.br em https://www.elisiario.sp.gov.br/gabinete"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Elisiário",
+"orgao": "Câmara",
+"email": "c.e@camaraelisiario.com.br",
+"telefone": "(17) 3529-1223",
+"situacao": "Pronto",
+"obs": "Domínio .com.br, mas é o publicado no cabeçalho do site oficial da Câmara"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Embaúba",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3566-8000",
+"situacao": "Sem e-mail",
+"obs": "Nenhum e-mail no site (a Ouvidoria só tem formulário)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Embaúba",
+"orgao": "Câmara",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "O site camaraembauba.sp.gov.br bloqueia acesso automatizado (verificação anti-bot)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Itajobi",
+"orgao": "Prefeitura",
+"email": "comunicacao@itajobi.sp.gov.br",
+"telefone": "(17) 3546-9000",
+"situacao": "Pronto",
+"obs": "Assessoria de Comunicação: (17) 3546-9019"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Itajobi",
+"orgao": "Câmara",
+"email": "cmitajobi@gmail.com",
+"telefone": "(17) 3546-2001",
+"situacao": "Pronto",
+"obs": "Gmail, mas é o publicado no site oficial"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Marapoama",
+"orgao": "Prefeitura",
+"email": "gabinete@marapoama.sp.gov.br",
+"telefone": "(17) 3548-8400",
+"situacao": "Pronto",
+"obs": "O rodapé do site traz por engano gabinete@setebarras.sp.gov.br (de outra cidade); ignorei"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Marapoama",
+"orgao": "Câmara",
+"email": "cmmarapoama@gmail.com",
+"telefone": "(17) 3548-1191",
+"situacao": "Pronto",
+"obs": "Gmail publicado no site oficial; site achado por tentativa de domínio (não estava no CSV)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Novais",
+"orgao": "Prefeitura",
+"email": "secretaria@novais.sp.gov.br",
+"telefone": "(17) 3561-8780",
+"situacao": "Pronto",
+"obs": "E-mail geral da secretaria"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Novais",
+"orgao": "Câmara",
+"email": "secretaria@camaranovais.sp.gov.br",
+"telefone": "(17) 3561-1279",
+"situacao": "Pronto",
+"obs": "Outro telefone: (17) 3561-1288"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Palmares Paulista",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "O site bloqueia acesso automatizado (verificação anti-bot). Resultado de busca (não verificado) cita secret@palmarespaulista.sp.gov.br e (17) 3587-1500 num Diário Oficial de 2022"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Palmares Paulista",
+"orgao": "Câmara",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "O site camarapalmarespaulista.sp.gov.br bloqueia acesso automatizado (verificação do Cloudflare)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Paraíso",
+"orgao": "Prefeitura",
+"email": "contato@paraiso.sp.gov.br",
+"telefone": "(17) 3567-9510",
+"situacao": "Pronto",
+"obs": "gabinete@paraiso.sp.gov.br em /paginas/gabinete-do-prefeito"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Paraíso",
+"orgao": "Câmara",
+"email": "contato@camaraparaiso.sp.gov.br",
+"telefone": "(17) 3567-1348",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Catanduva",
+"cidade": "Pindorama",
+"orgao": "Prefeitura",
+"email": "oomarketeiro@gmail.com",
+"telefone": "(17) 3572-9900",
+"situacao": "Pronto",
+"obs": "Gmail listado como 'Comunicação' no formulário de contato oficial; e-mail geral: gabinete@pindorama.sp.gov.br (rodapé da home)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Pindorama",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3572-1379",
+"situacao": "Sem e-mail",
+"obs": "Sem e-mail institucional/geral no site; só e-mails individuais de vereadores (ver.*@camarapindorama.sp.gov.br)"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Pirangi",
+"orgao": "Prefeitura",
+"email": "gabinete@pirangi.sp.gov.br",
+"telefone": "(17) 3386-9600",
+"situacao": "Pronto",
+"obs": "Outro telefone no rodapé: (17) 3386-1410"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Pirangi",
+"orgao": "Câmara",
+"email": "contato@camarapirangi.sp.gov.br",
+"telefone": "(17) 3386-1289",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Catanduva",
+"cidade": "Santa Adélia",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "",
+"situacao": "Sem e-mail",
+"obs": "O site santaadelia.sp.gov.br bloqueia acesso automatizado (Cloudflare); não achei e-mail verificável"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Santa Adélia",
+"orgao": "Câmara",
+"email": "secretaria@camarasantaadelia.sp.gov.br",
+"telefone": "(17) 3571-1795",
+"situacao": "Pronto",
+"obs": "Também publicado: camaradesantaadelia@terra.com.br"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Tabapuã",
+"orgao": "Prefeitura",
+"email": "comunicacao@tabapua.sp.gov.br",
+"telefone": "(17) 3562-9022",
+"situacao": "Pronto",
+"obs": "E-mail estava ofuscado (joomla-hidden-mail, base64) e foi decodificado; geral: prefeitura@tabapua.sp.gov.br"
+},
+{
+"regiao": "Catanduva",
+"cidade": "Tabapuã",
+"orgao": "Câmara",
+"email": "camara@camaratabapua.sp.gov.br",
+"telefone": "(17) 3562-1273",
+"situacao": "Pronto",
+"obs": "Também: camaratabapua@hotmail.com; tel. (17) 3562-1985"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Américo de Campos",
+"orgao": "Prefeitura",
+"email": "prefeitura@americodecampos.sp.gov.br",
+"telefone": "(17) 99623-6848",
+"situacao": "Pronto",
+"obs": "Telefone que aparece no rodapé como contato (celular); gabinete@americodecampos.sp.gov.br em /portal/contato"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Américo de Campos",
+"orgao": "Câmara",
+"email": "camara@americodecampos.sp.leg.br",
+"telefone": "(17) 3445-1274",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Álvares Florence",
+"orgao": "Prefeitura",
+"email": "gabinete@alvaresflorence.sp.gov.br",
+"telefone": "(17) 3486-9000",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Álvares Florence",
+"orgao": "Câmara",
+"email": "contato@camaraalvaresflorence.sp.gov.br",
+"telefone": "(17) 3486-1202",
+"situacao": "Pronto",
+"obs": "Também: cmalvaresflorence@hotmail.com; tel. (17) 3486-1509"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Cardoso",
+"orgao": "Prefeitura",
+"email": "comunicacao@cardoso.sp.gov.br",
+"telefone": "(17) 3466-3900",
+"situacao": "Pronto",
+"obs": "Site fora do CSV (cardoso.sp.gov.br/site/). Telefone e e-mail geral prefeitura@cardoso.sp.gov.br vistos na Carta de Serviços (PDF oficial, 2020)"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Cardoso",
+"orgao": "Câmara",
+"email": "camara@camaracardoso.sp.gov.br",
+"telefone": "(17) 3466-3219",
+"situacao": "Pronto",
+"obs": "Site achado por link no portal da Prefeitura"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Cosmorama",
+"orgao": "Prefeitura",
+"email": "secretaria@cosmorama.sp.gov.br",
+"telefone": "(17) 3836-9220",
+"situacao": "Pronto",
+"obs": "Site fora do CSV; e-mail geral da secretaria"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Cosmorama",
+"orgao": "Câmara",
+"email": "camara@cmcosmorama.sp.gov.br",
+"telefone": "(17) 3836-1295",
+"situacao": "Pronto",
+"obs": "Site achado por tentativa de domínio (cmcosmorama.sp.gov.br)"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Floreal",
+"orgao": "Prefeitura",
+"email": "floreal@floreal.sp.gov.br",
+"telefone": "(17) 3847-1316",
+"situacao": "Pronto",
+"obs": "E-mail geral no rodapé; o telefone é o do Gabinete do Prefeito (/portal/secretarias)"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Floreal",
+"orgao": "Câmara",
+"email": "cmfloreal@camarafloreal.sp.gov.br",
+"telefone": "(17) 3847-1306",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Nhandeara",
+"orgao": "Prefeitura",
+"email": "contato@nhandeara.sp.gov.br",
+"telefone": "(17) 3467-4990",
+"situacao": "Pronto",
+"obs": "gabinete@nhandeara.sp.gov.br em /portal/secretarias"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Nhandeara",
+"orgao": "Câmara",
+"email": "camaranhandeara@camaranhandeara.sp.gov.br",
+"telefone": "(17) 3472-1374",
+"situacao": "Pronto",
+"obs": "Também: cmnhandeara@gmail.com"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Parisi",
+"orgao": "Prefeitura",
+"email": "gabinete@parisi.sp.gov.br",
+"telefone": "(17) 3839-1152",
+"situacao": "Pronto",
+"obs": "prefeitura@parisi.sp.gov.br em /portal/sic"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Parisi",
+"orgao": "Câmara",
+"email": "camara@parisi.sp.leg.br",
+"telefone": "(17) 3839-1119",
+"situacao": "Pronto",
+"obs": "Também: secretaria@parisi.sp.leg.br; tel. (17) 3839-1174"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Pontes Gestal",
+"orgao": "Prefeitura",
+"email": "prefeitura@pontesgestal.sp.gov.br",
+"telefone": "(17) 3844-1277",
+"situacao": "Pronto",
+"obs": "gabinete@pontesgestal.sp.gov.br em /portal/secretarias; outro tel. (17) 3844-1255"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Pontes Gestal",
+"orgao": "Câmara",
+"email": "camara@pontesgestal.sp.leg.br",
+"telefone": "(17) 3844-1304",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Riolândia",
+"orgao": "Prefeitura",
+"email": "prefeitura@riolandia.sp.gov.br",
+"telefone": "(17) 3801-9020",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Riolândia",
+"orgao": "Câmara",
+"email": "contato@riolandia.sp.leg.br",
+"telefone": "(17) 3291-1294",
+"situacao": "Pronto",
+"obs": "Site achado em <cidade>.sp.leg.br (não estava no CSV)"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Sebastianópolis do Sul",
+"orgao": "Prefeitura",
+"email": "prefeitura@sebastianopolisdosul.sp.gov.br",
+"telefone": "(17) 3837-1210",
+"situacao": "Pronto",
+"obs": "O Gabinete aparece com pm.sebastsul@uol.com.br em /portal/secretarias"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Sebastianópolis do Sul",
+"orgao": "Câmara",
+"email": "camara@camarasebastianopolisdosul.sp.gov.br",
+"telefone": "(17) 3837-1112",
+"situacao": "Pronto",
+"obs": "Outro tel. (17) 3837-1377"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Valentim Gentil",
+"orgao": "Prefeitura",
+"email": "romero.comunicacao@valentimgentil.sp.gov.br",
+"telefone": "(17) 3131-1250",
+"situacao": "Pronto",
+"obs": "Secretário de Comunicação Social; também comunicacaovalentim@gmail.com (/portal/secretarias); geral: pmvg@valentimgentil.sp.gov.br"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Valentim Gentil",
+"orgao": "Câmara",
+"email": "contato@camaravalentimgentil.sp.gov.br",
+"telefone": "(17) 3485-1482",
+"situacao": "Pronto",
+"obs": "Também assessoria@camaravalentimgentil.sp.gov.br (/portal/contato)"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Votuporanga",
+"orgao": "Prefeitura",
+"email": "faleconosco@votuporanga.sp.gov.br",
+"telefone": "(17) 3405-9700",
+"situacao": "Pronto",
+"obs": "Não achei e-mail específico de imprensa; Gabinete Civil: gabcivil@votuporanga.sp.gov.br"
+},
+{
+"regiao": "Votuporanga",
+"cidade": "Votuporanga",
+"orgao": "Câmara",
+"email": "administracao@camaravotuporanga.sp.gov.br",
+"telefone": "(17) 3421-1188",
+"situacao": "Pronto",
+"obs": "E-mail do rodapé 'Dados da Entidade'; não achei e-mail de imprensa"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Estrela d'Oeste",
+"orgao": "Prefeitura",
+"email": "prefeitura@pmestrela.sp.gov.br",
+"telefone": "(17) 3833-9411",
+"situacao": "Pronto",
+"obs": "verificado via curl; domínio oficial é pmestrela.sp.gov.br; alternativa: gabinete@pmestrela.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Estrela d'Oeste",
+"orgao": "Câmara",
+"email": "secretaria@camaraestrela.sp.gov.br",
+"telefone": "(17) 3833-1442",
+"situacao": "Pronto",
+"obs": "verificado via curl (bloco Fale Conosco); outro tel. (17) 3833-3484"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Fernandópolis",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3465-0150",
+"situacao": "Sem e-mail",
+"obs": "site bloqueia acesso (Cloudflare); e-mail da Secretaria de Comunicação aparece ofuscado no índice de busca, não foi possível confirmar"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Fernandópolis",
+"orgao": "Câmara",
+"email": "camara@camarafernandopolis.sp.gov.br",
+"telefone": "(17) 3465-5510",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); alternativa: ouvidoria@camarafernandopolis.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Guarani d'Oeste",
+"orgao": "Prefeitura",
+"email": "gabinete@guaranidoeste.sp.gov.br",
+"telefone": "(17) 3834-1179",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); portal da transparência lista pmguarani@guaranidoeste.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Guarani d'Oeste",
+"orgao": "Câmara",
+"email": "contato@camaraguaranidoeste.sp.gov.br",
+"telefone": "(17) 3834-1308",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Indiaporã",
+"orgao": "Prefeitura",
+"email": "faleconosco@indiapora.sp.gov.br",
+"telefone": "(17) 3842-1232",
+"situacao": "Pronto",
+"obs": "verificado via curl; sem e-mail específico de imprensa"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Indiaporã",
+"orgao": "Câmara",
+"email": "camara@indiapora.sp.leg.br",
+"telefone": "(17) 3842-1390",
+"situacao": "Pronto",
+"obs": "verificado via curl; rodapé do site usa camaraindiapora@gmail.com; ouvidoria@indiapora.sp.leg.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Macedônia",
+"orgao": "Prefeitura",
+"email": "pmmacedonia@macedonia.sp.gov.br",
+"telefone": "(17) 3849-1162",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail no cabeçalho de documento oficial (pregão), não na home; home lista celular (17) 99741-1615"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Macedônia",
+"orgao": "Câmara",
+"email": "camara@camaramacedonia.sp.gov.br",
+"telefone": "(17) 3849-1343",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Meridiano",
+"orgao": "Prefeitura",
+"email": "meridiano@meridiano.sp.gov.br",
+"telefone": "(17) 3475-1116",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail geral (consta também na página Imprensa); outro tel. (17) 3475-1124"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Meridiano",
+"orgao": "Câmara",
+"email": "camaramunicipal@camarameridiano.sp.gov.br",
+"telefone": "(17) 3475-1177",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); Carta de Serviços 2026"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Mira Estrela",
+"orgao": "Prefeitura",
+"email": "secretaria@miraestrela.sp.gov.br",
+"telefone": "(17) 3846-1163",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail geral do rodapé; outro tel. (17) 3846-1174"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Mira Estrela",
+"orgao": "Câmara",
+"email": "camara@camaramiraestrela.sp.gov.br",
+"telefone": "(17) 3846-1414",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Ouroeste",
+"orgao": "Prefeitura",
+"email": "prefeitura@ouroeste.sp.gov.br",
+"telefone": "(17) 3843-3850",
+"situacao": "Pronto",
+"obs": "verificado via curl"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Ouroeste",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3843-1112",
+"situacao": "Sem e-mail",
+"obs": "site bloqueia acesso (Cloudflare); e-mail geral ofuscado no índice; página do SIC cita e-mail nominal leida@camaraouroeste.sp.gov.br (não confirmado, URL exata não identificada)"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Pedranópolis",
+"orgao": "Prefeitura",
+"email": "prefeitura@pedranopolis.sp.gov.br",
+"telefone": "(17) 3838-1101",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); site oficial ofusca o e-mail; endereço visto no Portal da Transparência federal e em edital de pregão; Diário Oficial cita atendimento@pedranopolis.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "Pedranópolis",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3838-1173",
+"situacao": "Sem e-mail",
+"obs": "site bloqueia acesso (Cloudflare) e e-mail aparece ofuscado no índice; domínio é cmpedranopolis.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "São João das Duas Pontes",
+"orgao": "Prefeitura",
+"email": "prefeituraduaspontes@gmail.com",
+"telefone": "(17) 3481-1538",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); GMAIL publicado no portal de transparência oficial; domínio sjduaspontes.sp.gov.br"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "São João das Duas Pontes",
+"orgao": "Câmara",
+"email": "camara@sjduaspontes.sp.gov.br",
+"telefone": "(17) 3481-1170",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); e-mail em aviso de licitação no Diário Oficial do município (não confirmado em site da câmara)"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "São João de Iracema",
+"orgao": "Prefeitura",
+"email": "prefeitura@saojoaodeiracema.sp.gov.br",
+"telefone": "(17) 3875-6560",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail no cabeçalho de documento oficial"
+},
+{
+"regiao": "Fernandópolis",
+"cidade": "São João de Iracema",
+"orgao": "Câmara",
+"email": "contato@cmsaojoaodeiracema.sp.gov.br",
+"telefone": "(17) 3875-6148",
+"situacao": "Pronto",
+"obs": "verificado via curl; domínio cmsaojoaodeiracema.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Aparecida d'Oeste",
+"orgao": "Prefeitura",
+"email": "adm@pmaparecidadoeste.sp.gov.br",
+"telefone": "(17) 3635-1757",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); domínio pmaparecidadoeste.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Aparecida d'Oeste",
+"orgao": "Câmara",
+"email": "contato@cmaparecidadoeste.sp.gov.br",
+"telefone": "(17) 3635-1342",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); domínio cmaparecidadoeste.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Aspásia",
+"orgao": "Prefeitura",
+"email": "contato@aspasia.sp.gov.br",
+"telefone": "(17) 3664-8780",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Aspásia",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3199-0488",
+"situacao": "Sem e-mail",
+"obs": "verificado via curl; página de contato só tem formulário, sem e-mail publicado"
+},
+{
+"regiao": "Jales",
+"cidade": "Dirce Reis",
+"orgao": "Prefeitura",
+"email": "gabinete@dircereis.sp.gov.br",
+"telefone": "(17) 3694-8300",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail geral do rodapé: administracao@dircereis.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Dirce Reis",
+"orgao": "Câmara",
+"email": "camaradircereis@camaradircereis.sp.gov.br",
+"telefone": "(17) 3694-1141",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Dolcinópolis",
+"orgao": "Prefeitura",
+"email": "gabinete@dolcinopolis.sp.gov.br",
+"telefone": "(17) 2019-0633",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); páginas antigas citam (17) 3636-5550; ouvidoria@dolcinopolis.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Dolcinópolis",
+"orgao": "Câmara",
+"email": "camara@dolcinopolis.sp.leg.br",
+"telefone": "(17) 3636-1283",
+"situacao": "Pronto",
+"obs": "verificado via curl"
+},
+{
+"regiao": "Jales",
+"cidade": "Jales",
+"orgao": "Prefeitura",
+"email": "comunicacaojales@gmail.com",
+"telefone": "(17) 3622-3000",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); GMAIL publicado na página da Secretaria de Comunicação Social (ramal 3052; página antiga); alternativa: prefeito.gabinete@jales.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Jales",
+"orgao": "Câmara",
+"email": "contato@jales.sp.leg.br",
+"telefone": "(17) 3632-1340",
+"situacao": "Pronto",
+"obs": "verificado via curl; ouvidoria@jales.sp.leg.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Marinópolis",
+"orgao": "Prefeitura",
+"email": "ouvidoria@marinopolis.sp.gov.br",
+"telefone": "(17) 3695-1101",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); único e-mail legível é o da ouvidoria (e-mail geral ofuscado)"
+},
+{
+"regiao": "Jales",
+"cidade": "Marinópolis",
+"orgao": "Câmara",
+"email": "camara@cmmarinopolis.sp.gov.br",
+"telefone": "(17) 3695-1174",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); domínio cmmarinopolis.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Mesópolis",
+"orgao": "Prefeitura",
+"email": "contato@mesopolis.sp.gov.br",
+"telefone": "(17) 3638-8700",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Mesópolis",
+"orgao": "Câmara",
+"email": "cmmesopolis@cmmesopolis.sp.gov.br",
+"telefone": "(17) 3638-6196",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); domínio cmmesopolis.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Palmeira d'Oeste",
+"orgao": "Prefeitura",
+"email": "contato@palmeiradoeste.sp.gov.br",
+"telefone": "(17) 3651-1212",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Palmeira d'Oeste",
+"orgao": "Câmara",
+"email": "camara@cmpalmeiradoeste.sp.gov.br",
+"telefone": "(17) 3651-1275",
+"situacao": "Pronto",
+"obs": "verificado via curl; domínio cmpalmeiradoeste.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Paranapuã",
+"orgao": "Prefeitura",
+"email": "contato@paranapua.sp.gov.br",
+"telefone": "(17) 3648-9020",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); também prefeito@paranapua.sp.gov.br; a página /contato/ exibe dados de outra cidade (template)"
+},
+{
+"regiao": "Jales",
+"cidade": "Paranapuã",
+"orgao": "Câmara",
+"email": "camara@cmparanapua.sp.gov.br",
+"telefone": "(17) 3648-1551",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); domínio cmparanapua.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Pontalinda",
+"orgao": "Prefeitura",
+"email": "prefeitura@pontalinda.sp.gov.br",
+"telefone": "(17) 3699-8780",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); e-mail da página de contato do portal, que lista tel. (17) 3699-8700"
+},
+{
+"regiao": "Jales",
+"cidade": "Pontalinda",
+"orgao": "Câmara",
+"email": "camara@cmpontalinda.sp.gov.br",
+"telefone": "(17) 3699-1187",
+"situacao": "Pronto",
+"obs": "verificado via curl; domínio cmpontalinda.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Populina",
+"orgao": "Prefeitura",
+"email": "gabinete@populina.sp.gov.br",
+"telefone": "(17) 99154-5389",
+"situacao": "Pronto",
+"obs": "verificado via curl; telefone publicado é celular; índice de busca cita (17) 3639-9020 na página de contatos"
+},
+{
+"regiao": "Jales",
+"cidade": "Populina",
+"orgao": "Câmara",
+"email": "contato@cmpopulina.sp.gov.br",
+"telefone": "(17) 3639-1332",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail exibido no bloco de contato do site (aplicação JS)"
+},
+{
+"regiao": "Jales",
+"cidade": "Santa Albertina",
+"orgao": "Prefeitura",
+"email": "santaalbertina@santaalbertina.sp.gov.br",
+"telefone": "(17) 3633-9300",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Santa Albertina",
+"orgao": "Câmara",
+"email": "cmsantaalbertina@cmsantaalbertina.sp.gov.br",
+"telefone": "(17) 3633-1367",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); e-mail do SIC; tel. SIC (17) 3633-1326"
+},
+{
+"regiao": "Jales",
+"cidade": "Santa Salete",
+"orgao": "Prefeitura",
+"email": "administracao@santasalete.sp.gov.br",
+"telefone": "(17) 3662-9000",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); e-mail da Secretaria de Administração (não há e-mail geral/imprensa publicado)"
+},
+{
+"regiao": "Jales",
+"cidade": "Santa Salete",
+"orgao": "Câmara",
+"email": "cmss@camarasantasalete.sp.gov.br",
+"telefone": "(17) 3662-6159",
+"situacao": "Pronto",
+"obs": "verificado via curl"
+},
+{
+"regiao": "Jales",
+"cidade": "São Francisco",
+"orgao": "Prefeitura",
+"email": "pmsaofrancisco@gmail.com",
+"telefone": "(17) 3693-1101",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare); GMAIL publicado como oficial na página de contato"
+},
+{
+"regiao": "Jales",
+"cidade": "São Francisco",
+"orgao": "Câmara",
+"email": "camara@camarasaofrancisco.sp.gov.br",
+"telefone": "(17) 3693-1202",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Turmalina",
+"orgao": "Prefeitura",
+"email": "imprensaemidiassociais@turmalina.sp.gov.br",
+"telefone": "(17) 3667-1192",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail do setor de Imprensa; geral: secretaria@turmalina.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Turmalina",
+"orgao": "Câmara",
+"email": "administrativo@camaraturmalina.sp.gov.br",
+"telefone": "(17) 3667-1310",
+"situacao": "Pronto",
+"obs": "verificado via curl; dados da entidade no Diário Oficial (ed. 827/2025)"
+},
+{
+"regiao": "Jales",
+"cidade": "Urânia",
+"orgao": "Prefeitura",
+"email": "imprensa@urania.sp.gov.br",
+"telefone": "(17) 3634-9020",
+"situacao": "Conferir",
+"obs": "via índice de busca (site bloqueia acesso direto/Cloudflare)"
+},
+{
+"regiao": "Jales",
+"cidade": "Urânia",
+"orgao": "Câmara",
+"email": "camara@cmurania.sp.gov.br",
+"telefone": "(17) 3634-1177",
+"situacao": "Pronto",
+"obs": "verificado via curl; domínio cmurania.sp.gov.br"
+},
+{
+"regiao": "Jales",
+"cidade": "Vitória Brasil",
+"orgao": "Prefeitura",
+"email": "gabinete@vitoriabrasil.sp.gov.br",
+"telefone": "(17) 3642-9000",
+"situacao": "Pronto",
+"obs": "verificado via curl"
+},
+{
+"regiao": "Jales",
+"cidade": "Vitória Brasil",
+"orgao": "Câmara",
+"email": "camara@vitoriabrasil.sp.gov.br",
+"telefone": "(17) 3642-1130",
+"situacao": "Pronto",
+"obs": "verificado via curl; e-mail usa domínio da prefeitura (vitoriabrasil.sp.gov.br)"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Nova Canaã Paulista",
+"orgao": "Prefeitura",
+"email": "prefeitura@novacanaapaulista.sp.gov.br",
+"telefone": "(17) 3681-8000",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Nova Canaã Paulista",
+"orgao": "Câmara",
+"email": "camara@cmnovacanaapaulista.sp.gov.br",
+"telefone": "(17) 3681-1158",
+"situacao": "Pronto",
+"obs": "site da câmara: cmnovacanaapaulista.sp.gov.br"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Rubinéia",
+"orgao": "Prefeitura",
+"email": "gabinete@rubineia.sp.gov.br",
+"telefone": "(17) 3661-9099",
+"situacao": "Pronto",
+"obs": "e-mail do gabinete (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Rubinéia",
+"orgao": "Câmara",
+"email": "camara@camararubineia.sp.gov.br",
+"telefone": "(17) 3661-1282",
+"situacao": "Conferir",
+"obs": "site bloqueia acesso automatizado (Cloudflare 403); e-mail e telefone vistos em trecho indexado da página oficial via busca web; telefone também na lista de telefones úteis da prefeitura; confirmar"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Clara d'Oeste",
+"orgao": "Prefeitura",
+"email": "imprensa@santaclaradoeste.sp.gov.br",
+"telefone": "(17) 3663-8700",
+"situacao": "Pronto",
+"obs": "e-mail de imprensa publicado como contato do responsável pela ouvidoria; gabinete: prefeito@santaclaradoeste.sp.gov.br"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Clara d'Oeste",
+"orgao": "Câmara",
+"email": "camara@cmsantaclaradoeste.sp.gov.br",
+"telefone": "(17) 3663-1219",
+"situacao": "Conferir",
+"obs": "site bloqueia acesso automatizado (Cloudflare 403); e-mail e telefone vistos em trecho indexado do site oficial via busca web; confirmar"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Fé do Sul",
+"orgao": "Prefeitura",
+"email": "gab@santafedosul.sp.gov.br",
+"telefone": "(17) 3631-9500",
+"situacao": "Pronto",
+"obs": "e-mail do gabinete (sem e-mail de imprensa no site); ouvidoria: ouvidoria@santafedosul.sp.gov.br"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Fé do Sul",
+"orgao": "Câmara",
+"email": "contato@camarasantafedosul.sp.gov.br",
+"telefone": "(17) 3631-1223",
+"situacao": "Pronto",
+"obs": "outros telefones: (17) 3631-7122 / (17) 99631-0395"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Rita d'Oeste",
+"orgao": "Prefeitura",
+"email": "ouvidoria@santaritadoeste.sp.gov.br",
+"telefone": "(17) 3643-1123",
+"situacao": "Pronto",
+"obs": "único e-mail geral visto é o da ouvidoria (também sic@santaritadoeste.sp.gov.br); sem e-mail de imprensa/gabinete"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santa Rita d'Oeste",
+"orgao": "Câmara",
+"email": "camara@camarasantaritadoeste.sp.gov.br",
+"telefone": "(17) 3643-1132",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santana da Ponte Pensa",
+"orgao": "Prefeitura",
+"email": "prefeitura@santanapontepensa.sp.gov.br",
+"telefone": "(17) 3692-1101",
+"situacao": "Conferir",
+"obs": "site oficial (santanapontepensa.sp.gov.br) bloqueia acesso automatizado (Cloudflare 403); e-mail visto em trecho indexado da Lei Orgânica (SNC/gov.br) via busca web; telefone de diretório/Diário Oficial; confirmar"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Santana da Ponte Pensa",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3692-1161",
+"situacao": "Sem e-mail",
+"obs": "sem e-mail confirmado (site bloqueia acesso automatizado; e-mail ofuscado no índice); telefone visto em trecho indexado do site oficial"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Três Fronteiras",
+"orgao": "Prefeitura",
+"email": "ouvidoria@tresfronteiras.sp.gov.br",
+"telefone": "(17) 3691-8200",
+"situacao": "Pronto",
+"obs": "único e-mail visto é o da ouvidoria; sem e-mail de imprensa/gabinete"
+},
+{
+"regiao": "Santa Fé do Sul",
+"cidade": "Três Fronteiras",
+"orgao": "Câmara",
+"email": "camara@camaratresfronteiras.sp.gov.br",
+"telefone": "(17) 3691-1491",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Barretos",
+"orgao": "Prefeitura",
+"email": "smcomunicacao@barretos.sp.gov.br",
+"telefone": "(17) 3612-2000",
+"situacao": "Pronto",
+"obs": "Secretaria Municipal de Comunicação (tel. direto (17) 3612-2013); geral: ouvidoria@barretos.sp.gov.br"
+},
+{
+"regiao": "Barretos",
+"cidade": "Barretos",
+"orgao": "Câmara",
+"email": "imprensacamarabarretos@gmail.com",
+"telefone": "(17) 3321-8888",
+"situacao": "Pronto",
+"obs": "gmail oficial publicado pela assessoria de imprensa da câmara; geral/ouvidoria: ouvidoria@camarabarretos.sp.gov.br; site real é camarabarretos.sp.gov.br (barretos.sp.leg.br é modelo não configurado)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Bebedouro",
+"orgao": "Prefeitura",
+"email": "faleconosco@bebedouro.sp.gov.br",
+"telefone": "(17) 3345-9100",
+"situacao": "Pronto",
+"obs": "e-mail ofuscado (Joomla) decodificado; sem e-mail de imprensa no site (assessoria: (17) 3345-9119/9120 segundo busca)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Bebedouro",
+"orgao": "Câmara",
+"email": "camara@camarabebedouro.sp.gov.br",
+"telefone": "(17) 3345-9200",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Cajobi",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3563-9000",
+"situacao": "Sem e-mail",
+"obs": "sem e-mail confirmado: site bloqueia acesso automatizado (Cloudflare 403) e e-mail aparece ofuscado no índice; telefone visto em trecho indexado (gabinete ramal 208)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Cajobi",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3563-1309",
+"situacao": "Sem e-mail",
+"obs": "sem e-mail confirmado (site bloqueado/ofuscado); telefone visto em trecho indexado do site oficial"
+},
+{
+"regiao": "Barretos",
+"cidade": "Colina",
+"orgao": "Prefeitura",
+"email": "",
+"telefone": "(17) 3341-9444",
+"situacao": "Sem e-mail",
+"obs": "sem e-mail confirmado: site da prefeitura bloqueia acesso automatizado (Cloudflare 403) e e-mail aparece ofuscado no índice; telefone visto na lista de telefones da câmara"
+},
+{
+"regiao": "Barretos",
+"cidade": "Colina",
+"orgao": "Câmara",
+"email": "contato@camaracolina.sp.gov.br",
+"telefone": "(17) 3341-1071",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Colômbia",
+"orgao": "Prefeitura",
+"email": "contato@colombia.sp.gov.br",
+"telefone": "(17) 3335-8500",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Colômbia",
+"orgao": "Câmara",
+"email": "administracao@colombia.sp.leg.br",
+"telefone": "(17) 3335-1128",
+"situacao": "Conferir",
+"obs": "site da câmara inacessível daqui (DNS); e-mail visto em trecho indexado da página oficial via busca web; telefone confirmado na lista de telefones da prefeitura; confirmar"
+},
+{
+"regiao": "Barretos",
+"cidade": "Guaíra",
+"orgao": "Prefeitura",
+"email": "secretaria@guaira.sp.gov.br",
+"telefone": "(17) 3332-5100",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Guaíra",
+"orgao": "Câmara",
+"email": "camaraguaira@gmail.com",
+"telefone": "(17) 3331-2220",
+"situacao": "Conferir",
+"obs": "gmail oficial; site camaraguaira.com.br inacessível daqui (proxy); e-mail e telefone vistos em trecho indexado do site oficial e do Diário Oficial via busca web; confirmar"
+},
+{
+"regiao": "Barretos",
+"cidade": "Guaraci",
+"orgao": "Prefeitura",
+"email": "prefeitura@guaraci.sp.gov.br",
+"telefone": "(17) 3285-9999",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Barretos",
+"cidade": "Guaraci",
+"orgao": "Câmara",
+"email": "camara@camaraguaraci.sp.gov.br",
+"telefone": "(17) 3815-1252",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Jaborandi",
+"orgao": "Prefeitura",
+"email": "imprensa@jaborandi.sp.gov.br",
+"telefone": "(17) 3347-9900",
+"situacao": "Pronto",
+"obs": "Secretaria de Comunicação; WhatsApp imprensa (17) 99172-4699"
+},
+{
+"regiao": "Barretos",
+"cidade": "Jaborandi",
+"orgao": "Câmara",
+"email": "camarajaborandi@camarajaborandi.sp.gov.br",
+"telefone": "(17) 3347-9997",
+"situacao": "Pronto",
+"obs": "ouvidoria: ouvidoria@camarajaborandi.sp.gov.br"
+},
+{
+"regiao": "Barretos",
+"cidade": "Monte Azul Paulista",
+"orgao": "Prefeitura",
+"email": "ouvidoria@monteazulpaulista.sp.gov.br",
+"telefone": "(17) 3361-9500",
+"situacao": "Pronto",
+"obs": "único e-mail geral visto é o da ouvidoria; sem e-mail de imprensa/gabinete"
+},
+{
+"regiao": "Barretos",
+"cidade": "Monte Azul Paulista",
+"orgao": "Câmara",
+"email": "imprensa@camaramonteazul.sp.gov.br",
+"telefone": "(17) 3361-3477",
+"situacao": "Pronto",
+"obs": "site da câmara: camaramonteazul.sp.gov.br; geral: camara@camaramonteazul.sp.gov.br; outro tel. (17) 3361-1254"
+},
+{
+"regiao": "Barretos",
+"cidade": "Olímpia",
+"orgao": "Prefeitura",
+"email": "imprensa@olimpia.sp.gov.br",
+"telefone": "(17) 3279-2727",
+"situacao": "Pronto",
+"obs": "geral: prefeitura@olimpia.sp.gov.br"
+},
+{
+"regiao": "Barretos",
+"cidade": "Olímpia",
+"orgao": "Câmara",
+"email": "camara@camaraolimpia.sp.gov.br",
+"telefone": "(17) 3279-3999",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Severínia",
+"orgao": "Prefeitura",
+"email": "pms.gabinete@severinia.sp.gov.br",
+"telefone": "(17) 3817-3300",
+"situacao": "Conferir",
+"obs": "site bloqueia acesso automatizado (Cloudflare 403); e-mail e telefone vistos em trecho indexado de documento oficial do site via busca web; confirmar"
+},
+{
+"regiao": "Barretos",
+"cidade": "Severínia",
+"orgao": "Câmara",
+"email": "",
+"telefone": "(17) 3817-2110",
+"situacao": "Sem e-mail",
+"obs": "sem e-mail geral confirmado (site bloqueado; e-mail ofuscado no índice; só achado compras@camaraseverinia.sp.gov.br, de licitação); telefone visto em trecho indexado"
+},
+{
+"regiao": "Barretos",
+"cidade": "Terra Roxa",
+"orgao": "Prefeitura",
+"email": "prefeitura@terraroxa.sp.gov.br",
+"telefone": "(17) 3395-9600",
+"situacao": "Pronto",
+"obs": "Usado o e-mail geral da prefeitura. O site também publica giselisilva042@gmail.com como Assessoria de Imprensa (parece pessoal). gmail (aparentemente pessoal) publicado no portal oficial como e-mail da Secretaria de Assessoria de Imprensa; geral: prefeitura@terraroxa.sp.gov.br"
+},
+{
+"regiao": "Barretos",
+"cidade": "Terra Roxa",
+"orgao": "Câmara",
+"email": "camara@camaraterraroxa.sp.gov.br",
+"telefone": "(17) 3395-2008",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Barretos",
+"cidade": "Viradouro",
+"orgao": "Prefeitura",
+"email": "comunicacao@viradouro.sp.gov.br",
+"telefone": "(17) 3392-8800",
+"situacao": "Pronto",
+"obs": "Assessoria de Comunicação e Imprensa; tel. imprensa (17) 99737-4603; gabinete: gabinete@viradouro.sp.gov.br"
+},
+{
+"regiao": "Barretos",
+"cidade": "Viradouro",
+"orgao": "Câmara",
+"email": "camaraviradouro@camaraviradouro.sp.gov.br",
+"telefone": "(17) 3392-1131",
+"situacao": "Pronto",
+"obs": "site da câmara: camaraviradouro.sp.gov.br"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Auriflama",
+"orgao": "Prefeitura",
+"email": "comunicacao@auriflama.sp.gov.br",
+"telefone": "(17) 3482-9000",
+"situacao": "Pronto",
+"obs": "geral: prefeitura@auriflama.sp.gov.br"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Auriflama",
+"orgao": "Câmara",
+"email": "camara@cmauriflama.sp.gov.br",
+"telefone": "(17) 3482-1994",
+"situacao": "Pronto",
+"obs": "site da câmara: cmauriflama.sp.gov.br; também publicado cmauriflama@gmail.com na página de contato"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Gastão Vidigal",
+"orgao": "Prefeitura",
+"email": "prefeitura@gastaovidigal.sp.gov.br",
+"telefone": "(17) 3848-1155",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Gastão Vidigal",
+"orgao": "Câmara",
+"email": "camara@camaragastaovidigal.sp.gov.br",
+"telefone": "(17) 3848-1266",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Araçatuba",
+"cidade": "General Salgado",
+"orgao": "Prefeitura",
+"email": "gabinetepmgs@generalsalgado.sp.gov.br",
+"telefone": "(17) 3461-3380",
+"situacao": "Pronto",
+"obs": "e-mail do gabinete (sem e-mail de imprensa no site); telefone conforme rodapé do site"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "General Salgado",
+"orgao": "Câmara",
+"email": "camara@camarageneralsalgado.sp.gov.br",
+"telefone": "(17) 3832-1113",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Guzolândia",
+"orgao": "Prefeitura",
+"email": "prefeitura@guzolandia.sp.gov.br",
+"telefone": "(17) 3637-8700",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Guzolândia",
+"orgao": "Câmara",
+"email": "ouvidoria@cmguzolandia.sp.gov.br",
+"telefone": "(17) 3637-1102",
+"situacao": "Pronto",
+"obs": "site da câmara: cmguzolandia.sp.gov.br; também publicado cm_guzolandia@yahoo.com.br (acesso à informação)"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Magda",
+"orgao": "Prefeitura",
+"email": "prefeitura@magda.sp.gov.br",
+"telefone": "(17) 3487-9020",
+"situacao": "Conferir",
+"obs": "site bloqueia acesso automatizado (Cloudflare 403); e-mail visto em trecho indexado da ouvidoria do portal de acesso à informação do município via busca web; telefone do site oficial (trecho indexado); confirmar"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Magda",
+"orgao": "Câmara",
+"email": "camara@camaramagda.sp.gov.br",
+"telefone": "(17) 3487-1146",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Monções",
+"orgao": "Prefeitura",
+"email": "prefeitura@moncoes.sp.gov.br",
+"telefone": "(17) 3484-1217",
+"situacao": "Pronto",
+"obs": "geral; gabinete: gabinete@moncoes.sp.gov.br"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Monções",
+"orgao": "Câmara",
+"email": "contato@camaramoncoes.sp.gov.br",
+"telefone": "(17) 3484-1161",
+"situacao": "Pronto",
+"obs": ""
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Nova Castilho",
+"orgao": "Prefeitura",
+"email": "municipio@novacastilho.sp.gov.br",
+"telefone": "(17) 3831-7090",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Nova Castilho",
+"orgao": "Câmara",
+"email": "camara@cmnovacastilho.sp.gov.br",
+"telefone": "(17) 3831-6128",
+"situacao": "Pronto",
+"obs": "site da câmara: cmnovacastilho.sp.gov.br"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Nova Luzitânia",
+"orgao": "Prefeitura",
+"email": "prefeitura@novaluzitania.sp.gov.br",
+"telefone": "(17) 3483-9200",
+"situacao": "Pronto",
+"obs": "e-mail geral (sem e-mail de imprensa no site)"
+},
+{
+"regiao": "Araçatuba",
+"cidade": "Nova Luzitânia",
+"orgao": "Câmara",
+"email": "camaranovaluzitania@camaranovaluzitania.sp.gov.br",
+"telefone": "(17) 3483-1120",
+"situacao": "Pronto",
+"obs": "site da câmara: camaranovaluzitania.sp.gov.br"
+}
+]

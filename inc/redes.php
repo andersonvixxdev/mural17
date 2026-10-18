@@ -20,6 +20,29 @@ function mural17_hashtags_padrao() {
 }
 
 /**
+ * Hashtags de cada editoria automática (slug da categoria => hashtags).
+ *
+ * @return array<string, string>
+ */
+function mural17_hashtags_editorias() {
+	return apply_filters(
+		'mural17_hashtags_editorias',
+		array(
+			'policia'  => '#policia #segurancapublica',
+			'transito' => '#transito #rodovias',
+			'politica' => '#politica #camaramunicipal',
+			'saude'    => '#saude #sus',
+			'educacao' => '#educacao',
+			'empregos' => '#concurso #vagas #emprego',
+			'economia' => '#economia #agronegocio',
+			'esporte'  => '#esporte #futebol',
+			'cultura'  => '#cultura #eventos #oquefazer',
+			'clima'    => '#clima #previsaodotempo #defesacivil',
+		)
+	);
+}
+
+/**
  * Completa a configuração do plugin: hashtags, e {hashtags} nos dois modelos.
  *
  * @param mixed $s Opção wpig_settings.
@@ -36,9 +59,14 @@ function mural17_completa_redes( $s ) {
 		'caption_template' => "{titulo}\n\n{gravata}\n\n📲 Matéria completa no link da bio · mural17.com.br\n🔔 Siga @mural17br e acompanhe a sua cidade",
 		'fb_template'      => "{titulo}\n\n{resumo}\n\n👉 Leia a matéria completa:\n{link}",
 	);
+	// Modelos de fábrica do plugin: valem como "não configurado".
+	$fabrica = array(
+		'caption_template' => "{titulo}\n\n{resumo}\n\nLeia o post completo no link da bio!\n\n{hashtags}",
+		'fb_template'      => "{titulo}\n\n{resumo}\n\nLeia a matéria completa:\n{link}",
+	);
 	foreach ( $modelos as $campo => $padrao ) {
-		$m = trim( (string) ( $s[ $campo ] ?? '' ) );
-		if ( '' === $m ) {
+		$m = trim( str_replace( "\r", '', (string) ( $s[ $campo ] ?? '' ) ) );
+		if ( '' === $m || $m === $fabrica[ $campo ] ) {
 			$m = $padrao;
 		}
 		if ( false === strpos( $m, '{hashtags}' ) ) {
@@ -46,9 +74,25 @@ function mural17_completa_redes( $s ) {
 		}
 		$s[ $campo ] = $m;
 	}
+	// Hashtags por editoria: a do portal entra onde o campo do plugin está vazio.
+	$mapa = isset( $s['hashtags_cats'] ) && is_array( $s['hashtags_cats'] ) ? $s['hashtags_cats'] : array();
+	foreach ( mural17_hashtags_editorias() as $slug => $tags ) {
+		$t = get_term_by( 'slug', $slug, 'category' );
+		if ( $t && '' === trim( (string) ( $mapa[ $t->term_id ] ?? '' ) ) ) {
+			$mapa[ $t->term_id ] = $tags;
+		}
+	}
+	$s['hashtags_cats'] = $mapa;
 	return $s;
 }
 add_filter( 'option_wpig_settings', 'mural17_completa_redes' );
+// Opção que nunca foi salva não passa pelo filtro acima.
+add_filter(
+	'default_option_wpig_settings',
+	function ( $padrao ) {
+		return mural17_completa_redes( is_array( $padrao ) ? $padrao : array() );
+	}
+);
 
 /**
  * Prévia do que o plugin publicaria agora para uma matéria.

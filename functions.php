@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MURAL17_VERSION', '2.5.4' );
+define( 'MURAL17_VERSION', '2.5.5' );
 define( 'MURAL17_CIDADES_VERSAO', 1 );
 define( 'MURAL17_OFICIAL_VERSAO', 1 );
 define( 'MURAL17_SERVICOS_VERSAO', 1 );

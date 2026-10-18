@@ -526,3 +526,49 @@ function mural17_lista_cidades() {
 	}
 	return $saida;
 }
+
+/**
+ * Cidades para o navegador: nome, link, região e coordenadas. Usado pelo
+ * "Usar minha localização" (a conta da cidade mais próxima é feita no próprio
+ * aparelho; a posição da pessoa não é enviada ao site) e pelo bloco "Sua
+ * cidade" da home.
+ *
+ * @return array<int, array>
+ */
+function mural17_cidades_js() {
+	$cache = get_transient( 'mural17_cidades_js' );
+	if ( is_array( $cache ) ) {
+		return $cache;
+	}
+	$coords = mural17_coordenadas();
+	$saida  = array();
+	foreach ( mural17_lista_cidades() as $grupo ) {
+		$r = $grupo['regiao'];
+		foreach ( $grupo['cidades'] as $c ) {
+			if ( ! isset( $coords[ $c->slug ] ) ) {
+				continue;
+			}
+			$saida[] = array(
+				'id'  => $c->term_id,
+				'n'   => $c->name,
+				'u'   => get_term_link( $c ),
+				'r'   => preg_replace( '/^Região de /', '', $r->name ),
+				'ru'  => get_term_link( $r ),
+				'la'  => $coords[ $c->slug ][0],
+				'lo'  => $coords[ $c->slug ][1],
+			);
+		}
+	}
+	set_transient( 'mural17_cidades_js', $saida, DAY_IN_SECONDS );
+	return $saida;
+}
+
+/**
+ * Refaz a lista do navegador quando uma cidade muda.
+ */
+function mural17_limpa_cidades_js() {
+	delete_transient( 'mural17_cidades_js' );
+}
+add_action( 'created_cidade', 'mural17_limpa_cidades_js' );
+add_action( 'edited_cidade', 'mural17_limpa_cidades_js' );
+add_action( 'delete_cidade', 'mural17_limpa_cidades_js' );

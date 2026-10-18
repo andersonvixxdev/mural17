@@ -98,6 +98,16 @@ function mural17_assets() {
 	wp_add_inline_style( 'mural17-main', mural17_accent_css() );
 
 	wp_enqueue_script( 'mural17-main', MURAL17_URI . '/assets/js/main.js', array(), MURAL17_VERSION, true );
+	wp_add_inline_script(
+		'mural17-main',
+		'window.mural17 = ' . wp_json_encode(
+			array(
+				'rest'    => esc_url_raw( rest_url( 'wp/v2/posts' ) ),
+				'cidades' => mural17_cidades_js(),
+			)
+		) . ';',
+		'before'
+	);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

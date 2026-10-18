@@ -76,14 +76,18 @@ $mural17_mural = is_front_page() || is_tax( 'cidade' );
 	</div>
 	<label class="screen-reader-text" for="cidades-busca">Buscar cidade</label>
 	<input type="search" id="cidades-busca" class="cidades__busca" placeholder="Digite o nome da cidade" autocomplete="off">
-	<p class="cidades__dica">Sua escolha fica guardada neste aparelho. A home continua mostrando todo o 17.</p>
+	<button type="button" class="cidades__local" data-localizar>
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+		Usar minha localização
+	</button>
+	<p class="cidades__dica" data-aviso-local aria-live="polite">Sua escolha fica guardada neste aparelho. A home continua mostrando todo o 17, com a sua cidade em primeiro.</p>
 	<div class="cidades__lista">
 		<?php foreach ( mural17_lista_cidades() as $grupo ) : ?>
 			<section class="cidades__grupo">
-				<h3 class="cidades__regiao"><a href="<?php echo esc_url( get_term_link( $grupo['regiao'] ) ); ?>" data-cidade="<?php echo esc_attr( $grupo['regiao']->name ); ?>"><?php echo esc_html( $grupo['regiao']->name ); ?></a></h3>
+				<h3 class="cidades__regiao"><a href="<?php echo esc_url( get_term_link( $grupo['regiao'] ) ); ?>"><?php echo esc_html( $grupo['regiao']->name ); ?></a></h3>
 				<ul>
 					<?php foreach ( $grupo['cidades'] as $c ) : ?>
-						<li><a href="<?php echo esc_url( get_term_link( $c ) ); ?>" data-cidade="<?php echo esc_attr( $c->name ); ?>"><?php echo esc_html( $c->name ); ?></a></li>
+						<li><a href="<?php echo esc_url( get_term_link( $c ) ); ?>" data-cidade="<?php echo esc_attr( $c->name ); ?>" data-id="<?php echo esc_attr( $c->term_id ); ?>"><?php echo esc_html( $c->name ); ?></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</section>

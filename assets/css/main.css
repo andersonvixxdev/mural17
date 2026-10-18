@@ -178,6 +178,12 @@ h1, h2, h3, h4 { text-wrap: balance; }
 	border: 2px solid var(--m17-ink); border-radius: 999px;
 	font: 500 17px var(--m17-sans); color: var(--m17-ink); background: #FFFFFF;
 }
+.cidades__local {
+	margin: 10px 24px 0; align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+	background: var(--m17-ink); color: #FFFFFF; border: 0; border-radius: 999px; padding: 10px 16px;
+	font: 600 14px/1 var(--m17-sans); cursor: pointer;
+}
+.cidades__local:disabled { opacity: 0.6; cursor: progress; }
 .cidades__dica { margin: 8px 24px 0; font-size: 13px; color: var(--m17-muted); }
 .cidades__lista { overflow-y: auto; padding: 8px 24px 24px; display: flex; flex-direction: column; gap: 18px; }
 .cidades__grupo { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--m17-line); padding-top: 14px; }
@@ -328,6 +334,37 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .roda--vaga .roda__sigla { background: var(--m17-wa); }
 .roda--evento .roda__sigla { background: var(--m17-ipe); color: var(--m17-ink); }
 .roda__rotulo { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+
+/* Convite "sua cidade" e bloco "Agora em ..." ----------------------------- */
+
+.convite {
+	display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+	background: #1B1E24; border: 1px solid #2E3238; border-radius: var(--m17-radius-g); padding: 14px 16px 14px 20px;
+}
+.convite__texto { margin: 0; color: #B9BEC5; font-size: 14px; }
+.convite__texto b { display: block; color: #FFFFFF; font: 700 16px/1.3 var(--m17-sans); }
+.convite__acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.convite__aviso { margin: 0; width: 100%; font-size: 13px; color: var(--m17-ipe); }
+.convite__aviso:empty { display: none; }
+.botao--contorno { background: transparent; box-shadow: inset 0 0 0 1.5px #5B626B; }
+.botao--contorno:hover { background: rgba(255, 255, 255, 0.08); }
+.botao:disabled { opacity: 0.6; cursor: progress; }
+
+.sua-cidade {
+	margin-bottom: 14px; background: #FFFFFF; border-radius: var(--m17-radius-g);
+	padding: 18px 22px; display: flex; flex-direction: column; gap: 10px;
+	box-shadow: inset 4px 0 0 var(--m17-ipe);
+}
+.sua-cidade__topo { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.sua-cidade__titulo { margin: 0; font: 900 20px/1.1 var(--m17-marca); letter-spacing: -0.02em; }
+.sua-cidade__titulo a { color: var(--m17-accent); }
+.sua-cidade__trocar { background: none; border: 0; padding: 0; cursor: pointer; font: 600 14px var(--m17-sans); color: var(--m17-muted); text-decoration: underline; text-underline-offset: 3px; }
+.sua-cidade__lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 20px; }
+.sua-cidade__lista li { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 1px solid var(--m17-line); }
+.sua-cidade__lista time { font: 700 12px/1 var(--m17-sans); color: var(--m17-accent); }
+.sua-cidade__lista a { font: 700 16px/1.3 var(--m17-serif); }
+.sua-cidade__vazio { margin: 0; color: var(--m17-ink-2); }
+.sua-cidade__vazio a { color: var(--m17-accent); font-weight: 600; }
 
 /* Mural (bento) ----------------------------------------------------------- */
 
@@ -687,6 +724,8 @@ a.evento:hover { color: var(--m17-ink); box-shadow: inset 0 0 0 2px var(--m17-ip
 	.lugares { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
 	.lugares::-webkit-scrollbar { display: none; }
 	.lugar { flex: 0 0 82%; scroll-snap-align: start; }
+	.sua-cidade__lista { grid-template-columns: minmax(0, 1fr); }
+	.convite { padding: 14px 16px; }
 	.grade-classificados--home, .grade-classificados { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 
 	.principal { padding-top: 18px; gap: 28px; }

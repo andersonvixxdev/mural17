@@ -44,9 +44,6 @@ $plantao = mural17_consulta(
 				<?php endif; ?>
 				<h1 id="hoje-titulo" class="hoje__titulo">Hoje <?php echo $escopo ? 'em' : 'no'; ?> <span><?php echo esc_html( $nome ); ?></span></h1>
 			</div>
-			<?php if ( ! $escopo ) : ?>
-				<a class="hoje__minha" href="#" data-atalho-cidade hidden>Ver só <b></b> <span aria-hidden="true">→</span></a>
-			<?php endif; ?>
 			<p class="hoje__data">
 				<?php echo esc_html( ucfirst( date_i18n( 'l, j \d\e F' ) ) ); ?>
 				<?php if ( $numeros['atualizado'] ) : ?>
@@ -61,6 +58,20 @@ $plantao = mural17_consulta(
 			<a class="num num--eventos" href="#semana"><b><?php echo esc_html( $numeros['eventos'] ); ?></b><span><?php echo 1 === $numeros['eventos'] ? 'evento esta semana' : 'eventos esta semana'; ?></span></a>
 			<a class="num num--anuncios" href="<?php echo esc_url( $escopo ? add_query_arg( 'cidade', $escopo->slug, get_post_type_archive_link( 'classificado' ) ) : get_post_type_archive_link( 'classificado' ) ); ?>"><b><?php echo esc_html( $numeros['anuncios'] ); ?></b><span>classificados</span></a>
 		</div>
+
+		<?php if ( ! $escopo ) : ?>
+			<div class="convite" data-convite-cidade hidden>
+				<p class="convite__texto"><b>Veja primeiro o que acontece na sua cidade.</b> A localização é usada só neste aparelho.</p>
+				<div class="convite__acoes">
+					<button type="button" class="botao botao--pilula" data-localizar>
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+						Usar minha localização
+					</button>
+					<button type="button" class="botao botao--pilula botao--contorno" data-abre-cidades>Escolher na lista</button>
+				</div>
+				<p class="convite__aviso" data-aviso-local aria-live="polite"></p>
+			</div>
+		<?php endif; ?>
 
 		<?php $rodas = mural17_rodas( $escopo ); ?>
 		<?php if ( $rodas ) : ?>
@@ -77,6 +88,16 @@ $plantao = mural17_consulta(
 </section>
 
 <div class="wrap mural">
+	<?php if ( ! $escopo ) : ?>
+		<section class="sua-cidade" data-sua-cidade hidden aria-labelledby="sua-cidade-titulo">
+			<div class="sua-cidade__topo">
+				<h2 class="sua-cidade__titulo" id="sua-cidade-titulo">Agora em <a href="#" data-sua-cidade-link><span data-sua-cidade-nome></span></a></h2>
+				<button type="button" class="sua-cidade__trocar" data-abre-cidades>Trocar cidade</button>
+			</div>
+			<ol class="sua-cidade__lista" data-sua-cidade-lista></ol>
+			<p class="sua-cidade__vazio" data-sua-cidade-vazio hidden></p>
+		</section>
+	<?php endif; ?>
 	<div class="bento">
 		<?php if ( $manchete ) : ?>
 			<?php

@@ -55,7 +55,10 @@ function mural17_pagina_servicos_admin() {
 		'anp-erro'  => 'Não foi possível ler a ANP agora. Veja o erro abaixo.',
 		'inmet'     => 'Avisos do INMET lidos.',
 		'inmet-erro' => 'Não foi possível ler o INMET agora. Veja o erro abaixo.',
+		'gn'        => 'Feeds do Google News cadastrados.',
+		'gn-erro'   => 'Não foi possível cadastrar os feeds do Google News. Veja o erro abaixo.',
 	);
+	$gn       = get_option( 'mural17_google_news' );
 	$form     = function ( $acao ) {
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
 		echo '<input type="hidden" name="action" value="' . esc_attr( $acao ) . '">';
@@ -93,6 +96,32 @@ function mural17_pagina_servicos_admin() {
 				<?php submit_button( 'Atualizar agora', 'secondary', 'submit', false ); ?>
 				</form>
 			</div>
+
+			<?php if ( current_user_can( 'manage_options' ) ) : ?>
+			<div class="m17-card" id="google-news">
+				<h2>Google News das 117 cidades</h2>
+				<p>Cadastra no Portal de Notícias PRO um feed de busca do Google News para cada cidade do 17, já com a cidade no nome. Os que já existem ficam como estão.</p>
+				<?php if ( is_array( $gn ) ) : ?>
+					<p><b>Última vez:</b> <?php echo esc_html( $gn['criados'] . ' cadastrado(s), ' . $gn['existiam'] . ' já existia(m)' ); ?></p>
+				<?php elseif ( $gn ) : ?>
+					<p class="m17-erro"><b>Erro:</b> <?php echo esc_html( $gn ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_google_news' ); ?>
+					<p>
+						<label>Frequência <select name="frequency">
+							<option value="every_6h">A cada 6 horas</option>
+							<option value="every_12h" selected>A cada 12 horas (2x por dia)</option>
+							<option value="daily">Uma vez por dia</option>
+						</select></label>
+					</p>
+					<p>
+						<label><input type="checkbox" name="ai_rewrite" value="1" checked> Reescrever com IA</label><br>
+						<label><input type="checkbox" name="ai_image" value="1" checked> Gerar imagem quando faltar</label>
+					</p>
+					<?php submit_button( 'Cadastrar os feeds', 'secondary', 'submit', false ); ?>
+				</form>
+			</div>
+			<?php endif; ?>
 		</div>
 
 		<h2 id="escala">Importar escala de farmácia de plantão</h2>

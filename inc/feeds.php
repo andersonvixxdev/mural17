@@ -206,3 +206,91 @@ function mural17_cidades_no_texto( $titulo, $texto ) {
 	arsort( $pontos );
 	return array_slice( array_keys( $pontos ), 0, 3 );
 }
+
+/**
+ * Busca do Google News de cada cidade do 17. Nomes que também são palavra
+ * comum ou sobrenome vão com a cidade-polo da região, para a busca não trazer
+ * notícia de outro lugar.
+ *
+ * @return array[] Lista de array( 'cidade' => ID, 'nome' => nome do feed, 'url' => endereço ).
+ */
+function mural17_feeds_google_news() {
+	$com_polo = array( 'Adolfo', 'Altair', 'Bálsamo', 'Jaci', 'Mendonça', 'Palestina', 'Sales', 'Novais', 'Paraíso', 'Cardoso', 'Floreal', 'Parisi', 'Macedônia', 'São Francisco', 'Turmalina', 'Colina', 'Colômbia', 'Guaíra', 'Terra Roxa', 'Magda' );
+	$feeds    = array();
+	foreach ( mural17_regioes() as $slug_regiao => $regiao ) {
+		$polo = 'regiao-rio-preto' === $slug_regiao ? 'São José do Rio Preto' : str_replace( 'Região de ', '', $regiao['nome'] );
+		foreach ( $regiao['cidades'] as $slug => $nome ) {
+			$termo = get_term_by( 'slug', $slug, 'cidade' );
+			$busca = '"' . $nome . '" ' . ( in_array( $nome, $com_polo, true ) ? '"' . $polo . '"' : 'SP' );
+			$feeds[] = array(
+				'cidade' => $termo ? (int) $termo->term_id : 0,
+				'nome'   => 'Google News - ' . $nome,
+				'url'    => 'https://news.google.com/rss/search?q=' . rawurlencode( $busca ) . '&hl=pt-BR&gl=BR&ceid=BR:pt-419',
+			);
+		}
+	}
+	return $feeds;
+}
+
+/**
+ * Cadastra no Portal de Notícias PRO os feeds do Google News que ainda não
+ * existem. A importação em massa do plugin passa cada linha por
+ * sanitize_text_field, que apaga o %22/%20 dos endereços de busca; aqui o
+ * endereço vai inteiro para o save_feed do próprio plugin.
+ *
+ * @param array $opcoes frequency, ai_rewrite, ai_image.
+ * @return array|WP_Error array( 'criados' => n, 'existiam' => n ).
+ */
+function mural17_cadastra_google_news( $opcoes ) {
+	if ( ! class_exists( 'PFAI_Feed_Manager' ) || ! method_exists( 'PFAI_Feed_Manager', 'save_feed' ) ) {
+		return new WP_Error( 'sem_plugin', 'O plugin Portal de Notícias PRO não está ativo.' );
+	}
+	global $wpdb;
+	$tabela = $wpdb->prefix . 'pfai_feeds';
+	$r      = array(
+		'criados'  => 0,
+		'existiam' => 0,
+	);
+	foreach ( mural17_feeds_google_news() as $f ) {
+		$ja = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$tabela} WHERE url = %s LIMIT 1", esc_url_raw( $f['url'] ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery
+		if ( $ja ) {
+			++$r['existiam'];
+			continue;
+		}
+		$id = PFAI_Feed_Manager::save_feed(
+			array(
+				'name'        => $f['nome'],
+				'url'         => $f['url'],
+				'type'        => 'rss',
+				'category_id' => 0,
+				'frequency'   => $opcoes['frequency'],
+				'ai_rewrite'  => $opcoes['ai_rewrite'],
+				'ai_image'    => $opcoes['ai_image'],
+				'status'      => 'active',
+			)
+		);
+		if ( $id ) {
+			++$r['criados'];
+		}
+	}
+	return $r;
+}
+
+add_action(
+	'admin_post_mural17_admin_google_news',
+	function () {
+		mural17_confere_admin_servicos( 'mural17_admin_google_news' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Sem permissão.' );
+		}
+		$r = mural17_cadastra_google_news(
+			array(
+				'frequency'  => sanitize_key( mural17_post( 'frequency' ) ),
+				'ai_rewrite' => (int) ! empty( $_POST['ai_rewrite'] ), // phpcs:ignore WordPress.Security.NonceVerification
+				'ai_image'   => (int) ! empty( $_POST['ai_image'] ), // phpcs:ignore WordPress.Security.NonceVerification
+			)
+		);
+		update_option( 'mural17_google_news', is_wp_error( $r ) ? $r->get_error_message() : $r, false );
+		mural17_volta_admin_servicos( is_wp_error( $r ) ? 'gn-erro' : 'gn', 'google-news' );
+	}
+);

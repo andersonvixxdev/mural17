@@ -88,6 +88,15 @@ $plantao = mural17_consulta(
 </section>
 
 <div class="wrap mural">
+	<?php if ( mural17_eleicao_ativa() || mural17_eleicao_teste() ) : ?>
+		<?php $mural17_ap_slug = $escopo && ! mural17_e_regiao( $escopo ) ? $escopo->slug : ''; ?>
+		<a class="ap-dest" href="<?php echo esc_url( home_url( '/eleicoes-2026/' ) . ( mural17_eleicao_teste() ? '?teste=1' : '' ) ); ?>" data-ap-destaque="<?php echo esc_attr( $mural17_ap_slug ); ?>">
+			<span class="ap-dest__chapeu"><b>AO VIVO</b> Eleições 2026 · <?php echo esc_html( mural17_eleicao_config()['titulo'] ); ?></span>
+			<span class="ap-dest__titulo">Apuração para presidente<?php echo $mural17_ap_slug ? ' em ' . esc_html( mural17_nome_curto( $escopo ) ) : ''; ?></span>
+			<span class="ap-dest__in" data-ap-destaque-in><span class="ap-dest__txt">Carregando o placar…</span></span>
+			<span class="ap-dest__ir">Mapa, cidade por cidade e minuto a minuto →</span>
+		</a>
+	<?php endif; ?>
 	<?php get_template_part( 'template-parts/servicos/faixa', null, array( 'cidade' => mural17_cidade_da_faixa( $escopo ) ) ); ?>
 	<?php if ( ! $escopo ) : ?>
 		<section class="sua-cidade" data-sua-cidade hidden aria-labelledby="sua-cidade-titulo">

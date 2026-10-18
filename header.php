@@ -68,6 +68,7 @@ $mural17_mural = is_front_page() || ( ( is_tax( 'cidade' ) || is_tax( 'orgao' ) 
 	</div>
 </header>
 
+<?php mural17_faixa_eleicao(); ?>
 <?php mural17_faixa_alerta(); ?>
 
 <dialog class="cidades" id="cidades" aria-labelledby="cidades-titulo">

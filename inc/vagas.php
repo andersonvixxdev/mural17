@@ -103,8 +103,21 @@ function mural17_le_lista_pat( $texto ) {
  */
 function mural17_importa_pat( $cidade, $texto, $fonte ) {
 	list( $itens, $erros ) = mural17_le_lista_pat( $texto );
+	return array( mural17_grava_pat( $cidade, $itens, $fonte ), $erros );
+}
+
+/**
+ * Grava itens já lidos como a lista do dia do PAT de uma cidade.
+ *
+ * @param WP_Term $cidade Cidade.
+ * @param array[] $itens  Itens (qtd, cargo, req).
+ * @param string  $fonte  Quem enviou.
+ * @param bool    $so_mesma_fonte Não troca a lista de hoje se ela veio de outra fonte.
+ * @return int Itens gravados.
+ */
+function mural17_grava_pat( $cidade, $itens, $fonte, $so_mesma_fonte = false ) {
 	if ( ! $cidade || ! $itens ) {
-		return array( 0, $erros );
+		return 0;
 	}
 	$hoje  = wp_date( 'Y-m-d' );
 	$velha = get_posts(
@@ -117,6 +130,9 @@ function mural17_importa_pat( $cidade, $texto, $fonte ) {
 			'tax_query'      => array( array( 'taxonomy' => 'cidade', 'field' => 'term_id', 'terms' => $cidade->term_id, 'include_children' => false ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
 		)
 	);
+	if ( $velha && $so_mesma_fonte && get_post_meta( $velha[0], '_mural17_pat_fonte', true ) !== $fonte ) {
+		return 0; // O próprio PAT já mandou a lista de hoje: ela vale mais.
+	}
 	$id = wp_insert_post(
 		array(
 			'ID'          => $velha ? $velha[0] : 0,
@@ -127,12 +143,12 @@ function mural17_importa_pat( $cidade, $texto, $fonte ) {
 		true
 	);
 	if ( is_wp_error( $id ) ) {
-		return array( 0, $erros );
+		return 0;
 	}
 	wp_set_object_terms( $id, array( (int) $cidade->term_id ), 'cidade' );
 	update_post_meta( $id, '_mural17_pat_itens', $itens );
 	update_post_meta( $id, '_mural17_pat_fonte', sanitize_text_field( $fonte ) );
-	return array( count( $itens ), $erros );
+	return count( $itens );
 }
 
 /**
@@ -163,6 +179,7 @@ function mural17_lista_pat( $cidade ) {
 		'itens'  => $itens,
 		'total'  => array_sum( wp_list_pluck( $itens, 'qtd' ) ),
 		'quando' => (int) get_post_modified_time( 'U', true, $p[0] ),
+		'fonte'  => (string) get_post_meta( $p[0]->ID, '_mural17_pat_fonte', true ),
 	);
 }
 
@@ -299,6 +316,249 @@ add_action(
 		mural17_salva_info_pat( $cidade );
 		list( $n ) = mural17_importa_pat( $cidade, mural17_post( 'lista', true ), 'Redação do Mural 17' );
 		mural17_volta_admin_servicos( $n ? 'pat' : 'pat-0', 'pat' );
+	}
+);
+
+/* ---- Balcão de Empregos de Rio Preto ------------------------------------ */
+
+/**
+ * Nome da fonte gravado nas listas que vêm do Balcão.
+ */
+const MURAL17_BALCAO_FONTE = 'Balcão de Empregos da Prefeitura de Rio Preto';
+
+/**
+ * Endereço da lista pública do Balcão.
+ *
+ * @return string
+ */
+function mural17_balcao_url() {
+	return apply_filters( 'mural17_balcao_url', 'https://www.riopreto.sp.gov.br/balcaoempregos/vagas.php' );
+}
+
+/**
+ * Linhas da tabela de vagas de uma página do Balcão.
+ *
+ * @param string $html Página.
+ * @return array[] chave, cargo, local, qtd, desc.
+ */
+function mural17_linhas_balcao( $html ) {
+	$linhas = array();
+	if ( ! preg_match( '/<table id="idTabelaVaga".*?<tbody>(.*?)<\/tbody>/s', (string) $html, $t ) ) {
+		return $linhas;
+	}
+	preg_match_all( '/<tr>(.*?)<\/tr>/s', $t[1], $trs );
+	foreach ( $trs[1] as $tr ) {
+		preg_match_all( '/<td[^>]*>(.*?)<\/td>/s', $tr, $tds );
+		if ( count( $tds[1] ) < 4 || ! preg_match( "/redirecionarVaga\('([0-9a-f]{16,})'\)/", $tr, $ch ) ) {
+			continue;
+		}
+		$c = array_map(
+			function ( $x ) {
+				$x = html_entity_decode( html_entity_decode( wp_strip_all_tags( $x ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+				return trim( preg_replace( '/\s+/u', ' ', $x ) );
+			},
+			$tds[1]
+		);
+		$cargo = mb_convert_case( mb_strtolower( $c[0] ), MB_CASE_TITLE );
+		$cargo = preg_replace_callback(
+			'/\b(De|Da|Do|Das|Dos|E|Em|Para|Com)\b/u',
+			function ( $m ) {
+				return mb_strtolower( $m[1] );
+			},
+			$cargo
+		);
+		$cargo = preg_replace_callback(
+			'/\((\w{1,2})\)/u',
+			function ( $m ) {
+				return '(' . mb_strtolower( $m[1] ) . ')';
+			},
+			$cargo
+		);
+		if ( mb_strlen( $cargo ) < 3 ) {
+			continue;
+		}
+		$desc = preg_replace( '/\s*\.\.\.$/', '…', $c[3] );
+		if ( $desc === mb_strtoupper( $desc ) ) {
+			$desc = mb_strtoupper( mb_substr( $desc, 0, 1 ) ) . mb_strtolower( mb_substr( $desc, 1 ) ); // Sem gritar.
+		}
+		$linhas[] = array(
+			'chave' => $ch[1],
+			'cargo' => mb_substr( $cargo, 0, 100 ),
+			'local' => mb_substr( $c[1], 0, 120 ),
+			'qtd'   => preg_match( '/(\d{1,4})/', $c[2], $m ) ? (int) $m[1] : 1,
+			'desc'  => mb_substr( $desc, 0, 160 ),
+		);
+	}
+	return $linhas;
+}
+
+/**
+ * Cidade do 17 de um "Local" do Balcão. Quase tudo é Rio Preto (escrito de
+ * vinte jeitos, ou só um endereço); vale outra cidade quando ela aparece no texto.
+ *
+ * @param string  $local Local.
+ * @param WP_Term $rp    Rio Preto.
+ * @return int term_id.
+ */
+function mural17_cidade_balcao( $local, $rp ) {
+	static $mapa = null;
+	if ( null === $mapa ) {
+		$mapa = mural17_mapa_nomes_cidades();
+		unset( $mapa[ mural17_normaliza( $rp->name ) ] );
+		uksort(
+			$mapa,
+			function ( $a, $b ) {
+				return strlen( $b ) <=> strlen( $a );
+			}
+		);
+	}
+	$n = ' ' . mural17_normaliza( $local ) . ' ';
+	if ( false === strpos( $n, ' rio preto ' ) && false === strpos( $n, ' sjrp ' ) ) {
+		foreach ( $mapa as $nome => $id ) {
+			// Nome de cidade em endereço ("Vicinal João Parisi") não é a cidade.
+			if ( false !== strpos( $n, ' ' . $nome . ' ' ) && ! preg_match( '/ (vicinal|rua|r|av|avenida|rodovia|rod|estrada|jardim|jd|bairro|praca|joao|jose)( [a-z]+)? ' . preg_quote( $nome, '/' ) . ' /', $n ) ) {
+				return (int) $id;
+			}
+		}
+	}
+	return (int) $rp->term_id;
+}
+
+/**
+ * Lê todas as páginas do Balcão de Empregos de Rio Preto e grava as vagas
+ * como a lista do dia de cada cidade (quase sempre Rio Preto).
+ *
+ * A lista é paginada por POST com um token que muda a cada página e vale
+ * para a sessão (cookie), por isso cada página usa o token da anterior.
+ *
+ * @return int|WP_Error Vagas lidas.
+ */
+function mural17_balcao_atualiza() {
+	$rp = get_term_by( 'slug', 'rio-preto', 'cidade' );
+	if ( ! $rp ) {
+		return new WP_Error( 'balcao', 'Cidade Rio Preto não cadastrada.' );
+	}
+	if ( function_exists( 'set_time_limit' ) ) {
+		@set_time_limit( 180 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+	}
+	$url     = mural17_balcao_url();
+	$args    = array( 'timeout' => 20, 'user-agent' => 'Mozilla/5.0 (compatible; Mural17/1.0)' );
+	$r       = wp_remote_get( $url, $args );
+	$cookies = array();
+	$linhas  = array();
+	$erro    = '';
+	for ( $p = 1; $p <= 120; $p++ ) {
+		if ( is_wp_error( $r ) || 200 !== (int) wp_remote_retrieve_response_code( $r ) ) {
+			$erro = ( is_wp_error( $r ) ? $r->get_error_message() : 'HTTP ' . wp_remote_retrieve_response_code( $r ) ) . ' na página ' . $p;
+			break;
+		}
+		foreach ( wp_remote_retrieve_cookies( $r ) as $c ) {
+			$cookies[ $c->name ] = $c;
+		}
+		$html  = wp_remote_retrieve_body( $r );
+		$novas = 0;
+		foreach ( mural17_linhas_balcao( $html ) as $l ) {
+			if ( ! isset( $linhas[ $l['chave'] ] ) ) {
+				$linhas[ $l['chave'] ] = $l;
+				++$novas;
+			}
+		}
+		if ( ! $novas ) {
+			break; // Passou da última página (ou ela repetiu a anterior).
+		}
+		if ( ! preg_match( '/id="idFormBuscarVagas"[^>]*>\s*<input type="hidden" name="tokenCSRF" value="([0-9a-f]+)"/', $html, $tk ) ) {
+			$erro = 'Não achei o token da paginação na página ' . $p . ' (o site mudou?)';
+			break;
+		}
+		$r = wp_remote_post(
+			$url,
+			$args + array(
+				'cookies' => array_values( $cookies ),
+				'body'    => array(
+					'tokenCSRF' => $tk[1],
+					's'         => '',
+					'p'         => (string) ( $p + 1 ),
+				),
+			)
+		);
+	}
+	if ( ! $linhas ) {
+		$erro = $erro ? $erro : 'A página abriu, mas sem nenhuma vaga na tabela (o site mudou?)';
+		update_option( 'mural17_balcao_erro', array( $erro, time() ), false );
+		return new WP_Error( 'balcao', $erro );
+	}
+
+	// Junta os anúncios do mesmo cargo na mesma cidade: na lista do portal
+	// interessa "Ajudante geral, 14 vagas", não seis linhas iguais.
+	$por_cidade = array();
+	$vagas      = 0;
+	foreach ( $linhas as $l ) {
+		$cid = mural17_cidade_balcao( $l['local'], $rp );
+		$k   = mural17_normaliza( $l['cargo'] );
+		if ( ! isset( $por_cidade[ $cid ][ $k ] ) ) {
+			$por_cidade[ $cid ][ $k ] = array(
+				'qtd'   => 0,
+				'cargo' => $l['cargo'],
+				'req'   => $l['desc'],
+				'n'     => 0,
+			);
+		}
+		$i         = &$por_cidade[ $cid ][ $k ];
+		$i['qtd'] += $l['qtd'];
+		$i['n']++;
+		if ( '' === $i['req'] ) {
+			$i['req'] = $l['desc'];
+		}
+		unset( $i );
+		$vagas += $l['qtd'];
+	}
+	$cidades = 0;
+	foreach ( $por_cidade as $cid => $itens ) {
+		ksort( $itens );
+		$itens = array_map(
+			function ( $i ) {
+				if ( $i['n'] > 1 ) {
+					$i['req'] = $i['n'] . ' anúncios de empresas diferentes';
+				}
+				unset( $i['n'] );
+				return $i;
+			},
+			array_values( $itens )
+		);
+		if ( mural17_grava_pat( get_term( $cid, 'cidade' ), $itens, MURAL17_BALCAO_FONTE, (int) $cid !== (int) $rp->term_id ) ) {
+			++$cidades;
+		}
+	}
+	update_option(
+		'mural17_balcao',
+		array(
+			'em'       => time(),
+			'anuncios' => count( $linhas ),
+			'vagas'    => $vagas,
+			'cidades'  => $cidades,
+		),
+		false
+	);
+	if ( $erro ) {
+		update_option( 'mural17_balcao_erro', array( $erro . ' (gravei o que veio até ali)', time() ), false );
+	} else {
+		delete_option( 'mural17_balcao_erro' );
+	}
+	delete_transient( 'mural17_contagem_vagas' );
+	return $vagas;
+}
+
+add_action( 'mural17_le_balcao', 'mural17_balcao_atualiza' );
+
+add_action(
+	'admin_post_mural17_admin_balcao',
+	function () {
+		mural17_confere_admin_servicos( 'mural17_admin_balcao' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Sem permissão.' );
+		}
+		$r = mural17_balcao_atualiza();
+		mural17_volta_admin_servicos( is_wp_error( $r ) ? 'balcao-erro' : 'balcao', 'balcao' );
 	}
 );
 
@@ -612,6 +872,10 @@ add_action(
 		} elseif ( ! mural17_jooble_chave() && wp_next_scheduled( 'mural17_le_jooble' ) ) {
 			wp_clear_scheduled_hook( 'mural17_le_jooble' );
 		}
+		if ( ! wp_next_scheduled( 'mural17_le_balcao' ) ) {
+			$hoje_6h = mural17_data( wp_date( 'Y-m-d' ) . ' 06:10' );
+			wp_schedule_event( $hoje_6h && $hoje_6h->getTimestamp() > time() ? $hoje_6h->getTimestamp() : time() + 180, 'twicedaily', 'mural17_le_balcao' );
+		}
 		if ( ! wp_next_scheduled( 'mural17_resumo_vagas' ) ) {
 			$amanha_7h = mural17_data( wp_date( 'Y-m-d', time() + DAY_IN_SECONDS ) . ' 07:00' );
 			wp_schedule_event( $amanha_7h ? $amanha_7h->getTimestamp() : time() + DAY_IN_SECONDS, 'daily', 'mural17_resumo_vagas' );
@@ -646,7 +910,7 @@ function mural17_texto_resumo_vagas( $escopo ) {
 	foreach ( $cidades as $c ) {
 		$l = mural17_lista_pat( $c );
 		if ( $l && $l['quando'] >= $desde ) {
-			$linhas[] = '• PAT de ' . $c->name . ': ' . ( $l['total'] ? $l['total'] . ' vagas em ' : '' ) . count( $l['itens'] ) . ' cargos (' . implode( ', ', array_slice( wp_list_pluck( $l['itens'], 'cargo' ), 0, 5 ) ) . ( count( $l['itens'] ) > 5 ? '…' : '' ) . ')';
+			$linhas[] = '• ' . ( MURAL17_BALCAO_FONTE === $l['fonte'] ? 'Balcão de Empregos de Rio Preto' . ( 'rio-preto' === $c->slug ? '' : ' (vagas em ' . $c->name . ')' ) : 'PAT de ' . $c->name ) . ': ' . ( $l['total'] ? $l['total'] . ' vagas em ' : '' ) . count( $l['itens'] ) . ' cargos (' . implode( ', ', array_slice( wp_list_pluck( $l['itens'], 'cargo' ), 0, 5 ) ) . ( count( $l['itens'] ) > 5 ? '…' : '' ) . ')';
 		}
 	}
 	$ext = array_filter(

@@ -132,8 +132,12 @@ $mural17_onde = $mural17_escopo ? mural17_nome_curto( $mural17_escopo ) : '';
 				?>
 				<?php if ( $mural17_pat ) : ?>
 					<?php
-					$mural17_info  = mural17_info_pat( $mural17_pat_cid );
-					$mural17_itens = $mural17_pat['itens'];
+					$mural17_info   = mural17_info_pat( $mural17_pat_cid );
+					$mural17_itens  = $mural17_pat['itens'];
+					$mural17_balcao = MURAL17_BALCAO_FONTE === $mural17_pat['fonte'];
+					if ( $mural17_balcao && ! $mural17_info['link'] ) {
+						$mural17_info['link'] = mural17_balcao_url();
+					}
 					if ( $mural17_busca ) {
 						$mural17_itens = array_values(
 							array_filter(
@@ -147,7 +151,7 @@ $mural17_onde = $mural17_escopo ? mural17_nome_curto( $mural17_escopo ) : '';
 					?>
 					<section class="emp-caixa">
 						<div class="emp-caixa__cab">
-							<h2>PAT de <?php echo esc_html( $mural17_onde ); ?> · <?php echo esc_html( strtolower( mural17_dia( mural17_data( wp_date( 'Y-m-d H:i', $mural17_pat['quando'] ) ) ) ) ); ?></h2>
+							<h2><?php echo esc_html( $mural17_balcao ? 'Balcão de Empregos' . ( 'rio-preto' === $mural17_pat_cid->slug ? ' de Rio Preto' : ' · vagas em ' . $mural17_onde ) : 'PAT de ' . $mural17_onde ); ?> · <?php echo esc_html( strtolower( mural17_dia( mural17_data( wp_date( 'Y-m-d H:i', $mural17_pat['quando'] ) ) ) ) ); ?></h2>
 							<?php if ( $mural17_info['link'] ) : ?>
 								<a href="<?php echo esc_url( $mural17_info['link'] ); ?>" target="_blank" rel="noopener">Lista oficial →</a>
 							<?php endif; ?>
@@ -156,18 +160,25 @@ $mural17_onde = $mural17_escopo ? mural17_nome_curto( $mural17_escopo ) : '';
 						<?php if ( $mural17_itens ) : ?>
 							<div class="tabela-rolagem">
 								<table class="emp-pat">
-									<thead><tr><th scope="col">Vagas</th><th scope="col">Cargo</th><th scope="col">Requisito</th></tr></thead>
+									<thead><tr><th scope="col">Vagas</th><th scope="col">Cargo</th><th scope="col"><?php echo $mural17_balcao ? 'Detalhes' : 'Requisito'; ?></th></tr></thead>
 									<tbody>
-										<?php foreach ( $mural17_itens as $mural17_i ) : ?>
-											<tr><td class="emp-pat__n"><?php echo $mural17_i['qtd'] ? (int) $mural17_i['qtd'] : '—'; ?></td><th scope="row"><?php echo esc_html( $mural17_i['cargo'] ); ?></th><td><?php echo esc_html( $mural17_i['req'] ); ?></td></tr>
+										<?php foreach ( $mural17_itens as $mural17_n => $mural17_i ) : ?>
+											<tr<?php echo $mural17_n >= 40 ? ' hidden data-pat-mais' : ''; ?>><td class="emp-pat__n"><?php echo $mural17_i['qtd'] ? (int) $mural17_i['qtd'] : '—'; ?></td><th scope="row"><?php echo esc_html( $mural17_i['cargo'] ); ?></th><td><?php echo esc_html( $mural17_i['req'] ); ?></td></tr>
 										<?php endforeach; ?>
 									</tbody>
 								</table>
 							</div>
+							<?php if ( count( $mural17_itens ) > 40 ) : ?>
+								<button type="button" class="botao botao--pilula botao--contorno-escuro emp-mais" onclick="document.querySelectorAll('[data-pat-mais]').forEach(function(e){e.hidden=false});this.remove();">Ver mais <?php echo (int) ( count( $mural17_itens ) - 40 ); ?> cargos</button>
+							<?php endif; ?>
 						<?php else : ?>
 							<p class="vazio">Nenhum cargo da lista de hoje com “<?php echo esc_html( $mural17_busca ); ?>”.</p>
 						<?php endif; ?>
-						<p class="emp-fonte">As vagas do PAT são preenchidas no próprio posto, por ordem de chegada. Confirme antes de ir.</p>
+						<?php if ( $mural17_balcao ) : ?>
+							<p class="emp-fonte">Lista lida automaticamente do Balcão de Empregos da Prefeitura de Rio Preto. Para se candidatar, faça o cadastro e envie o currículo pela <a href="<?php echo esc_url( mural17_balcao_url() ); ?>" target="_blank" rel="noopener">página oficial</a>.</p>
+						<?php else : ?>
+							<p class="emp-fonte">As vagas do PAT são preenchidas no próprio posto, por ordem de chegada. Confirme antes de ir.</p>
+						<?php endif; ?>
 					</section>
 				<?php elseif ( $mural17_pats && ( ! $mural17_pat_cid || 'pat' === $mural17_fonte ) ) : ?>
 					<section class="emp-caixa">

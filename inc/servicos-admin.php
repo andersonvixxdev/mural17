@@ -64,6 +64,8 @@ function mural17_pagina_servicos_admin() {
 		'sjrp-erro'     => 'A agenda de Rio Preto não abriu. Veja o erro abaixo.',
 		'sympla-erro'   => 'Algumas páginas do Sympla não abriram. Veja o erro abaixo.',
 		'pat-0'         => 'Nenhuma linha da lista do PAT foi entendida.',
+		'balcao'        => 'Balcão de Empregos de Rio Preto lido.',
+		'balcao-erro'   => 'O Balcão de Empregos não abriu. Veja o erro abaixo.',
 		'jooble'        => 'Vagas do Jooble atualizadas.',
 		'jooble-erro'   => 'Não foi possível ler o Jooble. Veja o erro abaixo.',
 		'jooble-sem'    => 'Chave do Jooble apagada. As vagas de outros sites saíram do ar.',
@@ -162,6 +164,22 @@ function mural17_pagina_servicos_admin() {
 				<?php $form( 'mural17_admin_sjrp' ); ?>
 					<p><label>Bilheterias (uma por linha)<br><textarea name="bilheterias" rows="3" class="large-text code"><?php echo esc_textarea( implode( "\n", mural17_bilheterias() ) ); ?></textarea></label></p>
 					<?php submit_button( 'Salvar e ler agora', 'secondary', 'submit', false ); ?>
+				</form>
+			</div>
+
+			<div class="m17-card" id="balcao">
+				<h2>Balcão de Empregos de Rio Preto</h2>
+				<p>Lê todas as vagas de <a href="<?php echo esc_url( mural17_balcao_url() ); ?>" target="_blank" rel="noopener">riopreto.sp.gov.br/balcaoempregos</a> 2 vezes por dia (a primeira às 6h, antes do e-mail de vagas) e mostra em Empregos como a lista do PAT de Rio Preto. Vagas anunciadas para outra cidade do 17 vão para a lista dela, sem apagar a que o próprio PAT de lá mandou.</p>
+				<?php
+				$m17_bc   = get_option( 'mural17_balcao' );
+				$m17_bc_e = get_option( 'mural17_balcao_erro' );
+				?>
+				<p><b>Última leitura:</b> <?php echo is_array( $m17_bc ) ? esc_html( wp_date( 'd/m H:i', $m17_bc['em'] ) . ' · ' . number_format( (int) $m17_bc['vagas'], 0, ',', '.' ) . ' vagas em ' . (int) $m17_bc['anuncios'] . ' anúncios · ' . (int) $m17_bc['cidades'] . ' cidade(s)' ) : 'ainda não leu'; ?></p>
+				<?php if ( is_array( $m17_bc_e ) ) : ?>
+					<p class="m17-erro"><b>Erro em <?php echo esc_html( wp_date( 'd/m H:i', $m17_bc_e[1] ) ); ?>:</b> <?php echo esc_html( $m17_bc_e[0] ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_balcao' ); ?>
+					<?php submit_button( 'Ler agora', 'secondary', 'submit', false ); ?>
 				</form>
 			</div>
 

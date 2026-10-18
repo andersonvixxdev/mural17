@@ -167,6 +167,23 @@ function mural17_pagina_servicos_admin() {
 				</form>
 			</div>
 
+			<?php $m17_ult = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 1 ) ); ?>
+			<?php $m17_prev = $m17_ult ? mural17_previa_redes( $m17_ult[0] ) : null; ?>
+			<?php if ( $m17_prev ) : ?>
+				<div class="m17-card" id="redes">
+					<h2>Legenda das redes (prévia)</h2>
+					<p>O que o Portal PRO publica para a matéria mais recente, <b><?php echo esc_html( get_the_title( $m17_ult[0] ) ); ?></b>. O tema garante as hashtags fixas e o <code>{hashtags}</code> nos dois modelos, mesmo que o campo do plugin fique vazio.</p>
+					<?php if ( 'story' === $m17_prev['modo'] ) : ?>
+						<p class="m17-erro"><b>Atenção:</b> o Instagram está em "Só Stories". Story não tem legenda, então não leva hashtag. Mude para "Feed" ou "Feed e Stories" no plugin.</p>
+					<?php endif; ?>
+					<p><b>Hashtags desta matéria:</b> <?php echo esc_html( $m17_prev['hashtags'] ? $m17_prev['hashtags'] : 'nenhuma' ); ?></p>
+					<p><b>Instagram</b> <?php echo $m17_prev['ig_saiu'] ? '· ' . esc_html( $m17_prev['ig_saiu'] ) : ''; ?></p>
+					<pre style="white-space:pre-wrap;background:#f6f7f7;padding:10px;max-height:260px;overflow:auto"><?php echo esc_html( $m17_prev['instagram'] ); ?></pre>
+					<p><b>Facebook</b> <?php echo $m17_prev['fb_saiu'] ? '· ' . esc_html( $m17_prev['fb_saiu'] ) : ''; ?></p>
+					<pre style="white-space:pre-wrap;background:#f6f7f7;padding:10px;max-height:260px;overflow:auto"><?php echo esc_html( $m17_prev['facebook'] ); ?></pre>
+				</div>
+			<?php endif; ?>
+
 			<div class="m17-card" id="balcao">
 				<h2>Balcão de Empregos de Rio Preto</h2>
 				<p>Lê todas as vagas de <a href="<?php echo esc_url( mural17_balcao_url() ); ?>" target="_blank" rel="noopener">riopreto.sp.gov.br/balcaoempregos</a> 2 vezes por dia (a primeira às 6h, antes do e-mail de vagas) e mostra em Empregos como a lista do PAT de Rio Preto. Vagas anunciadas para outra cidade do 17 vão para a lista dela, sem apagar a que o próprio PAT de lá mandou.</p>

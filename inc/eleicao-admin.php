@@ -36,9 +36,9 @@ function mural17_pagina_eleicao_admin() {
 	delete_transient( 'mural17_eleicao_resultado' );
 	$form = function ( $acao ) {
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" style="display:inline-block;margin-right:8px">';
-		echo '<input type="hidden" name="action" value="mural17_eleicao">';
+		echo '<input type="hidden" name="action" value="mural17_especial">';
 		echo '<input type="hidden" name="o_que" value="' . esc_attr( $acao ) . '">';
-		wp_nonce_field( 'mural17_eleicao', 'mural17_nonce' );
+		wp_nonce_field( 'mural17_especial', 'mural17_nonce' );
 	};
 	$resumo = function ( $x ) {
 		if ( ! is_array( $x ) || empty( $x['br']['cand'] ) ) {
@@ -62,9 +62,9 @@ function mural17_pagina_eleicao_admin() {
 
 		<h2>Quando fica no ar</h2>
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-			<input type="hidden" name="action" value="mural17_eleicao">
+			<input type="hidden" name="action" value="mural17_especial">
 			<input type="hidden" name="o_que" value="salvar">
-			<?php wp_nonce_field( 'mural17_eleicao', 'mural17_nonce' ); ?>
+			<?php wp_nonce_field( 'mural17_especial', 'mural17_nonce' ); ?>
 			<table class="form-table">
 				<tr><th>Modo</th><td>
 					<label><input type="radio" name="modo" value="auto" <?php checked( $c['modo'], 'auto' ); ?>> Automático, nos horários abaixo</label><br>
@@ -145,9 +145,9 @@ add_action(
 );
 
 add_action(
-	'admin_post_mural17_eleicao',
+	'admin_post_mural17_especial',
 	function () {
-		if ( ! current_user_can( 'manage_options' ) || ! isset( $_POST['mural17_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['mural17_nonce'] ) ), 'mural17_eleicao' ) ) {
+		if ( ! current_user_can( 'manage_options' ) || ! isset( $_POST['mural17_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['mural17_nonce'] ) ), 'mural17_especial' ) ) {
 			wp_die( 'Sem permissão.' );
 		}
 		$o_que = sanitize_key( wp_unslash( $_POST['o_que'] ?? '' ) );

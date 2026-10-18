@@ -106,3 +106,26 @@ function mural17_atualiza_cidades() {
 	update_option( 'mural17_cidades_versao', MURAL17_CIDADES_VERSAO );
 }
 add_action( 'admin_init', 'mural17_atualiza_cidades' );
+
+/**
+ * Portal de Notícias PRO: liga o campo "Cidade" no cadastro de feed também
+ * em sites onde o plugin chegou depois do tema (a ativação do tema já tinha
+ * passado). Só liga se ninguém escolheu outra coisa.
+ */
+function mural17_liga_cidade_no_feed() {
+	if ( '' === get_option( 'pfai_feed_tax_ativo', '' ) ) {
+		update_option( 'pfai_feed_tax_ativo', 1 );
+	}
+}
+add_action( 'admin_init', 'mural17_liga_cidade_no_feed' );
+
+/**
+ * No cadastro de feed, só a Cidade: órgão oficial não vem de feed.
+ *
+ * @param array $taxonomias Taxonomias extras do feed.
+ * @return array
+ */
+function mural17_taxonomias_do_feed( $taxonomias ) {
+	return array_intersect_key( (array) $taxonomias, array( 'cidade' => true ) );
+}
+add_filter( 'pfai_feed_taxonomias_extras', 'mural17_taxonomias_do_feed' );

@@ -394,7 +394,9 @@ function mural17_tse_resultado( $j ) {
 			'votos'  => (int) mural17_tse_num( $c['vap'] ?? 0 ),
 			'pct'    => mural17_tse_num( $c['pvap'] ?? 0 ),
 			'sq'     => (string) ( $c['sqcand'] ?? '' ),
-			'eleito' => 's' === strtolower( (string) ( $c['e'] ?? '' ) ) || ( false !== stripos( $st, 'eleito' ) && false === stripos( $st, 'não' ) && false === stripos( $st, 'nao' ) ),
+			// "e":"s" vale também para quem vai ao 2º turno ("st":"2º turno");
+			// eleito é só quando a situação diz "Eleito".
+			'eleito' => (bool) preg_match( '/^\s*eleit[oa]\b/iu', $st ),
 		);
 	}
 	// Ordem fixa pelo número: a cor de cada candidato não muda durante a noite.

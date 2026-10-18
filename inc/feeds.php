@@ -306,7 +306,7 @@ function mural17_editorias() {
 	return array(
 		'policia'   => array(
 			'nome'     => 'Polícia',
-			'palavras' => array( 'polici', 'pm ', 'delegaci', 'preso', 'presos', 'presa ', 'presas', 'prend', 'prisao', 'crime', 'criminos', 'homicid', 'assassin', 'feminicid', 'latrocin', 'furt', 'roub', 'assalt', 'trafic', 'droga', 'cocaina', 'maconha', 'golpe', 'golpist', 'estelionat', 'flagrante', 'mandado de', 'suspeit', 'baleado', 'a tiros', 'facada', 'esfaque', 'apreens', 'gcm', 'guarda civil', 'investigad', 'boletim de ocorrencia', 'agress', 'violencia domestica' ),
+			'palavras' => array( 'polici', 'pm ', 'delegaci', 'preso', 'presos', 'presa ', 'presas', 'prend', 'prisao', 'crime', 'criminos', 'homicid', 'assassin', 'feminicid', 'latrocin', 'furt', 'roub', 'assalt', 'trafic', 'droga', 'cocaina', 'maconha', 'golpe', 'golpist', 'estelionat', 'flagrante', 'mandado de', 'suspeit', 'baleado', 'a tiros', 'facada', 'esfaque', 'apreens', 'gcm', 'guarda civil', 'investigad', 'boletim de ocorrencia', 'agress', 'violencia domestica', 'refem', 'refens', 'sequestr', 'com faca', 'ameacad', 'medida protetiva' ),
 		),
 		'transito'  => array(
 			'nome'     => 'Trânsito',
@@ -454,3 +454,98 @@ function mural17_classifica_antigas() {
 	}
 }
 add_action( 'admin_init', 'mural17_classifica_antigas' );
+
+/* ---- Foto das matérias do Google News ------------------------------------ */
+
+/**
+ * A "imagem original" de uma matéria do Google News é sempre o logo do Google
+ * News: o link do feed abre a página de redirecionamento do Google, e o
+ * og:image dela é o logo. O plugin aceita porque o logo é colorido demais
+ * para o detector de logotipos dele. Aqui trocamos pela imagem padrão da
+ * editoria ou do portal (as mesmas que o plugin usaria se não houvesse foto).
+ *
+ * @param int $post_id Matéria.
+ * @return bool Trocou.
+ */
+function mural17_tira_logo_google_news( $post_id ) {
+	$fonte = (string) get_post_meta( $post_id, '_pfai_source_url', true );
+	$como  = (string) get_post_meta( $post_id, '_pfai_image_source', true );
+	if ( false === strpos( $fonte, 'news.google.com' ) || ! in_array( $como, array( 'og', 'feed' ), true ) ) {
+		return false;
+	}
+	$nova = 0;
+	if ( class_exists( 'PFAI_Imagem_Editoria' ) ) {
+		$nova = (int) PFAI_Imagem_Editoria::para_o_post( $post_id );
+	}
+	if ( ! $nova ) {
+		$nova = (int) get_option( 'pfai_placeholder_att_id' );
+		if ( ! $nova || ! wp_attachment_is_image( $nova ) ) {
+			$nova = (int) attachment_url_to_postid( (string) get_option( 'pfai_placeholder_url' ) );
+		}
+	}
+	if ( ! $nova || ! wp_attachment_is_image( $nova ) ) {
+		return false;
+	}
+	$velha = (int) get_post_thumbnail_id( $post_id );
+	if ( $velha === $nova ) {
+		return false;
+	}
+	set_post_thumbnail( $post_id, $nova );
+	update_post_meta( $post_id, '_pfai_image_source', 'placeholder' );
+	// O logo baixado não serve para nada: apaga, se nenhuma outra matéria usa.
+	if ( $velha && (int) get_post_field( 'post_parent', $velha ) === (int) $post_id ) {
+		global $wpdb;
+		$usos = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->postmeta} WHERE meta_key = '_thumbnail_id' AND meta_value = %d", $velha ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		if ( ! $usos ) {
+			wp_delete_attachment( $velha, true );
+		}
+	}
+	// Cards do Instagram/Stories gerados com o logo: o plugin refaz com a foto nova.
+	delete_post_meta( $post_id, '_pnp_story_card_url' );
+	delete_post_meta( $post_id, '_pnp_feed_card_url' );
+	return true;
+}
+
+/**
+ * Roda quando o plugin marca de onde veio a foto (é a última coisa que ele
+ * grava depois de pôr a imagem destacada).
+ *
+ * @param int    $meta_id ID do meta.
+ * @param int    $post_id Post.
+ * @param string $chave   Chave.
+ */
+function mural17_foto_na_importacao( $meta_id, $post_id, $chave ) {
+	if ( '_pfai_image_source' === $chave ) {
+		mural17_tira_logo_google_news( (int) $post_id );
+	}
+}
+add_action( 'added_post_meta', 'mural17_foto_na_importacao', 30, 3 );
+add_action( 'updated_post_meta', 'mural17_foto_na_importacao', 30, 3 );
+
+/**
+ * Corrige uma vez as matérias que já entraram com o logo (últimos 30 dias).
+ */
+add_action(
+	'admin_init',
+	function () {
+		if ( get_option( 'mural17_logo_gn_versao' ) || ! current_user_can( 'edit_others_posts' ) ) {
+			return;
+		}
+		update_option( 'mural17_logo_gn_versao', 1, false );
+		$ids = get_posts(
+			array(
+				'post_type'      => 'post',
+				'post_status'    => array( 'publish', 'draft', 'pending', 'future' ),
+				'posts_per_page' => 400,
+				'fields'         => 'ids',
+				'date_query'     => array( array( 'after' => '30 days ago' ) ),
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+					array( 'key' => '_pfai_source_url', 'value' => 'news.google.com', 'compare' => 'LIKE' ),
+				),
+			)
+		);
+		foreach ( $ids as $id ) {
+			mural17_tira_logo_google_news( $id );
+		}
+	}
+);

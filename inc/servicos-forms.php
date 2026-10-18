@@ -22,6 +22,9 @@ function mural17_mensagens_servicos() {
 		'interrupcao-volta'     => array( 'ok', 'Marcado como normalizado. O aviso sai da lista em 6 horas.' ),
 		'erro-interrupcao'      => array( 'erro', 'Preencha o que falta, os bairros e quando começa.' ),
 		'plantao-ok'            => array( 'ok', 'Escala salva. O site troca a farmácia sozinho no horário de cada plantão.' ),
+		'evento-ok'             => array( 'ok', 'Evento publicado na agenda do Mural 17.' ),
+		'evento-revisao'        => array( 'ok', 'Evento enviado. A redação confere e publica na agenda.' ),
+		'erro-evento'           => array( 'erro', 'Preencha o nome e a data do evento.' ),
 		'pat-ok'                => array( 'ok', 'Lista publicada. Ela aparece em Empregos, na sua cidade, e entra no resumo de vagas por e-mail.' ),
 		'erro-pat'              => array( 'erro', 'Nenhuma linha da lista foi entendida. Use uma vaga por linha: quantidade; cargo; requisito.' ),
 		'erro-plantao'          => array( 'erro', 'Nenhuma linha da escala foi entendida. Use uma linha por dia: data; farmácia; endereço; telefone.' ),
@@ -205,6 +208,9 @@ function mural17_abas_painel( $orgao ) {
 	if ( in_array( $tipo, array( 'prefeitura', 'municipal', 'saneamento', 'camara' ), true ) ) {
 		$abas['fala'] = 'Fala, 17';
 	}
+	if ( in_array( $tipo, array( 'prefeitura', 'municipal', 'camara', 'outro' ), true ) ) {
+		$abas['eventos'] = 'Eventos';
+	}
 	return $abas;
 }
 
@@ -283,6 +289,9 @@ function mural17_painel_servico( $aba, $orgao ) {
 			break;
 		case 'pat':
 			mural17_painel_pat( $orgao );
+			break;
+		case 'eventos':
+			mural17_painel_eventos( $orgao );
 			break;
 		case 'plantao':
 			mural17_painel_plantao( $orgao );
@@ -1404,6 +1413,7 @@ function mural17_temas_aviso() {
 		'agua-luz'  => 'Falta de água e luz',
 		'concursos' => 'Concursos e processos seletivos',
 		'vagas'     => 'Vagas de emprego (resumo diário)',
+		'agenda'    => 'Agenda do fim de semana (toda quinta)',
 	);
 }
 

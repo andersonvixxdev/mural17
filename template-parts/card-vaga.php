@@ -29,7 +29,7 @@ if ( ! empty( $args['destaque'] ) ) :
 			<p class="vaga-d__salario"><?php echo esc_html( $salario ); ?></p>
 		<?php endif; ?>
 		<?php if ( $validade ) : ?>
-			<p class="vaga-d__prazo">Inscrições até <?php echo esc_html( wp_date( 'j/m', strtotime( $validade ) ) ); ?></p>
+			<p class="vaga-d__prazo">Inscrições até <?php echo esc_html( wp_date( 'j/m', strtotime( $validade . ' 12:00' ) ) ); ?></p>
 		<?php endif; ?>
 		<a class="botao botao--pilula vaga-d__botao" href="<?php the_permalink(); ?>">Quero me candidatar</a>
 	</article>

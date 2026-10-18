@@ -1506,3 +1506,69 @@ a.orgao-linha { display: flex; gap: 12px; align-items: center; padding: 10px 0; 
 	.emp-hero { padding: 22px 18px; }
 	.emp-busca select, .emp-busca button { flex: 1 1 100%; }
 }
+
+/* ==========================================================================
+   Agenda do 17
+   ========================================================================== */
+.ag-hero { background: var(--m17-ipe); border-radius: var(--m17-radius-g); padding: 28px 32px 24px; margin-bottom: 16px; }
+.ag-hero__titulo { font: 900 clamp(30px, 5vw, 46px)/1.05 var(--m17-marca); letter-spacing: -.02em; margin: 0; color: var(--m17-ink); }
+.ag-hero__titulo em { font-style: normal; color: var(--m17-accent); }
+.ag-hero__texto { font-size: 16px; color: #4a3b00; margin: 6px 0 0; }
+.ag-dias { display: flex; gap: 8px; margin-top: 20px; overflow-x: auto; padding-bottom: 4px; }
+.ag-dias a { flex: 0 0 auto; background: #fff; border-radius: 12px; padding: 9px 14px; min-width: 88px; color: var(--m17-muted); font-size: 12px; font-weight: 600; line-height: 1.3; }
+.ag-dias a span { display: block; }
+.ag-dias a b { display: block; font: 900 22px/1.1 var(--m17-marca); color: var(--m17-ink); }
+.ag-dias a.is-fds { box-shadow: inset 0 0 0 2px var(--m17-accent); }
+.ag-dias a.is-on { background: var(--m17-ink); color: #C9CDD3; box-shadow: none; }
+.ag-dias a.is-on b { color: var(--m17-ipe); }
+.ag-chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 16px; align-items: center; }
+.ag-chips > a { padding: 7px 14px; border-radius: 99px; border: 1px solid var(--m17-line); background: #fff; font: 600 13px var(--m17-sans); color: var(--m17-ink-2); }
+.ag-chips > a.is-on { background: var(--m17-ink); color: #fff; border-color: var(--m17-ink); }
+.ag-cidade { margin-left: auto; }
+.ag-cidade select { border: 1px solid var(--m17-line); border-radius: 99px; padding: 7px 14px; font: 600 13px var(--m17-sans); background: #fff; color: var(--m17-ink-2); max-width: 260px; }
+.ag-grade { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 20px; align-items: start; }
+.ag-caixa { background: #fff; border-radius: var(--m17-radius-g); padding: 20px 22px; margin-bottom: 20px; }
+.ag-caixa__cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.ag-caixa__cab a { color: var(--m17-accent); font-weight: 600; font-size: 13px; }
+.ag-caixa__titulo, .ag-ingressos h2, .ag-cta h2 { font: 900 20px/1.15 var(--m17-marca); letter-spacing: -.01em; margin: 0 0 12px; }
+.ag-dest { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; }
+.ag-ev { display: flex; flex-direction: column; border: 1px solid var(--m17-line); border-radius: 12px; overflow: hidden; color: var(--m17-ink); }
+.ag-ev__img { height: 130px; background: linear-gradient(135deg, var(--m17-blue), #0E7C86) center / cover no-repeat; }
+.ag-ev:first-child .ag-ev__img { height: 170px; }
+.ag-ev__img--shows { background-color: var(--m17-blue); background-image: linear-gradient(135deg, #1F4E79, #6B2D8F); }
+.ag-ev__img--festas-e-rodeios { background-image: linear-gradient(135deg, #C2410C, #FFC531); }
+.ag-ev__img--esporte { background-image: linear-gradient(135deg, #0F7A40, #9BD3AE); }
+.ag-ev__img--teatro-e-cinema { background-image: linear-gradient(135deg, #0E1014, #B81A22); }
+.ag-ev__img--feiras { background-image: linear-gradient(135deg, #7A5C00, #FFC531); }
+.ag-ev__in { padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.ag-ev__quando { font-size: 12px; font-weight: 700; color: var(--m17-accent); text-transform: uppercase; letter-spacing: .06em; }
+.ag-ev__titulo { font: 700 18px/1.2 var(--m17-serif); }
+.ag-ev__onde { font-size: 13px; color: var(--m17-ink-2); }
+.ag-selo { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; padding: 2px 8px; border-radius: 99px; background: var(--m17-soft); color: var(--m17-ink-2); vertical-align: 1px; align-self: flex-start; }
+.ag-selo--oficial { background: var(--m17-blue-soft); color: var(--m17-blue); }
+.ag-selo--sympla { background: #FDEBE2; color: var(--m17-orange); }
+.ag-dia { font: 900 15px/1.2 var(--m17-marca); color: var(--m17-ink-2); margin: 18px 0 4px; }
+.ag-dia:first-of-type { margin-top: 4px; }
+.ag-lista { list-style: none; margin: 0; padding: 0; }
+.ag-lista li { display: grid; grid-template-columns: 66px minmax(0, 1fr) auto; gap: 14px; padding: 12px 0; border-top: 1px solid var(--m17-line); align-items: start; }
+.ag-lista__hora { font: 900 15px var(--m17-marca); color: var(--m17-accent); }
+.ag-lista__titulo { display: block; font-weight: 700; font-size: 15.5px; color: var(--m17-ink); }
+.ag-lista__onde { display: block; font-size: 13px; color: var(--m17-muted); margin-top: 2px; }
+.ag-lista__valor { font-size: 13px; font-weight: 700; text-align: right; color: var(--m17-ink-2); }
+.ag-lista__valor.is-gratis { color: var(--m17-wa); }
+.ag-cta { background: var(--m17-ink); color: #fff; border-radius: var(--m17-radius-g); padding: 20px; margin-bottom: 20px; }
+.ag-cta p { color: #C9CDD3; font-size: 13.5px; margin: 0 0 14px; }
+.ag-cta .botao { background: var(--m17-ipe); color: var(--m17-ink); }
+.ag-ingressos ul { list-style: none; margin: 0; padding: 0; }
+.ag-ingressos a { display: block; padding: 10px 0; border-top: 1px solid var(--m17-line); color: var(--m17-ink); font-size: 14px; }
+.ag-ingressos b { display: block; }
+.ag-ingressos span { font-size: 12.5px; color: var(--m17-muted); }
+@media (max-width: 960px) {
+	.ag-grade { grid-template-columns: 1fr; }
+	.ag-dest { grid-template-columns: 1fr; }
+	.ag-hero { padding: 22px 18px; }
+	.ag-cidade { margin-left: 0; width: 100%; }
+	.ag-cidade select { max-width: none; width: 100%; }
+	.ag-lista li { grid-template-columns: 52px minmax(0, 1fr); }
+	.ag-lista__valor { grid-column: 2; text-align: left; }
+}

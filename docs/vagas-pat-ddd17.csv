@@ -1,0 +1,119 @@
+cidade,onde,url,formato,frequencia,ultima_vista,leitura_automatica,obs
+Auriflama,não encontrado,,,,,nao,site sem RSS; home e /noticias sem links de vagas; busca só trouxe agregadores privados
+Gastão Vidigal,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+General Salgado,não encontrado,,,,,nao,varri as notícias do site (Instar) sem lista de vagas
+Guzolândia,"página ""Empregos"" no site da prefeitura (mesma plataforma de Tanabi) - vazia",https://guzolandia.sp.gov.br/vagas,tabela HTML,sem vagas cadastradas,2026-10-18,talvez,"página existe e é legível, mas mostra ""Ainda não existem vagas adicionadas"""
+Magda,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Monções,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nova Castilho,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nova Luzitânia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Barretos,notícias de feirões/mutirões de emprego no site (SPA com API JSON); sem lista periódica do PAT,https://public.barretos.sp.gov.br/api/v1/noticias?pagina=1&limite=12&busca=emprego,texto (JSON com HTML no campo descricao),irregular (feirões quase semanais em set-out/2026),2026-10-07,talvez,API de busca: /api/v1/noticias?pagina=N&limite=12&busca=termo; detalhe /api/v1/noticias/{id}; feirão de 19/10 com 98 vagas (Tereos/Impacto) e feirões JBS às terças; não achei lista corrente de vagas do PAT
+Bebedouro,notícia no site da prefeitura (categoria Empregos) com link para Google Docs com a lista,https://www.bebedouro.sp.gov.br/portal/index.php/ver-todas-as-noticias/itemlist/category/96-empregos,texto da notícia + lista em Google Docs (https://docs.google.com/document/d/1t0aO49-DyrCHLyJKiKwW0I62GHRuvrst2LukCFVUpxo/edit),quase diária (dias úteis),2026-10-16,talvez,"RSS da categoria funciona: https://www.bebedouro.sp.gov.br/portal/index.php/ver-todas-as-noticias/itemlist/category/96-empregos?format=feed&type=rss; o Google Doc é sempre o mesmo (export ?format=txt deve funcionar, mas docs.google.com é bloqueado pelo proxy daqui, não testei); página fixa /portal/index.php/empregos aponta pro mesmo doc"
+Cajobi,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Colina,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Colômbia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Guaíra,página PAT no site da prefeitura (sistema de vagas com cadastro online),https://www.guaira.sp.gov.br/pat,"tabela HTML (vaga, qtd, remuneração, início/fim da seleção, status) + /pat/detalhe/{id}/",contínua (prefeitura diz atualização diária),2026-10-09,sim,vaga mais nova na lista com início 09/10/2026; alguns caminhos devolvem 403 sem user-agent de navegador; também há notícias no site (/noticia/...) e no guairanews.com
+Guaraci,notícias avulsas no site (prefeitura recebe currículos / oportunidade de emprego),https://www.guaraci.sp.gov.br/portal/noticias/0/3/1411/prefeitura-de-guaraci-recebe-curriculos-para-futuras-oportunidades-de-emprego,texto,irregular,2026-04-24,nao,sem lista periódica
+Jaborandi,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Monte Azul Paulista,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Olímpia,"notícia semanal no site da prefeitura (""Olímpia divulga vagas de emprego disponíveis no PAT nesta segunda"")",https://www.olimpia.sp.gov.br/portal/noticias/0/3/8934/olimpia-divulga-vagas-de-emprego-disponiveis-nopatnesta-terca-13,"lista em texto (só nomes dos cargos, sem quantidade)","semanal (segunda/terça: 21/09, 28/09, 05/10, 13/10)",2026-10-13,sim,site Instar; RSS geral https://www.olimpia.sp.gov.br/portal/rss (5 itens) ou listar /portal/noticias/3/1/0/0/0/0; há também sistema PAT online https://olimpia.assistsistemas.com.br/pat/grid_candidatar_vagas (bloqueado pelo proxy daqui) e página /portal/servicos/1012/balcao-de-empregos/
+Severínia,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Terra Roxa,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Viradouro,"página ""Empregos"" no site da prefeitura (mesma plataforma de Tanabi) - vazia",https://viradouro.sp.gov.br/vagas,tabela HTML,sem vagas cadastradas,2026-10-18,talvez,"página existe e é legível, mas mostra ""Ainda não existem vagas adicionadas"""
+Ariranha,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Catanduva,"PDF linkado em banner ""Aqui há vagas"" na home do site da prefeitura",https://www.catanduva.sp.gov.br/arquivos/vagaspat_16041039.pdf,"PDF com texto (tabela Vaga/Qtd/Escolaridade/Cidade, gerado no Word)","semanal (PDF criado em 16/10/2026, sexta)",2026-10-16,sim,"nome do arquivo muda a cada atualização: achar o link /arquivos/vagaspat_*.pdf na home https://www.catanduva.sp.gov.br/; site Instar com RSS geral (/portal/rss, só 5 itens); PAT no Poupatempo, (17) 3531-9797"
+Catiguá,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Elisiário,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Embaúba,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Itajobi,página institucional do PAT no site (sem lista de vagas),https://www.itajobi.sp.gov.br/administracao/39/pat,texto institucional,sem lista,,nao,só descreve serviços do PAT
+Marapoama,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Novais,notícias avulsas no site (vagas da empresa Flower),https://www.novais.sp.gov.br/noticias/a-flower-esta-com-vagas-abertas,texto,irregular,2026-09-29,nao,sem lista periódica
+Palmares Paulista,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Paraíso,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Pindorama,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Pirangi,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santa Adélia,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Tabapuã,notícia avulsa no site (feirão de emprego com a Flower em 23/10),https://www.tabapua.sp.gov.br/noticias/tabapua-promove-feirao-de-emprego-em-parceria-com-a-empresa-flower-no-dia-23-de-outubro,texto,irregular,,nao,data da notícia não confirmada (link na home em out/2026)
+Estrela d'Oeste,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+Fernandópolis,"notícia no site da prefeitura (""PAT divulga novas vagas de emprego""), replicada por regiaonoroeste.com e oextra.net",https://www.fernandopolis.sp.gov.br/noticias/desenvolvimento-sustentavel/pat-divulga-novas-vagas-de-emprego,lista em texto na notícia,irregular,2026-08-31,talvez,"site bloqueia (Cloudflare 403) - visto só via busca; última matéria vista (regiaonoroeste.com) de ~31/08/2026; PAT na R. São Paulo 2570, Coester, (17) 3462-6036; existe perfil privado @empregosfernandopolis no Instagram (não é do PAT)"
+Guarani d'Oeste,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Indiaporã,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Macedônia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Meridiano,"página ""Balcão de Empregos"" no site com link para sistema próprio",https://meridiano.sp.gov.br/balcao-de-empregos/,sistema web em http://servidor.meridiano.sp.gov.br:4850/vagas/ (não resolve daqui),não determinado,,nao,host do sistema não resolve via DNS público
+Mira Estrela,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Ouroeste,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Pedranópolis,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+São João das Duas Pontes,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+São João de Iracema,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Aparecida d'Oeste,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+Aspásia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Dirce Reis,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Dolcinópolis,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Jales,"página ""Balcão de Empregos"" no site da prefeitura com relatórios de vagas do PAT",https://www.jales.sp.gov.br/cidadao/balcao-de-empregos,relatórios (provavelmente PDF) - não abri,irregular,2025-10-13,talvez,"site bloqueia (403) - visto só via busca; relatórios indexados de abr-jun/2024; jornal A Voz das Cidades publica ""Jales - Confira as Vagas de Emprego"" (última vista 13/10/2025); PAT no Poupatempo, Av. da Integração 2689"
+Marinópolis,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Mesópolis,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Palmeira d'Oeste,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Paranapuã,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Pontalinda,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Populina,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santa Albertina,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santa Salete,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+São Francisco,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Turmalina,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Urânia,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Vitória Brasil,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Adolfo,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Altair,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Bady Bassitt,"não encontrado (prefeitura lançou ""Balcão de Empregos"" no portal em 2018; hoje só feira ""Emprega Bady"")",https://www.badybassitt.sp.gov.br/portal/noticias/0/3/939/oportunidade-prefeitura-lanca-balcao-de-empregos-em-seu-portal,,,2018-12-04,nao,não achei a página do balcão ativa; varri 6 páginas de notícias (180 itens) sem lista de vagas
+Bálsamo,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Cedral,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Guapiaçu,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Ibirá,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Icém,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Ipiguá,notícia avulsa no site (vaga em mercado),https://www.ipigua.sp.gov.br/portal/noticias/0/3/1203/oportunidade-de-emprego-no-mercado-jatobas-em-ipigua,texto,irregular,2024-04-22,nao,sem lista periódica
+Irapuã,"página ""Empregos"" no site da prefeitura (mesma plataforma de Tanabi) - vazia",https://irapua.sp.gov.br/vagas,tabela HTML,sem vagas cadastradas,2026-10-18,talvez,"página existe e é legível, mas mostra ""Ainda não existem vagas adicionadas"""
+Jaci,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+José Bonifácio,"notícias avulsas no site (feirão do emprego, processos seletivos)",https://www.josebonifacio.sp.gov.br/portal/noticias/0/3/3797/5-feirao-do-emprego-e-da-cidadania-de-jose-bonifacio,texto,irregular (feirão 03/05/2026),2026-05-03,nao,"sem lista periódica do PAT; notícias antigas ""Vagas de Emprego para José Bonifácio"" (2018/2019); site Instar com RSS geral"
+Macaubal,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Mendonça,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Mirassol,"notícia no site da prefeitura (""PAT Mirassol divulga N vagas de emprego em diversas áreas"")",https://www.mirassol.sp.gov.br/portal/noticias/0/3/9153/pat-mirassol-divulga-140-vagas-de-emprego-em-diversas-areas,"lista em texto (cargo, qtd, salário, benefícios, código da vaga)","quinzenal/irregular (04/08, 16/09, 02/10/2026) + avisos de mutirão",2026-10-16,sim,"site Instar; RSS geral https://www.mirassol.sp.gov.br/portal/rss (5 itens, pegou o mutirão DHL de 16/10); categoria TRABALHO E DESENV. ECONÔMICO; vagas de Mirassol também aparecem no Balcão de Rio Preto"
+Mirassolândia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Monte Aprazível,não encontrado,,,,,nao,varri 180 notícias do site (Instar): só atendimento do PEI Rio Preto (emprego PcD) e processos seletivos da prefeitura
+Neves Paulista,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nipoã,notícia avulsa no site,https://www.nipoa.sp.gov.br/portal/noticias/0/3/12547/oportunidade-para-vaga-em-nipoa,texto,irregular,2026-02-06,nao,sem lista periódica
+Nova Aliança,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nova Granada,não encontrado,,,,,nao,varri 180 notícias do site (Instar) sem lista de vagas
+Novo Horizonte,Balcão de Empregos da prefeitura em sistema terceirizado (DRC Software),https://www.drcclientes.com.br/balcaoempregos/,sistema web (não acessível daqui),não determinado,,talvez,visto só via busca (proxy bloqueia drcclientes.com.br; site da prefeitura bloqueia por Cloudflare); não achei PAT nem lista em notícia
+Onda Verde,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+Orindiúva,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Palestina,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Paulo de Faria,notícias avulsas no site (vaga de colhedor de laranja),https://www.paulodefaria.sp.gov.br/portal/noticias/0/3/1379/a-prefeitura-de-paulo-de-faria-divulga-vaga-para-colhedora-de-laranja-com-oportunidades-para-homens-e-mulheres,texto,irregular,2026-08-05,nao,sem lista periódica
+Poloni,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Potirendaba,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Sales,não encontrado,,,,,nao,site bloqueia acesso automático (403); busca não achou lista de vagas
+São José do Rio Preto,"página no site da prefeitura (Balcão de Empregos da Secretaria do Trabalho e Emprego, sistema NKN Digital)",https://www.riopreto.sp.gov.br/balcaoempregos/vagas.php,"tabela HTML (table#idTabelaVaga: cargo, local, quantidade, descrição)",contínua (sistema ao vivo),2026-10-18,sim,"901 vagas no dia; paginação por formulário (alterarPaginacaoVagas/paginaBusca, 10 por página); traz vagas de cidades vizinhas (ex.: Mirassol); sem RSS; WhatsApp (17) 99739-8710"
+Tanabi,"página ""Empregos"" no site da prefeitura (vagas cadastradas por empregadores)",https://tanabi.sp.gov.br/vagas,"tabela HTML (cargo, empregador, qtd, sexo, tipo) + detalhes em /vagas/detalhes/{id}",contínua (sistema ao vivo),2026-10-18,sim,"sem data por vaga na lista; RSS do site (https://tanabi.sp.gov.br/rss) tem XML inválido; mesma plataforma de Irapuã, Guzolândia e Viradouro"
+Ubarana,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Uchoa,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+União Paulista,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Urupês,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nova Canaã Paulista,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Rubinéia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santa Clara d'Oeste,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santa Fé do Sul,notícia no site da prefeitura (site Next.js com API JSON),https://www.santafedosul.sp.gov.br/api/Noticias/Noticia,texto corrido (lista cargos e quantidades na prosa) + imagem,"mensal/irregular (14/07, 11/08, 25/08, 01/09, 02/10/2026)",2026-10-02,sim,"API devolve as 4.240 notícias em JSON (title, publicationDatePortal); detalhe em /api/Noticias/Noticia/{slug}, campo details em HTML; filtrar título por ""PAT""; PAT no Ganhe Tempo, Rua 11, 1.220"
+Santa Rita d'Oeste,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Santana da Ponte Pensa,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+Três Fronteiras,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Américo de Campos,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Álvares Florence,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Cardoso,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+Cosmorama,não encontrado,,,,,nao,site da prefeitura não identificado; busca não achou lista de vagas
+Floreal,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Nhandeara,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Parisi,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Pontes Gestal,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Riolândia,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Sebastianópolis do Sul,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Valentim Gentil,não encontrado,,,,,nao,home e notícias do site varridas (links/títulos com vaga/PAT/emprego) sem lista de vagas
+Votuporanga,"sistema ""Votuporanga Emprega"" da prefeitura (link /portal/emprega/ redireciona) + lista semanal no jornal A Cidade de Votuporanga",https://www.votuporanga.sp.gov.br/portal/emprega/,"sistema web (porta 8054, não acessível daqui) / texto em notícia de jornal","semanal no jornal (02/09, 16/09, 30/09/2026)",2026-09-30,talvez,"redirect para https://web.votuporanga.sp.gov.br:8054/ (conexão recusada pelo proxy); jornal: https://acidadevotuporanga.com.br/cidade/2026/09/votuporanga-tem-108-vagas-de-trabalho-nesta-semana-n88351 (visto só na busca, proxy bloqueia); site da prefeitura (Instar) só publica processos seletivos avulsos; PAT no Centro do Empreendedor, R. Barão do Rio Branco 4.497"
+Pereira Barreto,notícias no site da prefeitura (tag PAT) - parado,https://pereirabarreto.sp.gov.br/tag/pat/,texto em notícia,parado (último mutirão 07/05/2024; última lista 2021-2022),2024-05-07,nao,fora da lista das 117 (DDD 18); WordPress com feed https://pereirabarreto.sp.gov.br/tag/pat/feed/ mas sem listas recentes; PAT Av. Jonas Alves de Mello 1461

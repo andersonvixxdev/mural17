@@ -20,7 +20,13 @@ function mural17_fields() {
 			'titulo' => 'Dados do evento',
 			'campos' => array(
 				'evento_data'  => array( 'label' => 'Data', 'type' => 'date' ),
+				'evento_fim'   => array( 'label' => 'Até (se durar mais de um dia)', 'type' => 'date' ),
 				'evento_hora'  => array( 'label' => 'Horário', 'type' => 'time' ),
+				'evento_categoria' => array(
+					'label'   => 'Categoria',
+					'type'    => 'select',
+					'options' => array( 'Shows', 'Festas e rodeios', 'Teatro e cinema', 'Infantil', 'Feiras', 'Esporte', 'Religioso', 'Outros' ),
+				),
 				'evento_local' => array( 'label' => 'Local (ex.: Praça da Matriz)', 'type' => 'text' ),
 				'evento_valor' => array( 'label' => 'Entrada (ex.: Gratuita, R$ 20)', 'type' => 'text' ),
 				'evento_link'  => array( 'label' => 'Link de ingressos ou informações', 'type' => 'url' ),

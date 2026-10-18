@@ -59,6 +59,8 @@ function mural17_pagina_servicos_admin() {
 		'gn-erro'   => 'Não foi possível cadastrar os feeds do Google News. Veja o erro abaixo.',
 		'transito'      => 'Trânsito lido agora.',
 		'pat'           => 'Lista do PAT publicada.',
+		'sympla'        => 'Eventos do Sympla lidos.',
+		'sympla-erro'   => 'Algumas páginas do Sympla não abriram. Veja o erro abaixo.',
 		'pat-0'         => 'Nenhuma linha da lista do PAT foi entendida.',
 		'jooble'        => 'Vagas do Jooble atualizadas.',
 		'jooble-erro'   => 'Não foi possível ler o Jooble. Veja o erro abaixo.',
@@ -125,6 +127,22 @@ function mural17_pagina_servicos_admin() {
 					<?php if ( get_option( 'mural17_tomtom_chave' ) ) : ?>
 						<button type="submit" name="apagar" value="1" class="button-link" onclick="this.form.chave.value='';">Apagar chave</button>
 					<?php endif; ?>
+				</form>
+			</div>
+
+			<div class="m17-card" id="sympla">
+				<h2>Ingressos à venda (Sympla)</h2>
+				<p>Eventos à venda no Sympla nas 12 maiores cidades do 17, lidos uma vez por dia da página pública de cada cidade. Aparecem na agenda com o selo "Ingressos via Sympla".</p>
+				<?php
+				$m17_sy   = get_option( 'mural17_sympla' );
+				$m17_sy_e = get_option( 'mural17_sympla_erro' );
+				?>
+				<p><b>Última leitura:</b> <?php echo is_array( $m17_sy ) ? esc_html( wp_date( 'd/m H:i', $m17_sy['em'] ) . ' · ' . count( $m17_sy['itens'] ) . ' evento(s) no 17' ) : 'ainda não leu'; ?></p>
+				<?php if ( is_array( $m17_sy_e ) ) : ?>
+					<p class="m17-erro"><b>Erro em <?php echo esc_html( wp_date( 'd/m H:i', $m17_sy_e[1] ) ); ?>:</b> <?php echo esc_html( $m17_sy_e[0] ); ?></p>
+				<?php endif; ?>
+				<?php $form( 'mural17_admin_sympla' ); ?>
+				<?php submit_button( 'Ler agora', 'secondary', 'submit', false ); ?>
 				</form>
 			</div>
 

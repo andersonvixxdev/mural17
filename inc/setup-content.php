@@ -129,3 +129,86 @@ function mural17_taxonomias_do_feed( $taxonomias ) {
 	return array_intersect_key( (array) $taxonomias, array( 'cidade' => true ) );
 }
 add_filter( 'pfai_feed_taxonomias_extras', 'mural17_taxonomias_do_feed' );
+
+/**
+ * Cidade de um feed do Portal PRO: a marcada no cadastro do feed ou, se não
+ * tiver (feeds do "Importar lista" não têm), a que aparece no nome
+ * ("Prefeitura de Mirassol") ou no endereço (mirassol.sp.gov.br).
+ *
+ * @param int $feed_id Feed.
+ * @return int ID da cidade, ou 0.
+ */
+function mural17_cidade_do_feed( $feed_id ) {
+	static $cache = array();
+	$feed_id = (int) $feed_id;
+	if ( isset( $cache[ $feed_id ] ) ) {
+		return $cache[ $feed_id ];
+	}
+	$cache[ $feed_id ] = 0;
+	if ( class_exists( 'PFAI_Feed_Taxonomias' ) ) {
+		$marcadas = PFAI_Feed_Taxonomias::do_feed( $feed_id );
+		if ( ! empty( $marcadas['cidade'] ) ) {
+			$cache[ $feed_id ] = (int) $marcadas['cidade'];
+			return $cache[ $feed_id ];
+		}
+	}
+	global $wpdb;
+	$tabela = $wpdb->prefix . 'pfai_feeds';
+	$feed   = $wpdb->get_row( $wpdb->prepare( "SELECT name, url FROM {$tabela} WHERE id = %d", $feed_id ) ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery
+	if ( ! $feed ) {
+		return 0;
+	}
+	$nome = ' ' . mural17_normaliza( $feed->name ) . ' ';
+	$host = (string) wp_parse_url( (string) $feed->url, PHP_URL_HOST );
+	$host = preg_replace( '/^www\./', '', strtolower( $host ) );
+	$sub  = str_replace( '-', '', strtok( $host, '.' ) );
+
+	$mapa = mural17_mapa_nomes_cidades();
+	// Nomes mais longos primeiro: "Santa Fé do Sul" antes de "Sul".
+	uksort(
+		$mapa,
+		function ( $a, $b ) {
+			return strlen( $b ) <=> strlen( $a );
+		}
+	);
+	foreach ( $mapa as $n => $id ) {
+		$compacto = str_replace( ' ', '', $n );
+		if ( false !== strpos( $nome, ' ' . $n . ' ' ) || ( $host && ( $sub === $compacto || 0 === strpos( $host, $compacto . '.' ) ) ) ) {
+			$cache[ $feed_id ] = (int) $id;
+			return $cache[ $feed_id ];
+		}
+	}
+	// Endereços que não usam o nome inteiro.
+	$apelidos = array(
+		'riopreto' => 'rio-preto',
+	);
+	if ( isset( $apelidos[ $sub ] ) ) {
+		$t = get_term_by( 'slug', $apelidos[ $sub ], 'cidade' );
+		$cache[ $feed_id ] = $t ? (int) $t->term_id : 0;
+	}
+	return $cache[ $feed_id ];
+}
+
+/**
+ * Matéria importada sem cidade ganha a cidade do feed.
+ *
+ * @param int    $meta_id ID do meta.
+ * @param int    $post_id Post.
+ * @param string $chave   Chave.
+ * @param mixed  $valor   Valor.
+ */
+function mural17_cidade_na_importacao( $meta_id, $post_id, $chave, $valor ) {
+	if ( '_pfai_feed_id' !== $chave || ! (int) $valor ) {
+		return;
+	}
+	$atuais = wp_get_object_terms( $post_id, 'cidade', array( 'fields' => 'ids' ) );
+	if ( ! is_wp_error( $atuais ) && $atuais ) {
+		return;
+	}
+	$cidade = mural17_cidade_do_feed( (int) $valor );
+	if ( $cidade ) {
+		wp_set_object_terms( $post_id, array( $cidade ), 'cidade', false );
+	}
+}
+add_action( 'added_post_meta', 'mural17_cidade_na_importacao', 20, 4 );
+add_action( 'updated_post_meta', 'mural17_cidade_na_importacao', 20, 4 );

@@ -1,0 +1,14 @@
+Câmara de Ipiguá | https://www.ipigua.sp.leg.br/RSS
+Câmara de José Bonifácio | https://www.camarajosebonifacio.sp.gov.br/portal/rss
+Câmara de Mirassolândia | https://www.camaramirassolandia.sp.gov.br/portal/rss
+Câmara de Catiguá | https://www.camaracatigua.sp.gov.br/home/?format=feed&type=rss
+Câmara de Floreal | https://www.camarafloreal.sp.gov.br/portal/rss
+Câmara de Nhandeara | https://www.camaranhandeara.sp.gov.br/portal/rss
+Câmara de Parisi | https://www.parisi.sp.leg.br/rss.xml
+Câmara de Sebastianópolis do Sul | https://www.camarasebastianopolisdosul.sp.gov.br/portal/rss
+Câmara de Valentim Gentil | https://www.camaravalentimgentil.sp.gov.br/portal/rss
+Câmara de Indiaporã | https://www.indiapora.sp.leg.br/RSS
+Câmara de Aspásia | https://camaraaspasia.sp.gov.br/feed/
+Câmara de Gastão Vidigal | https://www.camaragastaovidigal.sp.gov.br/portal/rss
+Câmara de Magda | https://camaramagda.sp.gov.br/feed/
+Câmara de Monções | https://www.camaramoncoes.sp.gov.br/portal/rss

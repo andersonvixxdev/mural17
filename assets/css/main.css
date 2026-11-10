@@ -1572,3 +1572,10 @@ a.orgao-linha { display: flex; gap: 12px; align-items: center; padding: 10px 0; 
 	.ag-lista li { grid-template-columns: 52px minmax(0, 1fr); }
 	.ag-lista__valor { grid-column: 2; text-align: left; }
 }
+
+/* Contadores do "Hoje no 17": os zerados não aparecem, e a grade se ajusta. */
+.numeros { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.rodape__inst { margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 6px 10px; }
+.rodape__inst a + a::before { content: "·"; margin-right: 10px; opacity: .6; }
+.rodape__inst a { color: inherit; text-decoration: none; }
+.rodape__inst a:hover { text-decoration: underline; }

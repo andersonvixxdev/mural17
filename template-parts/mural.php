@@ -54,9 +54,15 @@ $plantao = mural17_consulta(
 
 		<div class="numeros">
 			<a class="num num--noticias" href="#plantao"><b><?php echo esc_html( $numeros['noticias'] ); ?></b><span><?php echo 1 === $numeros['noticias'] ? 'notícia hoje' : 'notícias hoje'; ?></span></a>
+			<?php if ( $numeros['vagas'] ) : ?>
 			<a class="num num--vagas" href="<?php echo esc_url( $escopo ? add_query_arg( 'cidade', $escopo->slug, get_post_type_archive_link( 'vaga' ) ) : get_post_type_archive_link( 'vaga' ) ); ?>"><b><?php echo esc_html( $numeros['vagas'] ); ?></b><span><?php echo 1 === $numeros['vagas'] ? 'vaga aberta' : 'vagas abertas'; ?></span></a>
+			<?php endif; ?>
+			<?php if ( $numeros['eventos'] ) : ?>
 			<a class="num num--eventos" href="#semana"><b><?php echo esc_html( $numeros['eventos'] ); ?></b><span><?php echo 1 === $numeros['eventos'] ? 'evento esta semana' : 'eventos esta semana'; ?></span></a>
+			<?php endif; ?>
+			<?php if ( $numeros['anuncios'] ) : ?>
 			<a class="num num--anuncios" href="<?php echo esc_url( $escopo ? add_query_arg( 'cidade', $escopo->slug, get_post_type_archive_link( 'classificado' ) ) : get_post_type_archive_link( 'classificado' ) ); ?>"><b><?php echo esc_html( $numeros['anuncios'] ); ?></b><span>classificados</span></a>
+			<?php endif; ?>
 		</div>
 
 		<?php if ( ! $escopo ) : ?>

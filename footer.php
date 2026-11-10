@@ -103,7 +103,8 @@ $fb    = mural17_opt( 'mural17_facebook' );
 		</div>
 	</div>
 	<div class="rodape__base">
-		<div class="wrap">© <?php echo esc_html( gmdate( 'Y' ) ); ?> Mural 17 · Notícias de outros veículos são resumidas e linkam a fonte original.</div>
+		<div class="wrap">
+			<?php mural17_links_institucionais(); ?>© <?php echo esc_html( gmdate( 'Y' ) ); ?> Mural 17 · Notícias de outros veículos são resumidas e linkam a fonte original.</div>
 	</div>
 </footer>
 

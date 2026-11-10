@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'MURAL17_VERSION', '2.6.1' );
+define( 'MURAL17_VERSION', '2.7.0' );
 define( 'MURAL17_CIDADES_VERSAO', 1 );
 define( 'MURAL17_OFICIAL_VERSAO', 1 );
 define( 'MURAL17_SERVICOS_VERSAO', 1 );
@@ -39,6 +39,7 @@ require MURAL17_DIR . '/inc/vagas.php';
 require MURAL17_DIR . '/inc/agenda.php';
 require MURAL17_DIR . '/inc/redes.php';
 require MURAL17_DIR . '/inc/convites.php';
+require MURAL17_DIR . '/inc/qualidade.php';
 
 /**
  * Configuração básica do tema.

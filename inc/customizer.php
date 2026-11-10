@@ -23,6 +23,9 @@ function mural17_defaults() {
 		'mural17_instagram'  => 'https://www.instagram.com/mural17br/',
 		'mural17_facebook'   => '',
 		'mural17_ultimahora' => true,
+		'mural17_responsavel' => '',
+		'mural17_sede'        => '',
+		'mural17_cnpj'        => '',
 	);
 }
 
@@ -77,6 +80,9 @@ function mural17_customize_register( $wp_customize ) {
 		'mural17_email'     => array( 'E-mail de contato', 'sanitize_email', 'email' ),
 		'mural17_instagram' => array( 'Link do Instagram', 'esc_url_raw', 'url' ),
 		'mural17_facebook'  => array( 'Link do Facebook', 'esc_url_raw', 'url' ),
+		'mural17_responsavel' => array( 'Editor responsável (aparece no Expediente)', 'sanitize_text_field', 'text' ),
+		'mural17_sede'        => array( 'Cidade da redação (Expediente)', 'sanitize_text_field', 'text' ),
+		'mural17_cnpj'        => array( 'CNPJ ou MEI (opcional, Expediente)', 'sanitize_text_field', 'text' ),
 	);
 	foreach ( $textos as $key => $cfg ) {
 		$wp_customize->add_setting(

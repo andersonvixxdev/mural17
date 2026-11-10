@@ -33,31 +33,97 @@ function mural17_paginas_institucionais() {
 }
 
 /**
- * Cria as páginas que faltam (uma vez por versão) e marca a de privacidade
- * como a oficial do WordPress.
+ * Garante as páginas institucionais publicadas: cria a que falta e publica a
+ * que existe só como rascunho ou na lixeira.
+ *
+ * O WordPress em português já cria na instalação um RASCUNHO "Política de
+ * privacidade" com o endereço politica-de-privacidade, com o texto-modelo
+ * dele. A primeira versão disto achava esse rascunho, dava a página por
+ * existente e o endereço continuava em 404 (o WordPress então "adivinhava"
+ * e abria uma notícia qualquer com "privacidade" no endereço). Rascunho e
+ * lixeira agora recebem o nosso texto e são publicados; página publicada
+ * com texto do dono do site fica como está.
+ *
+ * Roda no painel e, uma vez por hora, em qualquer visita, para não depender
+ * de alguém abrir o painel depois de trocar o tema.
  */
 function mural17_instala_institucional() {
-	if ( (int) get_option( 'mural17_institucional_versao' ) >= MURAL17_INSTITUCIONAL_VERSAO || ! current_user_can( 'manage_options' ) ) {
+	if ( get_transient( 'mural17_institucional_ok' ) ) {
 		return;
 	}
+	set_transient( 'mural17_institucional_ok', 1, HOUR_IN_SECONDS );
 	foreach ( mural17_paginas_institucionais() as $slug => $titulo ) {
-		$p  = get_page_by_path( $slug );
-		$id = $p ? $p->ID : wp_insert_post(
-			array(
-				'post_type'    => 'page',
-				'post_status'  => 'publish',
-				'post_title'   => $titulo,
-				'post_name'    => $slug,
-				'post_content' => '[mural17_institucional qual="' . $slug . '"]',
-			)
-		);
-		if ( 'politica-de-privacidade' === $slug && $id ) {
+		$p     = get_page_by_path( $slug, OBJECT, 'page' );
+		$texto = '[mural17_institucional qual="' . $slug . '"]';
+		if ( ! $p ) {
+			$id = wp_insert_post(
+				array(
+					'post_type'    => 'page',
+					'post_status'  => 'publish',
+					'post_title'   => $titulo,
+					'post_name'    => $slug,
+					'post_content' => $texto,
+				),
+				true
+			);
+		} elseif ( 'publish' !== $p->post_status ) {
+			if ( 'trash' === $p->post_status ) {
+				wp_untrash_post( $p->ID );
+			}
+			$id = wp_update_post(
+				array(
+					'ID'           => $p->ID,
+					'post_status'  => 'publish',
+					'post_title'   => $titulo,
+					'post_name'    => $slug,
+					'post_content' => $texto,
+				),
+				true
+			);
+		} else {
+			$id = $p->ID;
+		}
+		if ( is_wp_error( $id ) || ! $id ) {
+			delete_transient( 'mural17_institucional_ok' ); // Tenta de novo na próxima visita.
+			continue;
+		}
+		if ( 'politica-de-privacidade' === $slug ) {
 			update_option( 'wp_page_for_privacy_policy', (int) $id );
 		}
 	}
 	update_option( 'mural17_institucional_versao', MURAL17_INSTITUCIONAL_VERSAO );
 }
 add_action( 'admin_init', 'mural17_instala_institucional' );
+add_action( 'wp_loaded', 'mural17_instala_institucional' );
+
+// Endereço que não existe dá 404, em vez de abrir uma notícia "parecida"
+// (/sobre/ abria um acidente em Olímpia).
+add_filter( 'do_redirect_guess_404_permalink', '__return_false' );
+
+// Endereços que as pessoas (e o Google) costumam tentar.
+add_action(
+	'template_redirect',
+	function () {
+		if ( ! is_404() ) {
+			return;
+		}
+		$apelidos = array(
+			'sobre'         => 'quem-somos',
+			'sobre-nos'     => 'quem-somos',
+			'quem-somos-2'  => 'quem-somos',
+			'fale-conosco'  => 'contato',
+			'contact'       => 'contato',
+			'privacidade'   => 'politica-de-privacidade',
+			'privacy-policy' => 'politica-de-privacidade',
+			'termos'        => 'termos-de-uso',
+		);
+		$pedido = trim( (string) wp_parse_url( (string) ( $_SERVER['REQUEST_URI'] ?? '' ), PHP_URL_PATH ), '/' ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+		if ( isset( $apelidos[ $pedido ] ) ) {
+			wp_safe_redirect( mural17_link_institucional( $apelidos[ $pedido ] ), 301 );
+			exit;
+		}
+	}
+);
 
 /**
  * Link de uma página institucional.

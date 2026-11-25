@@ -71,8 +71,6 @@ while ( have_posts() ) :
 
 			<?php get_template_part( 'template-parts/compartilhar' ); ?>
 
-			<?php mural17_adsterra_nativo_bloco(); ?>
-
 			<?php
 			$cidade = mural17_cidade();
 			if ( $cidade ) :

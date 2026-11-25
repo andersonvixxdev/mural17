@@ -396,10 +396,11 @@ function mural17_fora_do_17( $post ) {
  * Tira da publicação (rascunho) a matéria repetida ou de fora do 17. Dá para
  * publicar de novo à mão: o rascunho guarda o motivo.
  *
- * @param int $post_id Matéria.
+ * @param int  $post_id    Matéria.
+ * @param bool $com_limite Aplica também o limite diário (só na publicação).
  * @return string Motivo, ou '' se ficou como estava.
  */
-function mural17_confere_qualidade( $post_id ) {
+function mural17_confere_qualidade( $post_id, $com_limite = false ) {
 	$post = get_post( $post_id );
 	if ( ! $post || 'post' !== $post->post_type || ! in_array( $post->post_status, array( 'publish', 'future' ), true ) || get_post_meta( $post_id, '_mural17_liberada', true ) ) {
 		return '';
@@ -411,6 +412,8 @@ function mural17_confere_qualidade( $post_id ) {
 		update_post_meta( $post_id, '_mural17_repetida_de', $igual );
 	} elseif ( mural17_fora_do_17( $post ) ) {
 		$motivo = 'fora-do-17';
+	} elseif ( $com_limite && mural17_passou_do_limite( $post ) ) {
+		$motivo = 'limite-do-dia';
 	}
 	if ( $motivo ) {
 		update_post_meta( $post_id, '_mural17_retida', $motivo );
@@ -418,6 +421,69 @@ function mural17_confere_qualidade( $post_id ) {
 	}
 	return $motivo;
 }
+
+/**
+ * Limite de matérias automáticas publicadas por dia (0 = sem limite).
+ *
+ * @return int
+ */
+function mural17_limite_auto() {
+	$v = get_option( 'mural17_limite_auto', null );
+	return null === $v ? 40 : max( 0, (int) $v );
+}
+
+/**
+ * Quantas matérias automáticas já foram publicadas hoje (sem contar esta).
+ *
+ * @param int $exceto Matéria a não contar.
+ * @return int
+ */
+function mural17_auto_publicadas_hoje( $exceto = 0 ) {
+	$q = new WP_Query(
+		array(
+			'post_type'      => 'post',
+			'post_status'    => 'publish',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'post__not_in'   => array( (int) $exceto ),
+			'date_query'     => array( array( 'after' => wp_date( 'Y-m-d' ) . ' 00:00:00', 'inclusive' => true ) ),
+			'meta_query'     => array( array( 'key' => '_pfai_feed_id', 'compare' => 'EXISTS' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+		)
+	);
+	return (int) $q->found_posts;
+}
+
+/**
+ * A matéria automática passa do limite do dia? Nota oficial, matéria escrita
+ * à mão e matéria liberada pela redação nunca contam.
+ *
+ * @param WP_Post $post Matéria.
+ * @return bool
+ */
+function mural17_passou_do_limite( $post ) {
+	$lim = mural17_limite_auto();
+	return $lim && get_post_meta( $post->ID, '_pfai_feed_id', true ) && mural17_auto_publicadas_hoje( $post->ID ) >= $lim;
+}
+
+/*
+ * O Portal PRO cria a matéria como rascunho, reescreve, põe a foto e só
+ * depois publica. A primeira versão conferia só na criação, quando a
+ * matéria ainda não estava publicada, e deixava passar tudo: em 25/11 o
+ * site tinha 252 matérias em 48 h, várias da região de Campinas. Agora
+ * confere também no momento em que ela vai ao ar (uma vez por matéria).
+ */
+add_action(
+	'wp_after_insert_post',
+	function ( $post_id, $post ) {
+		if ( 'post' !== $post->post_type || 'publish' !== $post->post_status || ! get_post_meta( $post_id, '_pfai_feed_id', true ) || get_post_meta( $post_id, '_mural17_conferida', true ) ) {
+			return;
+		}
+		update_post_meta( $post_id, '_mural17_conferida', 1 );
+		mural17_confere_qualidade( (int) $post_id, true );
+	},
+	20,
+	2
+);
 
 add_action(
 	'added_post_meta',
@@ -443,57 +509,166 @@ add_action(
 );
 
 /**
- * Revisão única das matérias dos últimos 30 dias (repetidas e fora do 17).
+ * Começa a revisão das matérias automáticas dos últimos 60 dias, em lotes
+ * (são milhares: de uma vez só, a hospedagem cortaria no meio).
+ *
+ * @param bool $excesso Também tira do ar o que passou do limite diário
+ *                      (mantém as primeiras de cada dia).
  */
+function mural17_revisao_inicia( $excesso = false ) {
+	update_option(
+		'mural17_revisao',
+		array(
+			'excesso' => (bool) $excesso,
+			'depois'  => gmdate( 'Y-m-d H:i:s', time() - 60 * DAY_IN_SECONDS ),
+			'id'      => 0,
+			'feitas'  => 0,
+			'dias'    => array(),
+			'n'       => array( 'repetida' => 0, 'fora-do-17' => 0, 'limite-do-dia' => 0 ),
+			'inicio'  => time(),
+			'fim'     => 0,
+		),
+		false
+	);
+	wp_clear_scheduled_hook( 'mural17_revisao_lote' );
+	wp_schedule_single_event( time(), 'mural17_revisao_lote' );
+	foreach ( get_users( array( 'role__in' => array( 'administrator', 'editor' ), 'fields' => 'ID' ) ) as $u ) {
+		delete_user_meta( $u, 'mural17_qualidade_visto' );
+	}
+}
+
+/**
+ * Um lote da revisão (250 matérias, da mais antiga para a mais nova).
+ */
+function mural17_revisao_lote() {
+	$r = get_option( 'mural17_revisao' );
+	if ( ! is_array( $r ) || $r['fim'] ) {
+		return;
+	}
+	global $wpdb;
+	$linhas = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		$wpdb->prepare(
+			"SELECT p.ID, p.post_date FROM {$wpdb->posts} p INNER JOIN {$wpdb->postmeta} m ON m.post_id = p.ID AND m.meta_key = '_pfai_feed_id'
+			 WHERE p.post_type = 'post' AND p.post_status = 'publish' AND ( p.post_date_gmt > %s OR ( p.post_date_gmt = %s AND p.ID > %d ) )
+			 ORDER BY p.post_date_gmt ASC, p.ID ASC LIMIT 250",
+			$r['depois'],
+			$r['depois'],
+			(int) $r['id']
+		)
+	);
+	$lim = mural17_limite_auto();
+	foreach ( $linhas as $l ) {
+		$m = mural17_confere_qualidade( (int) $l->ID );
+		if ( ! $m && $r['excesso'] && $lim && ! get_post_meta( $l->ID, '_mural17_liberada', true ) ) {
+			$dia = substr( $l->post_date, 0, 10 );
+			$r['dias'][ $dia ] = ( $r['dias'][ $dia ] ?? 0 ) + 1;
+			if ( $r['dias'][ $dia ] > $lim ) {
+				update_post_meta( $l->ID, '_mural17_retida', 'limite-do-dia' );
+				wp_update_post( array( 'ID' => (int) $l->ID, 'post_status' => 'draft' ) );
+				$m = 'limite-do-dia';
+			}
+		}
+		if ( $m ) {
+			++$r['n'][ $m ];
+		}
+		++$r['feitas'];
+		$r['depois'] = get_post_field( 'post_date_gmt', (int) $l->ID );
+		$r['id']     = (int) $l->ID;
+	}
+	if ( count( $linhas ) < 250 ) {
+		$r['fim'] = time();
+		update_option( 'mural17_qualidade_resultado', $r['n'], false );
+	} else {
+		wp_schedule_single_event( time() + 30, 'mural17_revisao_lote' );
+	}
+	update_option( 'mural17_revisao', $r, false );
+}
+add_action( 'mural17_revisao_lote', 'mural17_revisao_lote' );
+
+// Revisão automática uma vez nesta versão (repetidas e fora do 17).
 add_action(
 	'admin_init',
 	function () {
-		if ( get_option( 'mural17_qualidade_revisao' ) || ! current_user_can( 'edit_others_posts' ) ) {
+		if ( get_option( 'mural17_qualidade_revisao_2' ) || ! current_user_can( 'edit_others_posts' ) ) {
 			return;
 		}
-		update_option( 'mural17_qualidade_revisao', time(), false );
-		$ids = get_posts(
-			array(
-				'post_type'      => 'post',
-				'post_status'    => 'publish',
-				'posts_per_page' => 600,
-				'fields'         => 'ids',
-				'orderby'        => 'date',
-				'order'          => 'ASC',
-				'date_query'     => array( array( 'after' => '30 days ago' ) ),
-				'meta_query'     => array( array( 'key' => '_pfai_feed_id', 'compare' => 'EXISTS' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
-			)
-		);
-		$n = array( 'repetida' => 0, 'fora-do-17' => 0 );
-		foreach ( $ids as $id ) {
-			$m = mural17_confere_qualidade( $id );
-			if ( $m ) {
-				++$n[ $m ];
-			}
+		update_option( 'mural17_qualidade_revisao_2', time(), false );
+		mural17_revisao_inicia( false );
+	}
+);
+
+add_action(
+	'admin_post_mural17_admin_qualidade',
+	function () {
+		mural17_confere_admin_servicos( 'mural17_admin_qualidade' );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Sem permissão.' );
 		}
-		update_option( 'mural17_qualidade_resultado', $n, false );
+		if ( isset( $_POST['limite'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			update_option( 'mural17_limite_auto', max( 0, min( 500, (int) $_POST['limite'] ) ), false ); // phpcs:ignore WordPress.Security.NonceVerification
+		}
+		if ( ! empty( $_POST['revisar'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+			mural17_revisao_inicia( ! empty( $_POST['excesso'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
+			mural17_volta_admin_servicos( 'qualidade-revisao', 'qualidade' );
+		}
+		mural17_volta_admin_servicos( 'qualidade', 'qualidade' );
 	}
 );
 
 /**
- * Aviso no painel com o que foi retido, e a lista em Posts › Rascunhos.
+ * Card "Qualidade do conteúdo" em Serviços.
+ *
+ * @param callable $form Abre o formulário da ação.
+ */
+function mural17_card_qualidade( $form ) {
+	$r   = get_option( 'mural17_revisao' );
+	$lim = mural17_limite_auto();
+	?>
+	<div class="m17-card" id="qualidade">
+		<h2>Qualidade do conteúdo (AdSense e Google)</h2>
+		<p>Matéria automática repetida, sem nenhuma cidade do 17 ou além do limite do dia vira rascunho, com o motivo guardado. Para publicar uma de novo, é só publicar à mão: o tema não mexe mais nela. Nota oficial e matéria escrita no painel nunca contam.</p>
+		<p><b>Publicadas hoje pelo robô:</b> <?php echo (int) mural17_auto_publicadas_hoje(); ?><?php echo $lim ? ' de ' . (int) $lim : ''; ?> · <a href="<?php echo esc_url( admin_url( 'edit.php?post_status=draft&post_type=post&mural17_retida=1' ) ); ?>">ver as retidas</a></p>
+		<?php if ( is_array( $r ) ) : ?>
+			<p><b>Revisão do último mês:</b>
+				<?php echo $r['fim'] ? 'terminou ' . esc_html( wp_date( 'd/m H:i', $r['fim'] ) ) : 'em andamento'; ?>
+				· <?php echo (int) $r['feitas']; ?> conferidas · <?php echo (int) $r['n']['repetida']; ?> repetidas, <?php echo (int) $r['n']['fora-do-17']; ?> fora do 17<?php echo $r['excesso'] ? ', ' . (int) $r['n']['limite-do-dia'] . ' além do limite' : ''; ?> saíram do ar</p>
+		<?php endif; ?>
+		<?php $form( 'mural17_admin_qualidade' ); ?>
+			<p><label>Limite de matérias automáticas por dia <input type="number" name="limite" min="0" max="500" value="<?php echo (int) $lim; ?>" style="width:80px"></label> <span class="description">0 = sem limite. Recomendado: 30 a 50.</span></p>
+			<p><label><input type="checkbox" name="revisar" value="1"> Revisar agora as matérias dos últimos 60 dias</label><br>
+			<label style="margin-left:22px"><input type="checkbox" name="excesso" value="1"> e tirar do ar o que passou do limite em cada dia (fica a primeira parte de cada dia)</label></p>
+			<?php submit_button( 'Salvar', 'secondary', 'submit', false ); ?>
+		</form>
+	</div>
+	<?php
+}
+
+/**
+ * Aviso no painel: andamento e resultado da revisão.
  */
 add_action(
 	'admin_notices',
 	function () {
-		$n = get_option( 'mural17_qualidade_resultado' );
-		if ( ! is_array( $n ) || ! array_sum( $n ) || ! current_user_can( 'edit_others_posts' ) || get_user_meta( get_current_user_id(), 'mural17_qualidade_visto', true ) ) {
+		$r = get_option( 'mural17_revisao' );
+		if ( ! is_array( $r ) || ! current_user_can( 'edit_others_posts' ) || get_user_meta( get_current_user_id(), 'mural17_qualidade_visto', true ) ) {
 			return;
 		}
 		if ( isset( $_GET['mural17_visto'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			update_user_meta( get_current_user_id(), 'mural17_qualidade_visto', 1 );
 			return;
 		}
+		$n   = $r['n'];
 		$url = admin_url( 'edit.php?post_status=draft&post_type=post&mural17_retida=1' );
+		if ( ! $r['fim'] ) {
+			printf( '<div class="notice notice-info"><p><b>Mural 17 · revisão de qualidade em andamento:</b> %d matérias conferidas até agora. Pode continuar usando o painel.</p></div>', (int) $r['feitas'] );
+			return;
+		}
 		printf(
-			'<div class="notice notice-info"><p><b>Mural 17 · revisão de qualidade:</b> %1$d matéria(s) repetida(s) e %2$d sem relação com o 17 saíram do ar e viraram rascunho. <a href="%3$s">Ver as matérias</a> · <a href="%4$s">Ok, entendi</a></p></div>',
+			'<div class="notice notice-info"><p><b>Mural 17 · revisão de qualidade:</b> de %1$d matérias automáticas, %2$d repetidas, %3$d sem relação com o 17%4$s saíram do ar e viraram rascunho. <a href="%5$s">Ver as matérias</a> · <a href="%6$s">Ok, entendi</a></p></div>',
+			(int) $r['feitas'],
 			(int) $n['repetida'],
 			(int) $n['fora-do-17'],
+			$r['excesso'] ? ' e ' . (int) $n['limite-do-dia'] . ' além do limite diário' : '',
 			esc_url( $url ),
 			esc_url( add_query_arg( 'mural17_visto', 1 ) )
 		);

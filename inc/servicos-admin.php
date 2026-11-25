@@ -64,6 +64,8 @@ function mural17_pagina_servicos_admin() {
 		'sjrp-erro'     => 'A agenda de Rio Preto não abriu. Veja o erro abaixo.',
 		'sympla-erro'   => 'Algumas páginas do Sympla não abriram. Veja o erro abaixo.',
 		'pat-0'         => 'Nenhuma linha da lista do PAT foi entendida.',
+		'qualidade'          => 'Limite de matérias automáticas salvo.',
+		'qualidade-revisao'  => 'Revisão começou. Ela roda em segundo plano; o andamento aparece aqui e no aviso do painel.',
 		'balcao'        => 'Balcão de Empregos de Rio Preto lido.',
 		'balcao-erro'   => 'O Balcão de Empregos não abriu. Veja o erro abaixo.',
 		'jooble'        => 'Vagas do Jooble atualizadas.',
@@ -166,6 +168,8 @@ function mural17_pagina_servicos_admin() {
 					<?php submit_button( 'Salvar e ler agora', 'secondary', 'submit', false ); ?>
 				</form>
 			</div>
+
+			<?php mural17_card_qualidade( $form ); ?>
 
 			<?php $m17_ult = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 1 ) ); ?>
 			<?php $m17_prev = $m17_ult ? mural17_previa_redes( $m17_ult[0] ) : null; ?>

@@ -1579,3 +1579,10 @@ a.orgao-linha { display: flex; gap: 12px; align-items: center; padding: 10px 0; 
 .rodape__inst a + a::before { content: "·"; margin-right: 10px; opacity: .6; }
 .rodape__inst a { color: inherit; text-decoration: none; }
 .rodape__inst a:hover { text-decoration: underline; }
+
+/* Anúncios (Adsterra): rótulo "Publicidade" e o banner centralizado. */
+.anuncio--ads, .anuncio--nativo { flex-direction: column; gap: 4px; }
+.anuncio__rotulo { font: 600 10px/1 var(--m17-sans); letter-spacing: .12em; text-transform: uppercase; color: #8A9098; }
+.anuncio--ads iframe { display: block; max-width: 100%; }
+.anuncio--nativo { margin: 28px 0; align-items: stretch; }
+.anuncio--nativo .anuncio__rotulo { align-self: flex-start; }

@@ -241,6 +241,7 @@ function mural17_shortcode_institucional( $atts ) {
 			<h2>Cookies e publicidade</h2>
 			<p>O site usa cookies e tecnologias parecidas para lembrar a sua cidade, medir a audiência e exibir anúncios.</p>
 			<ul>
+				<li>Os anúncios são exibidos por redes de publicidade parceiras, como o <strong>Google AdSense</strong> e a <strong>Adsterra</strong>. Elas podem usar cookies e identificadores do navegador para mostrar anúncios e medir os resultados, conforme as políticas de privacidade de cada uma (<a href="https://adsterra.com/privacy-policy/" target="_blank" rel="noopener">Adsterra</a>).</li>
 				<li>Usamos o <strong>Google AdSense</strong> para exibir anúncios. O Google e seus parceiros usam cookies para exibir anúncios com base nas suas visitas a este e a outros sites. O uso do cookie de publicidade permite ao Google e aos parceiros mostrar anúncios com base nessas visitas.</li>
 				<li>Terceiros, incluindo o Google, podem colocar e ler cookies no seu navegador, ou usar web beacons e o endereço IP, para coletar informações como resultado da exibição de anúncios no site.</li>
 				<li>Você pode desativar a publicidade personalizada nas <a href="https://adssettings.google.com" target="_blank" rel="noopener">Configurações de anúncios do Google</a> ou em <a href="https://www.aboutads.info/choices" target="_blank" rel="noopener">aboutads.info</a>.</li>

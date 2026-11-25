@@ -255,9 +255,16 @@ function mural17_mais_lidas( $qtd = 5, $dias = 7, $escopo = null ) {
  * @param string $class Classe CSS (tamanho).
  */
 function mural17_anuncio( $area, $class = 'anuncio--728' ) {
+	if ( function_exists( 'mural17_sem_anuncio' ) && mural17_sem_anuncio() ) {
+		return;
+	}
 	if ( is_active_sidebar( $area ) ) {
 		echo '<div class="anuncio ' . esc_attr( $class ) . '">';
 		dynamic_sidebar( $area );
+		echo '</div>';
+	} elseif ( function_exists( 'mural17_adsterra_ligada' ) && mural17_adsterra_ligada() && mural17_adsterra_tamanhos( $area ) ) {
+		echo '<div class="anuncio anuncio--ads ' . esc_attr( $class ) . '" aria-label="Publicidade"><span class="anuncio__rotulo">Publicidade</span>';
+		mural17_adsterra_banner( mural17_adsterra_tamanhos( $area ) );
 		echo '</div>';
 	} elseif ( current_user_can( 'edit_theme_options' ) ) {
 		$label = 'anuncio--300' === $class ? '300 × 250' : '728 × 90';

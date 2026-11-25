@@ -343,6 +343,9 @@ $plantao = mural17_consulta(
 			<?php if ( is_active_sidebar( 'anuncio-lado' ) ) : ?>
 				<span class="t--pub__rotulo">Publicidade</span>
 				<?php dynamic_sidebar( 'anuncio-lado' ); ?>
+			<?php elseif ( mural17_adsterra_ligada() ) : ?>
+				<span class="t--pub__rotulo">Publicidade</span>
+				<?php mural17_adsterra_banner( array( array( 0, '300x250' ) ) ); ?>
 			<?php else : ?>
 				<a class="t--pub__vazio" href="<?php echo esc_url( $wa_num ? mural17_whatsapp_link( $wa_num, 'Olá, Mural 17! Quero anunciar no portal.' ) : home_url( '/' ) ); ?>">
 					<span class="t__titulo">Anuncie aqui</span>
@@ -351,6 +354,8 @@ $plantao = mural17_consulta(
 			<?php endif; ?>
 		</div>
 	</div>
+
+	<?php mural17_anuncio( 'anuncio-meio' ); ?>
 
 	<?php
 	$notas = $escopo ? mural17_notas_oficiais( $escopo, 3 ) : null;
